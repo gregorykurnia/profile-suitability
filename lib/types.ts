@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export type SuitabilityLabel =
   | "Highly Suitable"
   | "Suitable"
@@ -27,6 +29,24 @@ export interface AIInsights {
   interviewProbes: string[];
   developmentFocus: string[];
 }
+
+export const aiInsightsSchema = z.object({
+  executiveSummary: z
+    .string()
+    .describe("2-3 sentence overall read on this candidate's suitability"),
+  keyStrengths: z
+    .array(z.string())
+    .describe("one bullet per top-scoring competency, name the competency and reference its score"),
+  developmentAreas: z
+    .array(z.string())
+    .describe("one bullet per low-scoring competency, name the competency and reference its score"),
+  interviewProbes: z
+    .array(z.string())
+    .describe("3-5 suggested interview questions targeting development areas or ambiguous results"),
+  developmentFocus: z
+    .array(z.string())
+    .describe("bullet list of onboarding/development recommendations"),
+});
 
 export interface SuitabilityReport {
   candidateName: string;

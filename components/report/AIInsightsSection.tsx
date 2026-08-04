@@ -1,49 +1,32 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { RefreshCw, Sparkles } from "lucide-react";
-import { AIInsights, SuitabilityReport } from "@/lib/types";
+import { aiInsightsSchema, SuitabilityReport } from "@/lib/types";
 
-async function fetchInsights(report: SuitabilityReport): Promise<AIInsights> {
-  const res = await fetch("/api/generate-insights", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+export default function AIInsightsSection({ report }: { report: SuitabilityReport }) {
+  const { object, submit, isLoading, error } = useObject({
+    api: "/api/generate-insights",
+    schema: aiInsightsSchema,
+    initialValue: report.insights,
+  });
+
+  const insights = object ?? report.insights ?? null;
+  const loading = isLoading && !insights;
+
+  const load = () =>
+    submit({
       candidateName: report.candidateName,
       positionApplied: report.positionApplied,
       competencies: report.competencies,
       suitabilityScore: report.suitabilityScore,
       normativePercentile: report.normativePercentile,
-    }),
-  });
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error(body.error ?? "Failed to generate insights");
-  }
-  return res.json();
-}
+    });
 
-export default function AIInsightsSection({ report }: { report: SuitabilityReport }) {
-  const [insights, setInsights] = useState<AIInsights | null>(report.insights ?? null);
-  const [loading, setLoading] = useState(!report.insights);
-  const [error, setError] = useState<string | null>(null);
-
-  const load = useCallback(() => {
-    setLoading(true);
-    setError(null);
-    fetchInsights(report)
-      .then((data) => setInsights(data))
-      .catch((err) => setError(err.message ?? "Something went wrong"))
-      .finally(() => setLoading(false));
-  }, [report]);
-
-  const hasInsights = insights !== null;
   useEffect(() => {
-    if (!hasInsights) {
-      fetchInsights(report)
-        .then((data) => setInsights(data))
-        .catch((err) => setError(err.message ?? "Something went wrong"))
-        .finally(() => setLoading(false));
+    if (!report.insights) {
+      load();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -72,7 +55,9 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
 
       {!loading && error && (
         <div className="text-center py-8">
-          <p className="text-sm text-alert font-medium">{error}</p>
+          <p className="text-sm text-alert font-medium">
+            {error.message ?? "Something went wrong"}
+          </p>
           <button
             onClick={load}
             className="no-print mt-4 inline-flex items-center gap-2 rounded-lg bg-navy text-white text-sm font-semibold px-4 py-2 hover:bg-navy/90 transition-colors"
@@ -84,7 +69,9 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
 
       {!loading && !error && insights && (
         <div className="space-y-8">
-          <p className="text-body leading-relaxed">{insights.executiveSummary}</p>
+          {insights.executiveSummary && (
+            <p className="text-body leading-relaxed">{insights.executiveSummary}</p>
+          )}
 
           <div className="grid sm:grid-cols-2 gap-8">
             <div>
@@ -92,7 +79,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
                 Key Strengths
               </p>
               <ul className="space-y-2">
-                {insights.keyStrengths.map((s, i) => (
+                {insights.keyStrengths?.filter(Boolean).map((s, i) => (
                   <li key={i} className="text-sm text-body flex gap-2">
                     <span className="text-teal font-bold mt-0.5">+</span>
                     <span>{s}</span>
@@ -105,7 +92,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
                 Development Areas
               </p>
               <ul className="space-y-2">
-                {insights.developmentAreas.map((s, i) => (
+                {insights.developmentAreas?.filter(Boolean).map((s, i) => (
                   <li key={i} className="text-sm text-body flex gap-2">
                     <span className="text-amber font-bold mt-0.5">–</span>
                     <span>{s}</span>
@@ -120,7 +107,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
               Suggested Interview Probes
             </p>
             <ol className="space-y-2 list-decimal list-inside">
-              {insights.interviewProbes.map((q, i) => (
+              {insights.interviewProbes?.filter(Boolean).map((q, i) => (
                 <li key={i} className="text-sm text-body">
                   {q}
                 </li>
@@ -133,7 +120,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
               Onboarding &amp; Development Focus
             </p>
             <ul className="space-y-2">
-              {insights.developmentFocus.map((s, i) => (
+              {insights.developmentFocus?.filter(Boolean).map((s, i) => (
                 <li key={i} className="text-sm text-body flex gap-2">
                   <span className="text-navy font-bold mt-0.5">•</span>
                   <span>{s}</span>

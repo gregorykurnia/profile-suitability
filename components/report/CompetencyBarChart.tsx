@@ -20,9 +20,9 @@ export default function CompetencyBarChart({ competencies }: { competencies: Com
   }));
 
   return (
-    <div className="w-full h-[380px]">
+    <div className="w-full h-[420px]">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 8, right: 8, left: -16, bottom: 48 }}>
+        <BarChart data={data} margin={{ top: 8, right: 8, left: -16, bottom: 72 }}>
           <CartesianGrid stroke="#E5E7EB" vertical={false} />
           <XAxis
             dataKey="name"
@@ -30,6 +30,7 @@ export default function CompetencyBarChart({ competencies }: { competencies: Com
             angle={-30}
             textAnchor="end"
             interval={0}
+            height={80}
           />
           <YAxis domain={[0, 100]} tick={{ fill: "#9CA3AF", fontSize: 10 }} />
           <Tooltip
@@ -41,7 +42,7 @@ export default function CompetencyBarChart({ competencies }: { competencies: Com
             }}
             cursor={{ fill: "rgba(14,165,176,0.06)" }}
           />
-          <Legend wrapperStyle={{ fontSize: 12 }} />
+          <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: 12, paddingBottom: 8 }} />
           <defs>
             <linearGradient id="barCandidateFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#14C8D4" />

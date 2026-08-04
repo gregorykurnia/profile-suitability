@@ -33,26 +33,34 @@ export default function CompetencyRadarChart({ competencies }: { competencies: C
             domain={[0, 100]}
             tick={{ fill: "#9CA3AF", fontSize: 10 }}
           />
+          <defs>
+            <radialGradient id="radarCandidateFill">
+              <stop offset="0%" stopColor="#14C8D4" stopOpacity={0.45} />
+              <stop offset="100%" stopColor="#0EA5B0" stopOpacity={0.15} />
+            </radialGradient>
+          </defs>
           <Radar
             name="Role Benchmark"
             dataKey="Role Benchmark"
             stroke="#9CA3AF"
             fill="#9CA3AF"
-            fillOpacity={0.15}
+            fillOpacity={0.12}
             strokeDasharray="4 3"
           />
           <Radar
             name="Candidate"
             dataKey="Candidate"
             stroke="#0EA5B0"
-            fill="#0EA5B0"
-            fillOpacity={0.3}
+            strokeWidth={2}
+            fill="url(#radarCandidateFill)"
+            fillOpacity={1}
           />
           <Legend wrapperStyle={{ fontSize: 12 }} />
           <Tooltip
             contentStyle={{
-              borderRadius: 8,
+              borderRadius: 10,
               border: "1px solid #E5E7EB",
+              boxShadow: "0 8px 24px -8px rgba(27,43,75,0.25)",
               fontSize: 12,
             }}
           />

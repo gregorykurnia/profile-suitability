@@ -9,10 +9,13 @@ export default function OverallSuitabilitySection({ report }: { report: Suitabil
     diff === 0 ? "on par with" : diff > 0 ? `${diff} pts above` : `${Math.abs(diff)} pts below`;
 
   return (
-    <section className="bg-surface rounded-xl shadow-sm border border-divider px-8 py-8 sm:px-10 sm:py-10">
-      <h2 className="font-sans font-bold text-navy text-xl tracking-tight mb-6">
-        Overall Suitability
-      </h2>
+    <section className="report-card px-8 py-8 sm:px-10 sm:py-10">
+      <div className="flex items-center gap-2.5 mb-6">
+        <span className="h-6 w-1 rounded-full bg-gradient-to-b from-teal to-navy" />
+        <h2 className="font-sans font-bold text-navy text-xl tracking-tight">
+          Overall Suitability
+        </h2>
+      </div>
 
       <div className="flex flex-col md:flex-row items-center gap-10">
         <SuitabilityGauge
@@ -23,7 +26,7 @@ export default function OverallSuitabilitySection({ report }: { report: Suitabil
 
         <div className="flex-1 w-full">
           <span
-            className={`inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold ${labelBadgeClasses(
+            className={`inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold shadow-sm ${labelBadgeClasses(
               report.suitabilityLabel
             )}`}
           >
@@ -72,10 +75,13 @@ function BenchmarkBar({ label, value, color }: { label: string; value: number; c
   return (
     <div className="flex items-center gap-3">
       <span className="text-xs text-muted w-28 shrink-0">{label}</span>
-      <div className="flex-1 h-2.5 rounded-full bg-[#EEF0F3] overflow-hidden">
+      <div className="flex-1 h-2.5 rounded-full bg-[#EEF0F3] overflow-hidden shadow-inner">
         <div
-          className="h-full rounded-full"
-          style={{ width: `${value}%`, backgroundColor: color }}
+          className="h-full rounded-full shadow-sm"
+          style={{
+            width: `${value}%`,
+            background: `linear-gradient(90deg, ${color}cc, ${color})`,
+          }}
         />
       </div>
       <span className="font-mono text-sm text-navy w-8 text-right">{value}</span>

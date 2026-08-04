@@ -60,7 +60,8 @@ export default function DownloadPdfButton({
     <button
       onClick={handleExport}
       disabled={exporting}
-      className="no-print inline-flex items-center gap-2 rounded-lg bg-navy text-white text-sm font-semibold px-4 py-2.5 hover:bg-navy/90 transition-colors disabled:opacity-60"
+      className="no-print inline-flex items-center gap-2 rounded-lg text-white text-sm font-semibold px-4 py-2.5 shadow-md shadow-navy/20 hover:shadow-lg hover:shadow-teal/25 transition-all disabled:opacity-60"
+      style={{ background: "linear-gradient(135deg, #1b2b4b, #0ea5b0)" }}
     >
       {exporting ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
       {exporting ? "Exporting…" : "Download PDF"}

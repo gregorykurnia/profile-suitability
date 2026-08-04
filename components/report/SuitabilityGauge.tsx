@@ -56,9 +56,21 @@ export default function SuitabilityGauge({ score, color, size = 220, percentile 
   const circumference = (ARC_SWEEP / 360) * 2 * Math.PI * r;
   const fillFraction = animatedScore / 100;
 
+  const gradientId = `gauge-gradient-${color.replace("#", "")}`;
+
   return (
     <div className="relative flex flex-col items-center justify-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <div
+        className="pointer-events-none absolute inset-4 rounded-full blur-2xl opacity-25"
+        style={{ background: color }}
+      />
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="relative">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={color} stopOpacity={0.65} />
+            <stop offset="100%" stopColor={color} />
+          </linearGradient>
+        </defs>
         <path
           d={trackPath}
           fill="none"
@@ -69,12 +81,15 @@ export default function SuitabilityGauge({ score, color, size = 220, percentile 
         <path
           d={trackPath}
           fill="none"
-          stroke={color}
+          stroke={`url(#${gradientId})`}
           strokeWidth={14}
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={circumference * (1 - fillFraction)}
-          style={{ transition: "stroke-dashoffset 0.1s linear" }}
+          style={{
+            transition: "stroke-dashoffset 0.1s linear",
+            filter: `drop-shadow(0 2px 6px ${color}66)`,
+          }}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -83,7 +98,10 @@ export default function SuitabilityGauge({ score, color, size = 220, percentile 
         </span>
         <span className="font-mono text-sm text-muted mt-1">/ 100</span>
         {percentile !== undefined && (
-          <span className="font-mono font-semibold text-sm text-navy mt-2 px-2.5 py-0.5 rounded-full bg-[#EEF0F3]">
+          <span
+            className="font-mono font-semibold text-sm text-navy mt-2 px-2.5 py-0.5 rounded-full border"
+            style={{ backgroundColor: `${color}14`, borderColor: `${color}33` }}
+          >
             {ordinal(percentile)} percentile
           </span>
         )}

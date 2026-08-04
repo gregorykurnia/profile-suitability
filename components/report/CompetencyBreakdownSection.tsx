@@ -14,24 +14,31 @@ export default function CompetencyBreakdownSection({
   const [view, setView] = useState<"radar" | "bar">("radar");
 
   return (
-    <section className="bg-surface rounded-xl shadow-sm border border-divider px-8 py-8 sm:px-10 sm:py-10">
+    <section className="report-card px-8 py-8 sm:px-10 sm:py-10">
       <div className="flex items-center justify-between flex-wrap gap-3 mb-2">
-        <h2 className="font-sans font-bold text-navy text-xl tracking-tight">
-          Competency Breakdown
-        </h2>
+        <div className="flex items-center gap-2.5">
+          <span className="h-6 w-1 rounded-full bg-gradient-to-b from-teal to-navy" />
+          <h2 className="font-sans font-bold text-navy text-xl tracking-tight">
+            Competency Breakdown
+          </h2>
+        </div>
         <div className="no-print inline-flex rounded-lg border border-divider p-0.5 bg-[#F8F9FB]">
           <button
             onClick={() => setView("radar")}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-              view === "radar" ? "bg-navy text-white" : "text-muted hover:text-navy"
+            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+              view === "radar"
+                ? "bg-gradient-to-br from-navy to-navy-light text-white shadow-sm"
+                : "text-muted hover:text-navy"
             }`}
           >
             Radar
           </button>
           <button
             onClick={() => setView("bar")}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-              view === "bar" ? "bg-navy text-white" : "text-muted hover:text-navy"
+            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+              view === "bar"
+                ? "bg-gradient-to-br from-navy to-navy-light text-white shadow-sm"
+                : "text-muted hover:text-navy"
             }`}
           >
             Bar

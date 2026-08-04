@@ -33,8 +33,11 @@ export default async function ReportPage({
         <CompetencyDetailSection competencies={report.competencies} />
 
         <footer className="text-center text-xs text-muted pt-6 pb-2">
-          © {new Date().getFullYear()} DEUS Human Capital Services. Confidential — for internal
-          HR use only.
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-1 w-1 rounded-full bg-teal" />©{" "}
+            {new Date().getFullYear()} DEUS Human Capital Services. Confidential — for internal
+            HR use only.
+          </span>
         </footer>
       </div>
     </div>

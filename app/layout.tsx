@@ -25,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${robotoMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#F8F9FB] text-[#374151] font-sans">
+      <body className="min-h-full flex flex-col text-[#374151] font-sans">
         {children}
       </body>
     </html>

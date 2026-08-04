@@ -5,7 +5,10 @@ export default function CompetencyDetailCard({ competency }: { competency: Compe
   const color = statusColor(competency.status);
 
   return (
-    <div className="bg-surface rounded-xl shadow-sm border border-divider px-6 py-6 sm:px-8 sm:py-8">
+    <div
+      className="bg-surface rounded-xl shadow-sm border border-divider px-6 py-6 sm:px-8 sm:py-8 border-l-4 transition-shadow hover:shadow-md"
+      style={{ borderLeftColor: color }}
+    >
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <h3 className="font-sans font-bold text-navy text-lg tracking-tight">
@@ -19,7 +22,7 @@ export default function CompetencyDetailCard({ competency }: { competency: Compe
             <p className="text-xs text-muted font-mono">{competency.percentile}th pct</p>
           </div>
           <span
-            className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${statusBadgeClasses(
+            className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm ${statusBadgeClasses(
               competency.status
             )}`}
           >
@@ -29,10 +32,10 @@ export default function CompetencyDetailCard({ competency }: { competency: Compe
       </div>
 
       <div className="mt-6">
-        <div className="relative h-2 rounded-full bg-[#EEF0F3]">
+        <div className="relative h-2 rounded-full bg-[#EEF0F3] shadow-inner">
           <div
-            className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white shadow"
-            style={{ left: `${competency.score}%`, backgroundColor: color }}
+            className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white shadow-md"
+            style={{ left: `${competency.score}%`, backgroundColor: color, boxShadow: `0 0 0 3px ${color}22` }}
           />
           <div
             className="absolute top-1/2 h-3 w-0.5 -translate-y-1/2"

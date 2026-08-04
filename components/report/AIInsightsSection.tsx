@@ -34,10 +34,19 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
   }, []);
 
   return (
-    <section className="bg-surface rounded-xl shadow-sm border border-divider px-8 py-8 sm:px-10 sm:py-10">
-      <div className="flex items-center justify-between gap-3 mb-6">
-        <div className="flex items-center gap-2">
-          <Sparkles size={18} className="text-teal" />
+    <section className="report-card px-8 py-8 sm:px-10 sm:py-10 relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full blur-3xl opacity-40"
+        style={{ background: "radial-gradient(circle, rgba(14,165,176,0.25), transparent 70%)" }}
+      />
+      <div className="relative flex items-center justify-between gap-3 mb-6">
+        <div className="flex items-center gap-2.5">
+          <div
+            className="h-8 w-8 rounded-lg flex items-center justify-center shadow-sm"
+            style={{ background: "linear-gradient(135deg, #0ea5b0, #14c8d4)" }}
+          >
+            <Sparkles size={16} className="text-white" />
+          </div>
           <h2 className="font-sans font-bold text-navy text-xl tracking-tight">
             AI-Generated Insights
           </h2>

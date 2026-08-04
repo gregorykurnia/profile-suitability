@@ -33,11 +33,23 @@ export default function CompetencyBarChart({ competencies }: { competencies: Com
           />
           <YAxis domain={[0, 100]} tick={{ fill: "#9CA3AF", fontSize: 10 }} />
           <Tooltip
-            contentStyle={{ borderRadius: 8, border: "1px solid #E5E7EB", fontSize: 12 }}
+            contentStyle={{
+              borderRadius: 10,
+              border: "1px solid #E5E7EB",
+              boxShadow: "0 8px 24px -8px rgba(27,43,75,0.25)",
+              fontSize: 12,
+            }}
+            cursor={{ fill: "rgba(14,165,176,0.06)" }}
           />
           <Legend wrapperStyle={{ fontSize: 12 }} />
-          <Bar dataKey="Candidate" fill="#0EA5B0" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="Role Benchmark" fill="#9CA3AF" radius={[4, 4, 0, 0]} />
+          <defs>
+            <linearGradient id="barCandidateFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#14C8D4" />
+              <stop offset="100%" stopColor="#0EA5B0" />
+            </linearGradient>
+          </defs>
+          <Bar dataKey="Candidate" fill="url(#barCandidateFill)" radius={[5, 5, 0, 0]} />
+          <Bar dataKey="Role Benchmark" fill="#C7CDD6" radius={[5, 5, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

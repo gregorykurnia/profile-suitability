@@ -29,12 +29,14 @@ export default function ReportHeader({ report }: { report: SuitabilityReport }) 
 
         <div className="relative flex items-start justify-between gap-6 flex-wrap">
           <div>
-            <div className="flex items-center gap-2.5 mb-6">
-              <div
-                className="h-8 w-8 rounded-lg flex items-center justify-center shadow-lg shadow-teal/20"
-                style={{ background: "linear-gradient(135deg, #0ea5b0, #14c8d4)" }}
-              >
-                <span className="font-mono font-bold text-white text-sm">D</span>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-lg overflow-hidden shadow-lg shadow-teal/20 ring-1 ring-white/10 shrink-0">
+                <img
+                  src="/deus-logo.jpeg"
+                  alt="DEUS logo"
+                  className="max-w-none"
+                  style={{ width: 126, height: 126, transform: "translate(-41px, -26px)" }}
+                />
               </div>
               <span className="font-sans font-bold tracking-wide text-white/90 text-sm uppercase">
                 DEUS Human Capital Services

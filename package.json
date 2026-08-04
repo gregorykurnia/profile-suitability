@@ -13,6 +13,7 @@
     "@ai-sdk/react": "^3.0.243",
     "@anthropic-ai/sdk": "^0.115.0",
     "ai": "^6.0.241",
+    "firebase-admin": "^13.10.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
     "lucide-react": "^1.28.0",

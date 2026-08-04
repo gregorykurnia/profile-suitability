@@ -15,13 +15,15 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
   const insights = object ?? report.insights ?? null;
   const loading = isLoading && !insights;
 
-  const load = () =>
+  const load = (regenerate = false) =>
     submit({
+      candidateId: report.candidateId,
       candidateName: report.candidateName,
       positionApplied: report.positionApplied,
       competencies: report.competencies,
       suitabilityScore: report.suitabilityScore,
       normativePercentile: report.normativePercentile,
+      regenerate,
     });
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
         </div>
         {!loading && (
           <button
-            onClick={load}
+            onClick={() => load(true)}
             title="Regenerate insights"
             className="no-print p-2 rounded-lg text-muted hover:text-navy hover:bg-[#F8F9FB] transition-colors"
           >
@@ -59,7 +61,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
             {error.message ?? "Something went wrong"}
           </p>
           <button
-            onClick={load}
+            onClick={() => load()}
             className="no-print mt-4 inline-flex items-center gap-2 rounded-lg bg-navy text-white text-sm font-semibold px-4 py-2 hover:bg-navy/90 transition-colors"
           >
             <RefreshCw size={14} /> Retry

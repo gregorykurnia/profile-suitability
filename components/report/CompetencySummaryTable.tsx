@@ -17,7 +17,7 @@ export default function CompetencySummaryTable({ competencies }: { competencies:
               Percentile
             </th>
             <th className="py-2 pr-4 text-xs uppercase tracking-wide text-muted font-semibold">
-              Benchmark
+              Norm Score
             </th>
             <th className="py-2 text-xs uppercase tracking-wide text-muted font-semibold">
               Status

@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ordinal } from "@/lib/utils";
 
 interface SuitabilityGaugeProps {
   score: number;
   color: string;
   size?: number;
+  percentile?: number;
 }
 
 const START_ANGLE = 135;
@@ -24,7 +26,7 @@ function describeArc(cx: number, cy: number, r: number, startAngle: number, endA
   return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
 }
 
-export default function SuitabilityGauge({ score, color, size = 220 }: SuitabilityGaugeProps) {
+export default function SuitabilityGauge({ score, color, size = 220, percentile }: SuitabilityGaugeProps) {
   const [animatedScore, setAnimatedScore] = useState(0);
   const rafRef = useRef<number | null>(null);
 
@@ -80,6 +82,11 @@ export default function SuitabilityGauge({ score, color, size = 220 }: Suitabili
           {animatedScore}
         </span>
         <span className="font-mono text-sm text-muted mt-1">/ 100</span>
+        {percentile !== undefined && (
+          <span className="font-mono font-semibold text-sm text-navy mt-2 px-2.5 py-0.5 rounded-full bg-[#EEF0F3]">
+            {ordinal(percentile)} percentile
+          </span>
+        )}
       </div>
     </div>
   );

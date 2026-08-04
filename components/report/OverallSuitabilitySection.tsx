@@ -15,7 +15,11 @@ export default function OverallSuitabilitySection({ report }: { report: Suitabil
       </h2>
 
       <div className="flex flex-col md:flex-row items-center gap-10">
-        <SuitabilityGauge score={report.suitabilityScore} color={color} />
+        <SuitabilityGauge
+          score={report.suitabilityScore}
+          color={color}
+          percentile={report.normativePercentile}
+        />
 
         <div className="flex-1 w-full">
           <span
@@ -46,7 +50,7 @@ export default function OverallSuitabilitySection({ report }: { report: Suitabil
                 color={color}
               />
               <BenchmarkBar
-                label="Role Ideal Score"
+                label="Norm Average"
                 value={report.roleBenchmarkScore}
                 color="#9CA3AF"
               />

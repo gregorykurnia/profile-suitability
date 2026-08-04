@@ -19,7 +19,7 @@
   --color-divider: #e5e7eb;
 
   --font-sans: var(--font-inter);
-  --font-mono: var(--font-roboto-mono);
+  --font-mono: var(--font-inter);
 }
 
 body {

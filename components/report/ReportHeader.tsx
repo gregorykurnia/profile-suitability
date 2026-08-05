@@ -1,12 +1,7 @@
-"use client";
-
 import { SuitabilityReport } from "@/lib/types";
-import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { localeToIntl } from "@/lib/i18n";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-function formatDate(dateStr: string, intlLocale: string) {
-  return new Date(dateStr).toLocaleDateString(intlLocale, {
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -14,9 +9,6 @@ function formatDate(dateStr: string, intlLocale: string) {
 }
 
 export default function ReportHeader({ report }: { report: SuitabilityReport }) {
-  const { t, locale } = useLocale();
-  const intlLocale = localeToIntl(locale);
-
   return (
     <header className="report-card no-accent overflow-hidden">
       <div
@@ -47,7 +39,7 @@ export default function ReportHeader({ report }: { report: SuitabilityReport }) 
                 />
               </div>
               <span className="font-sans font-bold tracking-wide text-white/90 text-sm uppercase">
-                {t("common.orgName")}
+                Telkom Indonesia
               </span>
             </div>
 
@@ -55,50 +47,47 @@ export default function ReportHeader({ report }: { report: SuitabilityReport }) 
               {report.candidateName}
             </h1>
             <p className="mt-2 text-white/70 text-base sm:text-lg">
-              {t("report.candidateFor")}{" "}
+              Candidate for{" "}
               <span className="font-semibold text-red-light">{report.positionApplied}</span>
             </p>
           </div>
 
-          <div className="flex flex-col items-end gap-4 shrink-0">
-            <LanguageSwitcher variant="dark" />
-            <div className="text-right">
-              <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">
-                {t("report.referenceNo")}
-              </p>
-              <p className="font-mono text-sm text-white font-medium mt-1 bg-white/10 rounded-md px-2.5 py-1 border border-white/10">
-                {report.candidateId}
-              </p>
-            </div>
+          <div className="text-right shrink-0">
+            <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">
+              Reference No.
+            </p>
+            <p className="font-mono text-sm text-white font-medium mt-1 bg-white/10 rounded-md px-2.5 py-1 border border-white/10">
+              {report.candidateId}
+            </p>
           </div>
         </div>
       </div>
 
       <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-6 px-8 py-6 sm:px-10">
         <div>
-          <p className="text-xs uppercase tracking-wide text-muted font-semibold">{t("report.client")}</p>
+          <p className="text-xs uppercase tracking-wide text-muted font-semibold">Client</p>
           <p className="text-sm text-navy font-medium mt-1">{report.clientCompany}</p>
         </div>
         <div>
           <p className="text-xs uppercase tracking-wide text-muted font-semibold">
-            {t("report.assessmentDate")}
+            Assessment Date
           </p>
           <p className="text-sm text-navy font-medium mt-1 font-mono">
-            {formatDate(report.assessmentDate, intlLocale)}
+            {formatDate(report.assessmentDate)}
           </p>
         </div>
         <div>
           <p className="text-xs uppercase tracking-wide text-muted font-semibold">
-            {t("report.reportGenerated")}
+            Report Generated
           </p>
           <p className="text-sm text-navy font-medium mt-1 font-mono">
-            {formatDate(report.reportGeneratedDate, intlLocale)}
+            {formatDate(report.reportGeneratedDate)}
           </p>
         </div>
         {report.hrContact && (
           <div>
             <p className="text-xs uppercase tracking-wide text-muted font-semibold">
-              {t("report.hrContact")}
+              HR Contact
             </p>
             <p className="text-sm text-navy font-medium mt-1">{report.hrContact}</p>
           </div>

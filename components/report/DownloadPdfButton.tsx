@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
-import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export default function DownloadPdfButton({
   targetId,
@@ -11,7 +10,6 @@ export default function DownloadPdfButton({
   targetId: string;
   fileName: string;
 }) {
-  const { t } = useLocale();
   const [exporting, setExporting] = useState(false);
 
   async function handleExport() {
@@ -69,7 +67,7 @@ export default function DownloadPdfButton({
       style={{ background: "linear-gradient(135deg, #b8121e, #e3061c)" }}
     >
       {exporting ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
-      {exporting ? t("report.exporting") : t("report.downloadPdf")}
+      {exporting ? "Exporting…" : "Download PDF"}
     </button>
   );
 }

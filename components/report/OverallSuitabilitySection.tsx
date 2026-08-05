@@ -1,28 +1,19 @@
-"use client";
-
 import { SuitabilityReport } from "@/lib/types";
-import { labelBadgeClasses, labelColor } from "@/lib/utils";
-import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { dictionaries, localeOrdinal, translateLabel } from "@/lib/i18n";
+import { labelBadgeClasses, labelColor, ordinal } from "@/lib/utils";
 import SuitabilityGauge from "./SuitabilityGauge";
 
 export default function OverallSuitabilitySection({ report }: { report: SuitabilityReport }) {
-  const { t, locale } = useLocale();
   const color = labelColor(report.suitabilityLabel);
   const diff = report.suitabilityScore - report.roleBenchmarkScore;
   const diffLabel =
-    diff === 0
-      ? t("report.onParWith")
-      : diff > 0
-        ? t("report.ptsAbove", { n: diff })
-        : t("report.ptsBelow", { n: Math.abs(diff) });
+    diff === 0 ? "on par with" : diff > 0 ? `${diff} pts above` : `${Math.abs(diff)} pts below`;
 
   return (
     <section className="report-card px-8 py-8 sm:px-10 sm:py-10">
       <div className="flex items-center gap-2.5 mb-6">
         <span className="h-6 w-1 rounded-full bg-gradient-to-b from-teal to-navy" />
         <h2 className="font-sans font-bold text-navy text-xl tracking-tight">
-          {t("report.overallSuitability")}
+          Overall Suitability
         </h2>
       </div>
 
@@ -39,41 +30,39 @@ export default function OverallSuitabilitySection({ report }: { report: Suitabil
               report.suitabilityLabel
             )}`}
           >
-            {translateLabel(dictionaries[locale], report.suitabilityLabel)}
+            {report.suitabilityLabel}
           </span>
 
           <p className="mt-4 text-body leading-relaxed">
-            {t("report.scoresHigherThan")}{" "}
+            Scores higher than{" "}
             <span className="font-mono font-semibold text-navy">
               {report.normativePercentile}%
             </span>{" "}
-            {t("report.ofCandidatesAssessed")}{" "}
-            <span className="font-medium">{report.normGroupDescription}</span> {t("report.normGroup")}
+            of candidates assessed for this role, based on the{" "}
+            <span className="font-medium">{report.normGroupDescription}</span> norm group.
           </p>
 
           <div className="mt-6 pt-6 border-t border-divider">
             <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-              {t("report.roleBenchmarkComparison")}
+              Role Benchmark Comparison
             </p>
             <div className="space-y-2">
               <BenchmarkBar
-                label={t("report.candidateScore")}
+                label="Candidate Score"
                 value={report.suitabilityScore}
                 color={color}
               />
               <BenchmarkBar
-                label={t("report.normAverage")}
+                label="Norm Average"
                 value={report.roleBenchmarkScore}
                 color="#9CA3AF"
               />
             </div>
             <p className="mt-3 text-sm text-muted">
-              {t("report.candidateScoreIs")}{" "}
-              <span className="font-medium text-navy">{diffLabel}</span>{" "}
-              {t("report.theRoleBenchmarkOf")}{" "}
-              <span className="font-mono">{report.roleBenchmarkScore}</span>, {t("report.atThe")}{" "}
-              <span className="font-mono">{localeOrdinal(report.normativePercentile, locale)}</span>{" "}
-              {t("report.percentile")}
+              Candidate score is{" "}
+              <span className="font-medium text-navy">{diffLabel}</span> the role benchmark of{" "}
+              <span className="font-mono">{report.roleBenchmarkScore}</span>, at the{" "}
+              <span className="font-mono">{ordinal(report.normativePercentile)}</span> percentile.
             </p>
           </div>
         </div>

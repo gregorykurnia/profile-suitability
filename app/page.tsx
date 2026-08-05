@@ -6,9 +6,6 @@ import { ChevronDown, ChevronRight, Search, X } from "lucide-react";
 import { mockReports } from "@/lib/reportMock";
 import { SuitabilityLabel } from "@/lib/types";
 import { labelBadgeClasses, labelColor } from "@/lib/utils";
-import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { dictionaries, localeToIntl, translateLabel } from "@/lib/i18n";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 type SortKey = "candidateName" | "positionApplied" | "clientCompany" | "suitabilityScore" | "suitabilityLabel" | "assessmentDate";
 type SortDir = "asc" | "desc";
@@ -22,8 +19,8 @@ const labelRank: Record<SuitabilityLabel, number> = {
 
 const labelFilters: SuitabilityLabel[] = ["Highly Suitable", "Suitable", "Needs Development", "Not Recommended"];
 
-function formatDate(dateStr: string, intlLocale: string) {
-  return new Date(dateStr).toLocaleDateString(intlLocale, {
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -48,8 +45,6 @@ function avatarColor(name: string) {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { locale, t } = useLocale();
-  const intlLocale = localeToIntl(locale);
   const [search, setSearch] = useState("");
   const [positionFilter, setPositionFilter] = useState<string | null>(null);
   const [clientFilter, setClientFilter] = useState<string | null>(null);
@@ -135,12 +130,12 @@ export default function DashboardPage() {
   }
 
   const columns: { key: SortKey; label: string; align?: "right" }[] = [
-    { key: "candidateName", label: t("dashboard.columnCandidate") },
-    { key: "positionApplied", label: t("dashboard.columnPosition") },
-    { key: "clientCompany", label: t("dashboard.columnClient") },
-    { key: "suitabilityScore", label: t("dashboard.columnScore"), align: "right" },
-    { key: "suitabilityLabel", label: t("dashboard.columnSuitability") },
-    { key: "assessmentDate", label: t("dashboard.columnAssessmentDate") },
+    { key: "candidateName", label: "Candidate" },
+    { key: "positionApplied", label: "Position Applied" },
+    { key: "clientCompany", label: "Client" },
+    { key: "suitabilityScore", label: "Score", align: "right" },
+    { key: "suitabilityLabel", label: "Suitability" },
+    { key: "assessmentDate", label: "Assessment Date" },
   ];
 
   return (
@@ -163,47 +158,45 @@ export default function DashboardPage() {
               style={{ background: "radial-gradient(circle, rgba(255,90,90,0.18), transparent 70%)" }}
             />
 
-            <div className="relative flex items-center justify-between gap-3 mb-6">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-lg overflow-hidden bg-white shadow-lg shadow-red/20 ring-1 ring-white/10 shrink-0 flex items-center justify-center">
-                  <img
-                    src="/telkom-logo.png"
-                    alt="Telkom Indonesia logo"
-                    className="max-w-none"
-                    style={{ width: 34, height: 34, objectFit: "contain" }}
-                  />
-                </div>
-                <span className="font-sans font-bold tracking-wide text-white/90 text-sm uppercase">
-                  {t("common.orgName")}
-                </span>
+            <div className="relative flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-lg overflow-hidden bg-white shadow-lg shadow-red/20 ring-1 ring-white/10 shrink-0 flex items-center justify-center">
+                <img
+                  src="/telkom-logo.png"
+                  alt="Telkom Indonesia logo"
+                  className="max-w-none"
+                  style={{ width: 34, height: 34, objectFit: "contain" }}
+                />
               </div>
-              <LanguageSwitcher variant="dark" />
+              <span className="font-sans font-bold tracking-wide text-white/90 text-sm uppercase">
+                Telkom Indonesia
+              </span>
             </div>
 
             <h1 className="relative font-sans font-extrabold text-white text-3xl sm:text-4xl tracking-tight">
-              {t("dashboard.title")}
+              Candidate Assessments
             </h1>
             <p className="relative mt-2 text-white/70 text-base">
-              {t("dashboard.subtitle", { count: totalAssessed, roles: positions.length })}
+              <span className="font-semibold text-red-light">{totalAssessed} candidates</span> assessed across{" "}
+              {positions.length} open roles
             </p>
 
             <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8 pt-6 border-t border-white/10">
               <div>
-                <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">{t("dashboard.totalAssessed")}</p>
+                <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">Total Assessed</p>
                 <p className="text-2xl font-extrabold text-white mt-1.5 font-mono">{totalAssessed}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">{t("dashboard.avgScore")}</p>
+                <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">Avg. Suitability Score</p>
                 <p className="text-2xl font-extrabold text-red-light mt-1.5 font-mono">{avgScore}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">
-                  {t("dashboard.suitableCount")}
+                  Highly Suitable / Suitable
                 </p>
                 <p className="text-2xl font-extrabold text-red-light mt-1.5 font-mono">{suitableCount}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">{t("dashboard.needsAttention")}</p>
+                <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">Needs Attention</p>
                 <p className="text-2xl font-extrabold text-amber mt-1.5 font-mono">{needsAttentionCount}</p>
               </div>
             </div>
@@ -218,7 +211,7 @@ export default function DashboardPage() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder={t("dashboard.searchPlaceholder")}
+              placeholder="Search by candidate name or reference no."
               className="w-full pl-9 pr-3.5 py-2.5 rounded-lg border border-divider bg-white text-sm text-body focus:outline-none focus:ring-2 focus:ring-red/40 focus:border-red"
             />
           </div>
@@ -233,7 +226,7 @@ export default function DashboardPage() {
                   : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
               }`}
             >
-              <option value="">{t("dashboard.positionAll")}</option>
+              <option value="">Position: All</option>
               {positions.map((p) => (
                 <option key={p} value={p}>
                   {p}
@@ -256,7 +249,7 @@ export default function DashboardPage() {
                   : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
               }`}
             >
-              <option value="">{t("dashboard.clientAll")}</option>
+              <option value="">Client: All</option>
               {clients.map((c) => (
                 <option key={c} value={c}>
                   {c}
@@ -279,10 +272,10 @@ export default function DashboardPage() {
                   : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
               }`}
             >
-              <option value="">{t("dashboard.suitabilityAll")}</option>
+              <option value="">Suitability: All</option>
               {labelFilters.map((l) => (
                 <option key={l} value={l}>
-                  {translateLabel(dictionaries[locale], l)}
+                  {l}
                 </option>
               ))}
             </select>
@@ -298,7 +291,7 @@ export default function DashboardPage() {
               className="inline-flex items-center gap-1 rounded-lg border border-divider bg-white px-3 py-2.5 text-sm font-semibold text-muted hover:text-body hover:bg-[#F8F9FB] transition-colors"
             >
               <X size={14} />
-              {t("dashboard.clear")}
+              Clear
             </button>
           )}
         </div>
@@ -324,7 +317,7 @@ export default function DashboardPage() {
             {labelFilter && (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-red/10 text-[#b8121e] px-2.5 py-1 text-xs font-semibold">
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: labelColor(labelFilter) }} />
-                {translateLabel(dictionaries[locale], labelFilter)}
+                {labelFilter}
                 <button onClick={() => setLabelFilter(null)} aria-label="Remove suitability filter">
                   <X size={11} />
                 </button>
@@ -401,10 +394,10 @@ export default function DashboardPage() {
                         )}`}
                       >
                         <span className="h-1.5 w-1.5 rounded-full" style={{ background: labelColor(r.suitabilityLabel) }} />
-                        {translateLabel(dictionaries[locale], r.suitabilityLabel)}
+                        {r.suitabilityLabel}
                       </span>
                     </td>
-                    <td className="px-5 py-3.5 font-mono text-[12.5px] text-body">{formatDate(r.assessmentDate, intlLocale)}</td>
+                    <td className="px-5 py-3.5 font-mono text-[12.5px] text-body">{formatDate(r.assessmentDate)}</td>
                     <td className="px-5 py-3.5 text-right">
                       <ChevronRight
                         size={16}
@@ -416,7 +409,7 @@ export default function DashboardPage() {
                 {sorted.length === 0 && (
                   <tr>
                     <td colSpan={columns.length + 1} className="px-5 py-10 text-center text-muted text-sm">
-                      {t("dashboard.noResults")}
+                      No candidates match your filters.
                     </td>
                   </tr>
                 )}
@@ -424,14 +417,16 @@ export default function DashboardPage() {
             </table>
           </div>
           <div className="flex items-center justify-between px-5 py-3.5 border-t border-divider text-xs text-muted">
-            <span>{t("dashboard.showingCount", { shown: sorted.length, total: totalAssessed })}</span>
+            <span>
+              Showing {sorted.length} of {totalAssessed} candidates
+            </span>
           </div>
         </div>
 
         <footer className="text-center text-xs text-muted pt-2 pb-2">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-1 w-1 rounded-full bg-red" />
-            {t("common.confidentialFooter", { year: new Date().getFullYear() })}
+            <span className="h-1 w-1 rounded-full bg-red" />©{" "}
+            {new Date().getFullYear()} Telkom Indonesia. Confidential — for internal HR use only.
           </span>
         </footer>
       </div>

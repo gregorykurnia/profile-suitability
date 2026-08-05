@@ -1,12 +1,7 @@
-"use client";
-
 import { Competency } from "@/lib/types";
 import { statusBadgeClasses, statusColor } from "@/lib/utils";
-import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { dictionaries, translateStatus } from "@/lib/i18n";
 
 export default function CompetencyDetailCard({ competency }: { competency: Competency }) {
-  const { t, locale } = useLocale();
   const color = statusColor(competency.status);
 
   return (
@@ -24,14 +19,14 @@ export default function CompetencyDetailCard({ competency }: { competency: Compe
         <div className="flex items-center gap-3 shrink-0">
           <div className="text-right">
             <p className="font-mono font-bold text-2xl text-navy">{competency.score}</p>
-            <p className="text-xs text-muted font-mono">{t("report.pctPct", { pct: competency.percentile })}</p>
+            <p className="text-xs text-muted font-mono">{competency.percentile}th pct</p>
           </div>
           <span
             className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm ${statusBadgeClasses(
               competency.status
             )}`}
           >
-            {translateStatus(dictionaries[locale], competency.status)}
+            {competency.status}
           </span>
         </div>
       </div>
@@ -50,15 +45,15 @@ export default function CompetencyDetailCard({ competency }: { competency: Compe
         </div>
         <div className="grid grid-cols-3 gap-4 mt-3">
           <p className="text-xs text-muted leading-relaxed">
-            <span className="font-semibold text-navy block mb-0.5">{t("report.low")}</span>
+            <span className="font-semibold text-navy block mb-0.5">Low</span>
             {competency.lowDescriptor}
           </p>
           <p className="text-xs text-muted leading-relaxed">
-            <span className="font-semibold text-navy block mb-0.5">{t("report.mid")}</span>
+            <span className="font-semibold text-navy block mb-0.5">Mid</span>
             {competency.midDescriptor}
           </p>
           <p className="text-xs text-muted leading-relaxed">
-            <span className="font-semibold text-navy block mb-0.5">{t("report.high")}</span>
+            <span className="font-semibold text-navy block mb-0.5">High</span>
             {competency.highDescriptor}
           </p>
         </div>
@@ -66,7 +61,7 @@ export default function CompetencyDetailCard({ competency }: { competency: Compe
 
       <div className="mt-6 pt-5 border-t border-divider">
         <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-2">
-          {t("report.whatThisMeansInPractice")}
+          What This Means in Practice
         </p>
         <p className="text-sm text-body leading-relaxed">{competency.behavioralDescriptor}</p>
       </div>

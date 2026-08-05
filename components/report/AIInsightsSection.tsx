@@ -1,22 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { RefreshCw, Sparkles } from "lucide-react";
 import { aiInsightsSchema, SuitabilityReport } from "@/lib/types";
-import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export default function AIInsightsSection({ report }: { report: SuitabilityReport }) {
-  const { t, locale } = useLocale();
   const { object, submit, isLoading, error } = useObject({
     api: "/api/generate-insights",
     schema: aiInsightsSchema,
-    initialValue: locale === "en" ? report.insights : undefined,
+    initialValue: report.insights,
   });
 
-  const insights = object ?? (locale === "en" ? report.insights : null) ?? null;
+  const insights = object ?? report.insights ?? null;
   const loading = isLoading && !insights;
-  const hasLoadedLocale = useRef<string | null>(null);
 
   const load = (regenerate = false) =>
     submit({
@@ -26,23 +23,15 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
       competencies: report.competencies,
       suitabilityScore: report.suitabilityScore,
       normativePercentile: report.normativePercentile,
-      locale,
       regenerate,
     });
 
   useEffect(() => {
-    if (hasLoadedLocale.current !== locale) {
-      hasLoadedLocale.current = locale;
+    if (!report.insights) {
       load();
     }
-    return () => {
-      // Undo the guard on cleanup so a Strict Mode dev double-invoke (which
-      // aborts this in-flight request) doesn't leave the real mount stuck
-      // thinking it already loaded.
-      hasLoadedLocale.current = null;
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locale]);
+  }, []);
 
   return (
     <section className="report-card px-8 py-8 sm:px-10 sm:py-10 relative overflow-hidden">
@@ -59,13 +48,13 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
             <Sparkles size={16} className="text-white" />
           </div>
           <h2 className="font-sans font-bold text-navy text-xl tracking-tight">
-            {t("insights.title")}
+            AI-Generated Insights
           </h2>
         </div>
         {!loading && (
           <button
             onClick={() => load(true)}
-            title={t("insights.regenerate")}
+            title="Regenerate insights"
             className="no-print p-2 rounded-lg text-muted hover:text-navy hover:bg-[#F8F9FB] transition-colors"
           >
             <RefreshCw size={16} />
@@ -78,13 +67,13 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
       {!loading && error && (
         <div className="text-center py-8">
           <p className="text-sm text-alert font-medium">
-            {error.message ?? t("insights.somethingWentWrong")}
+            {error.message ?? "Something went wrong"}
           </p>
           <button
             onClick={() => load()}
             className="no-print mt-4 inline-flex items-center gap-2 rounded-lg bg-navy text-white text-sm font-semibold px-4 py-2 hover:bg-navy/90 transition-colors"
           >
-            <RefreshCw size={14} /> {t("insights.retry")}
+            <RefreshCw size={14} /> Retry
           </button>
         </div>
       )}
@@ -98,7 +87,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
           <div className="grid sm:grid-cols-2 gap-8">
             <div>
               <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-                {t("insights.keyStrengths")}
+                Key Strengths
               </p>
               <ul className="space-y-2">
                 {insights.keyStrengths?.filter(Boolean).map((s, i) => (
@@ -111,7 +100,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
             </div>
             <div>
               <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-                {t("insights.developmentAreas")}
+                Development Areas
               </p>
               <ul className="space-y-2">
                 {insights.developmentAreas?.filter(Boolean).map((s, i) => (
@@ -126,7 +115,7 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
 
           <div>
             <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-              {t("insights.roleFitRisks")}
+              Role Fit Risks &amp; Mitigations
             </p>
             <ul className="space-y-3">
               {insights.roleFitRisks

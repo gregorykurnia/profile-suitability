@@ -1,10 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
-import { cookies } from "next/headers";
 import "./globals.css";
 import RegisterServiceWorker from "./register-sw";
-import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
-import { Locale } from "@/lib/i18n";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,18 +37,15 @@ export const viewport: Viewport = {
   themeColor: "#e30613",
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const cookieStore = await cookies();
-  const locale = (cookieStore.get("locale")?.value as Locale) || "en";
-
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang={locale}
+      lang="en"
       className={`${inter.variable} ${robotoMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col text-[#374151] font-sans">
         <RegisterServiceWorker />
-        <LocaleProvider initialLocale={locale}>{children}</LocaleProvider>
+        {children}
       </body>
     </html>
   );

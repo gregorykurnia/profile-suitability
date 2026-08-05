@@ -1,31 +1,26 @@
-"use client";
-
 import { Competency } from "@/lib/types";
 import { statusBadgeClasses } from "@/lib/utils";
-import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { dictionaries, translateStatus } from "@/lib/i18n";
 
 export default function CompetencySummaryTable({ competencies }: { competencies: Competency[] }) {
-  const { t, locale } = useLocale();
   return (
     <div className="overflow-x-auto mt-8">
       <table className="w-full text-sm border-collapse">
         <thead>
           <tr className="text-left">
             <th className="py-2 pr-4 text-xs uppercase tracking-wide text-muted font-semibold border-b-2 border-divider">
-              {t("report.tableCompetency")}
+              Competency
             </th>
             <th className="py-2 pr-4 text-xs uppercase tracking-wide text-muted font-semibold border-b-2 border-divider">
-              {t("report.tableScore")}
+              Score
             </th>
             <th className="py-2 pr-4 text-xs uppercase tracking-wide text-muted font-semibold border-b-2 border-divider">
-              {t("report.tablePercentile")}
+              Percentile
             </th>
             <th className="py-2 pr-4 text-xs uppercase tracking-wide text-muted font-semibold border-b-2 border-divider">
-              {t("report.tableNormScore")}
+              Norm Score
             </th>
             <th className="py-2 text-xs uppercase tracking-wide text-muted font-semibold border-b-2 border-divider">
-              {t("report.tableStatus")}
+              Status
             </th>
           </tr>
         </thead>
@@ -39,7 +34,7 @@ export default function CompetencySummaryTable({ competencies }: { competencies:
             >
               <td className="py-3 pr-4 font-medium text-navy">{c.name}</td>
               <td className="py-3 pr-4 font-mono font-semibold text-navy">{c.score}</td>
-              <td className="py-3 pr-4 font-mono text-muted">{t("report.pctTh", { pct: c.percentile })}</td>
+              <td className="py-3 pr-4 font-mono text-muted">{c.percentile}th</td>
               <td className="py-3 pr-4 font-mono text-muted">{c.benchmarkScore}</td>
               <td className="py-3">
                 <span
@@ -47,7 +42,7 @@ export default function CompetencySummaryTable({ competencies }: { competencies:
                     c.status
                   )}`}
                 >
-                  {translateStatus(dictionaries[locale], c.status)}
+                  {c.status}
                 </span>
               </td>
             </tr>

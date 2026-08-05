@@ -41,13 +41,15 @@ export const aiInsightsSchema = z.object({
     .describe("2-3 sentence overall read on this candidate's suitability"),
   keyStrengths: z
     .array(z.string())
+    .length(4)
     .describe(
-      "plain behavioral statements describing what the candidate does well, one per top-scoring competency. Do not mention competency names, scores, percentiles, or benchmark status — just the observation itself. Must have the same number of bullets as developmentAreas."
+      "exactly 4 plain behavioral statements describing what the candidate does well, drawn from their top-scoring competencies. Do not mention competency names, scores, percentiles, or benchmark status — just the observation itself."
     ),
   developmentAreas: z
     .array(z.string())
+    .length(4)
     .describe(
-      "plain behavioral statements describing where the candidate falls short, one per low-scoring competency. Do not mention competency names, scores, percentiles, or benchmark status — just the observation itself. Must have the same number of bullets as keyStrengths."
+      "exactly 4 plain behavioral statements describing where the candidate falls short, drawn from their lower-scoring competencies. Do not mention competency names, scores, percentiles, or benchmark status — just the observation itself."
     ),
   roleFitRisks: z
     .array(

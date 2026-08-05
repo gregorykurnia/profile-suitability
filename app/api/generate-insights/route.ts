@@ -12,7 +12,7 @@ Avoid generic filler.
 
 Do not cite competency names, numeric scores, percentiles, or benchmark/status labels (e.g. "Above", "Below", "Meets") anywhere in your output — translate the data into plain behavioral statements instead. For example, write "Struggles to project authority in group settings" rather than "Leadership Presence (60/100, below benchmark) is a concern."
 
-keyStrengths and developmentAreas must contain the same number of bullets.`;
+keyStrengths and developmentAreas must each contain exactly 4 bullets. If fewer than 4 competencies are clearly strong or weak, draw on multiple distinct facets of the same competency rather than padding with filler.`;
 
 interface RequestBody {
   candidateId: string;

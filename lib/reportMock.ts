@@ -13,7 +13,7 @@ export const mockReport: SuitabilityReport = {
   suitabilityLabel: "Suitable",
   normativePercentile: 68,
   normGroupDescription: "Indonesian working adults, managerial level, n=1,240",
-  roleBenchmarkScore: 75,
+  roleBenchmarkScore: 70,
 
   competencies: [
     {
@@ -23,7 +23,7 @@ export const mockReport: SuitabilityReport = {
         "The tendency to set ambitious goals, persist through obstacles, and hold oneself to high standards of performance.",
       score: 82,
       percentile: 79,
-      benchmarkScore: 75,
+      benchmarkScore: 73,
       status: "Above",
       behavioralDescriptor:
         "Budi consistently sets stretch targets for himself and shows strong persistence when faced with setbacks, a pattern well above what is typically required for this role.",
@@ -38,7 +38,7 @@ export const mockReport: SuitabilityReport = {
         "The ability to build rapport, read social cues, and maintain productive working relationships across stakeholders.",
       score: 71,
       percentile: 61,
-      benchmarkScore: 75,
+      benchmarkScore: 76,
       status: "Below",
       behavioralDescriptor:
         "Budi builds workable relationships with peers and clients, though he may occasionally miss subtler social cues in higher-stakes stakeholder interactions.",
@@ -53,7 +53,7 @@ export const mockReport: SuitabilityReport = {
         "The capacity to break down complex problems, identify patterns in data, and draw sound, logical conclusions.",
       score: 65,
       percentile: 48,
-      benchmarkScore: 75,
+      benchmarkScore: 72,
       status: "Below",
       behavioralDescriptor:
         "Budi can work through straightforward problems methodically, but may need more time or support when handling highly complex or ambiguous data.",
@@ -68,7 +68,7 @@ export const mockReport: SuitabilityReport = {
         "The ability to adjust approach and remain effective when facing change, ambiguity, or new demands.",
       score: 78,
       percentile: 71,
-      benchmarkScore: 75,
+      benchmarkScore: 71,
       status: "Above",
       behavioralDescriptor:
         "Budi adjusts well to shifting priorities and market conditions, showing resilience that slightly exceeds what this role typically demands.",
@@ -83,7 +83,7 @@ export const mockReport: SuitabilityReport = {
         "The ability to inspire confidence, project authority, and influence others toward a shared direction.",
       score: 60,
       percentile: 39,
-      benchmarkScore: 75,
+      benchmarkScore: 74,
       status: "Below",
       behavioralDescriptor:
         "Budi's leadership presence is still developing; he may need additional coaching to project the authority and influence expected of an Area Sales Manager.",

@@ -11,9 +11,10 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
   const { object, submit, isLoading, error } = useObject({
     api: "/api/generate-insights",
     schema: aiInsightsSchema,
+    initialValue: locale === "en" ? report.insights : undefined,
   });
 
-  const insights = object ?? null;
+  const insights = object ?? (locale === "en" ? report.insights : null) ?? null;
   const loading = isLoading && !insights;
   const hasLoadedLocale = useRef<string | null>(null);
 

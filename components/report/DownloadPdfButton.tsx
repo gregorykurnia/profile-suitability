@@ -16,7 +16,7 @@ export default function DownloadPdfButton({
     setExporting(true);
     try {
       const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
-        import("html2canvas"),
+        import("html2canvas-pro"),
         import("jspdf"),
       ]);
 
@@ -51,6 +51,9 @@ export default function DownloadPdfButton({
       }
 
       pdf.save(fileName);
+    } catch (error) {
+      console.error("Failed to export PDF", error);
+      alert("Something went wrong while generating the PDF. Please try again.");
     } finally {
       setExporting(false);
     }
@@ -60,8 +63,8 @@ export default function DownloadPdfButton({
     <button
       onClick={handleExport}
       disabled={exporting}
-      className="no-print inline-flex items-center gap-2 rounded-lg text-white text-sm font-semibold px-4 py-2.5 shadow-md shadow-navy/20 hover:shadow-lg hover:shadow-teal/25 transition-all disabled:opacity-60"
-      style={{ background: "linear-gradient(135deg, #1b2b4b, #0ea5b0)" }}
+      className="no-print inline-flex items-center gap-2 rounded-lg text-white text-sm font-semibold px-4 py-2.5 shadow-md shadow-red/20 hover:shadow-lg hover:shadow-red-light/25 transition-all disabled:opacity-60"
+      style={{ background: "linear-gradient(135deg, #b8121e, #e3061c)" }}
     >
       {exporting ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
       {exporting ? "Exporting…" : "Download PDF"}

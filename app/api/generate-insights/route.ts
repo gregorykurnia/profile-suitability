@@ -44,7 +44,10 @@ export async function POST(req: NextRequest) {
   if (!regenerate) {
     const cached = await insightsRef.get();
     if (cached.exists) {
-      return Response.json(cached.data() as AIInsights);
+      const parsed = aiInsightsSchema.safeParse(cached.data());
+      if (parsed.success) {
+        return Response.json(parsed.data as AIInsights);
+      }
     }
   }
 

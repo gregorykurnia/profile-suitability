@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronRight, Search } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, X } from "lucide-react";
 import { mockReports } from "@/lib/reportMock";
 import { SuitabilityLabel } from "@/lib/types";
 import { labelBadgeClasses, labelColor } from "@/lib/utils";
@@ -47,14 +47,28 @@ export default function DashboardPage() {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [positionFilter, setPositionFilter] = useState<string | null>(null);
+  const [clientFilter, setClientFilter] = useState<string | null>(null);
   const [labelFilter, setLabelFilter] = useState<SuitabilityLabel | null>(null);
   const [sortKey, setSortKey] = useState<SortKey>("assessmentDate");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
 
   const positions = useMemo(
-    () => Array.from(new Set(mockReports.map((r) => r.positionApplied))),
+    () => Array.from(new Set(mockReports.map((r) => r.positionApplied))).sort(),
     []
   );
+  const clients = useMemo(
+    () => Array.from(new Set(mockReports.map((r) => r.clientCompany))).sort(),
+    []
+  );
+
+  const activeFilterCount = [positionFilter, clientFilter, labelFilter].filter(Boolean).length;
+
+  function clearFilters() {
+    setPositionFilter(null);
+    setClientFilter(null);
+    setLabelFilter(null);
+    setSearch("");
+  }
 
   const totalAssessed = mockReports.length;
   const avgScore = Math.round(
@@ -73,10 +87,11 @@ export default function DashboardPage() {
       const matchesSearch =
         !q || r.candidateName.toLowerCase().includes(q) || r.candidateId.toLowerCase().includes(q);
       const matchesPosition = !positionFilter || r.positionApplied === positionFilter;
+      const matchesClient = !clientFilter || r.clientCompany === clientFilter;
       const matchesLabel = !labelFilter || r.suitabilityLabel === labelFilter;
-      return matchesSearch && matchesPosition && matchesLabel;
+      return matchesSearch && matchesPosition && matchesClient && matchesLabel;
     });
-  }, [search, positionFilter, labelFilter]);
+  }, [search, positionFilter, clientFilter, labelFilter]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
@@ -201,45 +216,115 @@ export default function DashboardPage() {
             />
           </div>
 
-          <button
-            onClick={() => setPositionFilter(null)}
-            className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
-              positionFilter === null
-                ? "border-red bg-red/10 text-[#b8121e]"
-                : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
-            }`}
-          >
-            All Roles
-          </button>
-          {positions.map((p) => (
-            <button
-              key={p}
-              onClick={() => setPositionFilter(p)}
-              className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
-                positionFilter === p
+          <div className="relative">
+            <select
+              value={positionFilter ?? ""}
+              onChange={(e) => setPositionFilter(e.target.value || null)}
+              className={`appearance-none rounded-lg border pl-3.5 pr-8 py-2.5 text-sm font-semibold whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-red/40 focus:border-red transition-colors ${
+                positionFilter
                   ? "border-red bg-red/10 text-[#b8121e]"
                   : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
               }`}
             >
-              {p}
-            </button>
-          ))}
+              <option value="">Position: All</option>
+              {positions.map((p) => (
+                <option key={p} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={14}
+              className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted"
+            />
+          </div>
 
-          {labelFilters.map((l) => (
-            <button
-              key={l}
-              onClick={() => setLabelFilter(labelFilter === l ? null : l)}
-              className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
-                labelFilter === l
+          <div className="relative">
+            <select
+              value={clientFilter ?? ""}
+              onChange={(e) => setClientFilter(e.target.value || null)}
+              className={`appearance-none rounded-lg border pl-3.5 pr-8 py-2.5 text-sm font-semibold whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-red/40 focus:border-red transition-colors ${
+                clientFilter
                   ? "border-red bg-red/10 text-[#b8121e]"
                   : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
               }`}
             >
-              <span className="h-1.5 w-1.5 rounded-full" style={{ background: labelColor(l) }} />
-              {l}
+              <option value="">Client: All</option>
+              {clients.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={14}
+              className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted"
+            />
+          </div>
+
+          <div className="relative">
+            <select
+              value={labelFilter ?? ""}
+              onChange={(e) => setLabelFilter((e.target.value || null) as SuitabilityLabel | null)}
+              className={`appearance-none rounded-lg border pl-3.5 pr-8 py-2.5 text-sm font-semibold whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-red/40 focus:border-red transition-colors ${
+                labelFilter
+                  ? "border-red bg-red/10 text-[#b8121e]"
+                  : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
+              }`}
+            >
+              <option value="">Suitability: All</option>
+              {labelFilters.map((l) => (
+                <option key={l} value={l}>
+                  {l}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={14}
+              className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted"
+            />
+          </div>
+
+          {activeFilterCount > 0 && (
+            <button
+              onClick={clearFilters}
+              className="inline-flex items-center gap-1 rounded-lg border border-divider bg-white px-3 py-2.5 text-sm font-semibold text-muted hover:text-body hover:bg-[#F8F9FB] transition-colors"
+            >
+              <X size={14} />
+              Clear
             </button>
-          ))}
+          )}
         </div>
+
+        {activeFilterCount > 0 && (
+          <div className="flex items-center gap-2 flex-wrap -mt-1">
+            {positionFilter && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-red/10 text-[#b8121e] px-2.5 py-1 text-xs font-semibold">
+                {positionFilter}
+                <button onClick={() => setPositionFilter(null)} aria-label="Remove position filter">
+                  <X size={11} />
+                </button>
+              </span>
+            )}
+            {clientFilter && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-red/10 text-[#b8121e] px-2.5 py-1 text-xs font-semibold">
+                {clientFilter}
+                <button onClick={() => setClientFilter(null)} aria-label="Remove client filter">
+                  <X size={11} />
+                </button>
+              </span>
+            )}
+            {labelFilter && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-red/10 text-[#b8121e] px-2.5 py-1 text-xs font-semibold">
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: labelColor(labelFilter) }} />
+                {labelFilter}
+                <button onClick={() => setLabelFilter(null)} aria-label="Remove suitability filter">
+                  <X size={11} />
+                </button>
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Table */}
         <div className="report-card overflow-hidden">

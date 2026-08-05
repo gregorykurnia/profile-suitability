@@ -15,31 +15,31 @@ export default function ReportHeader({ report }: { report: SuitabilityReport }) 
         className="relative px-8 pt-8 pb-10 sm:px-10 sm:pt-10 sm:pb-12 overflow-hidden"
         style={{
           background:
-            "linear-gradient(135deg, #16233f 0%, #1b2b4b 45%, #0f3b46 100%)",
+            "linear-gradient(135deg, #4a0a0f 0%, #7a0e17 45%, #b8121e 100%)",
         }}
       >
         <div
           className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, rgba(14,165,176,0.35), transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(227,6,19,0.35), transparent 70%)" }}
         />
         <div
           className="pointer-events-none absolute -bottom-20 left-1/3 h-52 w-52 rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, rgba(20,200,212,0.18), transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(255,90,90,0.18), transparent 70%)" }}
         />
 
         <div className="relative flex items-start justify-between gap-6 flex-wrap">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 rounded-lg overflow-hidden shadow-lg shadow-teal/20 ring-1 ring-white/10 shrink-0">
+              <div className="h-10 w-10 rounded-lg overflow-hidden bg-white shadow-lg shadow-red/20 ring-1 ring-white/10 shrink-0 flex items-center justify-center">
                 <img
-                  src="/deus-logo.jpeg"
-                  alt="DEUS logo"
+                  src="/telkom-logo.png"
+                  alt="Telkom Indonesia logo"
                   className="max-w-none"
-                  style={{ width: 126, height: 126, transform: "translate(-41px, -26px)" }}
+                  style={{ width: 34, height: 34, objectFit: "contain" }}
                 />
               </div>
               <span className="font-sans font-bold tracking-wide text-white/90 text-sm uppercase">
-                DEUS Human Capital Services
+                Telkom Indonesia
               </span>
             </div>
 
@@ -48,7 +48,7 @@ export default function ReportHeader({ report }: { report: SuitabilityReport }) 
             </h1>
             <p className="mt-2 text-white/70 text-base sm:text-lg">
               Candidate for{" "}
-              <span className="font-semibold text-teal-light">{report.positionApplied}</span>
+              <span className="font-semibold text-red-light">{report.positionApplied}</span>
             </p>
           </div>
 

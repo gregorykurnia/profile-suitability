@@ -35,6 +35,12 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
       hasLoadedLocale.current = locale;
       load();
     }
+    return () => {
+      // Undo the guard on cleanup so a Strict Mode dev double-invoke (which
+      // aborts this in-flight request) doesn't leave the real mount stuck
+      // thinking it already loaded.
+      hasLoadedLocale.current = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale]);
 

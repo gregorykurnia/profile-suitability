@@ -32,7 +32,6 @@ export interface AIInsights {
   keyStrengths: string[];
   developmentAreas: string[];
   roleFitRisks: RoleFitRisk[];
-  successPlan90Day: string[];
 }
 
 export const aiInsightsSchema = z.object({
@@ -59,9 +58,6 @@ export const aiInsightsSchema = z.object({
       })
     )
     .describe("2-4 role fit risks derived from below-benchmark or borderline competencies, each paired with a mitigation"),
-  successPlan90Day: z
-    .array(z.string())
-    .describe("3-5 sequenced milestones/checkpoints for the candidate's first 90 days in this role, tailored to their competency profile"),
 });
 
 export interface SuitabilityReport {

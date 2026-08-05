@@ -131,19 +131,6 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
                 ))}
             </ul>
           </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-              90-Day Success Plan
-            </p>
-            <ol className="space-y-2 list-decimal list-inside">
-              {insights.successPlan90Day?.filter(Boolean).map((s, i) => (
-                <li key={i} className="text-sm text-body">
-                  {s}
-                </li>
-              ))}
-            </ol>
-          </div>
         </div>
       )}
     </section>

@@ -80,6 +80,39 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
 
       {!loading && !error && insights && (
         <div className="space-y-8">
+          {insights.executiveSummary && (
+            <p className="text-body leading-relaxed">{insights.executiveSummary}</p>
+          )}
+
+          <div className="grid sm:grid-cols-2 gap-8">
+            <div>
+              <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
+                Key Strengths
+              </p>
+              <ul className="space-y-2">
+                {insights.keyStrengths?.filter(Boolean).map((s, i) => (
+                  <li key={i} className="text-sm text-body flex gap-2">
+                    <span className="text-teal font-bold mt-0.5">+</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
+                Development Areas
+              </p>
+              <ul className="space-y-2">
+                {insights.developmentAreas?.filter(Boolean).map((s, i) => (
+                  <li key={i} className="text-sm text-body flex gap-2">
+                    <span className="text-amber font-bold mt-0.5">–</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           <div>
             <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
               Role Fit Risks &amp; Mitigations
@@ -110,33 +143,6 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
                 </li>
               ))}
             </ol>
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-              Suggested Interview Probes
-            </p>
-            <ol className="space-y-2 list-decimal list-inside">
-              {insights.interviewProbes?.filter(Boolean).map((q, i) => (
-                <li key={i} className="text-sm text-body">
-                  {q}
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-              Onboarding &amp; Development Focus
-            </p>
-            <ul className="space-y-2">
-              {insights.developmentFocus?.filter(Boolean).map((s, i) => (
-                <li key={i} className="text-sm text-body flex gap-2">
-                  <span className="text-navy font-bold mt-0.5">•</span>
-                  <span>{s}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       )}

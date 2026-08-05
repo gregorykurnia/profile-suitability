@@ -36,7 +36,7 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-const avatarPalette = ["#1b2b4b", "#0ea5b0", "#2d4470", "#0a7a83"];
+const avatarPalette = ["#1b2b4b", "#0ea5b0", "#2d4470", "#b8121e"];
 function avatarColor(name: string) {
   let h = 0;
   for (const c of name) h = (h + c.charCodeAt(0)) % avatarPalette.length;
@@ -111,7 +111,7 @@ export default function DashboardPage() {
 
   function sortArrow(key: SortKey) {
     if (sortKey !== key) return <span className="opacity-40">▾</span>;
-    return <span className="text-[#0a7a83]">{sortDir === "asc" ? "▴" : "▾"}</span>;
+    return <span className="text-[#b8121e]">{sortDir === "asc" ? "▴" : "▾"}</span>;
   }
 
   const columns: { key: SortKey; label: string; align?: "right" }[] = [
@@ -131,29 +131,29 @@ export default function DashboardPage() {
           <div
             className="relative px-8 pt-8 pb-8 sm:px-10 sm:pt-10 overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, #16233f 0%, #1b2b4b 45%, #0f3b46 100%)",
+              background: "linear-gradient(135deg, #4a0a0f 0%, #7a0e17 45%, #b8121e 100%)",
             }}
           >
             <div
               className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full blur-3xl"
-              style={{ background: "radial-gradient(circle, rgba(14,165,176,0.35), transparent 70%)" }}
+              style={{ background: "radial-gradient(circle, rgba(227,6,19,0.35), transparent 70%)" }}
             />
             <div
               className="pointer-events-none absolute -bottom-20 left-1/3 h-52 w-52 rounded-full blur-3xl"
-              style={{ background: "radial-gradient(circle, rgba(20,200,212,0.18), transparent 70%)" }}
+              style={{ background: "radial-gradient(circle, rgba(255,90,90,0.18), transparent 70%)" }}
             />
 
             <div className="relative flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 rounded-lg overflow-hidden shadow-lg shadow-teal/20 ring-1 ring-white/10 shrink-0">
+              <div className="h-10 w-10 rounded-lg overflow-hidden bg-white shadow-lg shadow-red/20 ring-1 ring-white/10 shrink-0 flex items-center justify-center">
                 <img
-                  src="/deus-logo.jpeg"
-                  alt="DEUS logo"
+                  src="/telkom-logo.png"
+                  alt="Telkom Indonesia logo"
                   className="max-w-none"
-                  style={{ width: 126, height: 126, transform: "translate(-41px, -26px)" }}
+                  style={{ width: 34, height: 34, objectFit: "contain" }}
                 />
               </div>
               <span className="font-sans font-bold tracking-wide text-white/90 text-sm uppercase">
-                DEUS Human Capital Services
+                Telkom Indonesia
               </span>
             </div>
 
@@ -161,7 +161,7 @@ export default function DashboardPage() {
               Candidate Assessments
             </h1>
             <p className="relative mt-2 text-white/70 text-base">
-              <span className="font-semibold text-teal-light">{totalAssessed} candidates</span> assessed across{" "}
+              <span className="font-semibold text-red-light">{totalAssessed} candidates</span> assessed across{" "}
               {positions.length} open roles
             </p>
 
@@ -172,13 +172,13 @@ export default function DashboardPage() {
               </div>
               <div>
                 <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">Avg. Suitability Score</p>
-                <p className="text-2xl font-extrabold text-teal-light mt-1.5 font-mono">{avgScore}</p>
+                <p className="text-2xl font-extrabold text-red-light mt-1.5 font-mono">{avgScore}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">
                   Highly Suitable / Suitable
                 </p>
-                <p className="text-2xl font-extrabold text-teal-light mt-1.5 font-mono">{suitableCount}</p>
+                <p className="text-2xl font-extrabold text-red-light mt-1.5 font-mono">{suitableCount}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-wide text-white/50 font-semibold">Needs Attention</p>
@@ -197,7 +197,7 @@ export default function DashboardPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by candidate name or reference no."
-              className="w-full pl-9 pr-3.5 py-2.5 rounded-lg border border-divider bg-white text-sm text-body focus:outline-none focus:ring-2 focus:ring-teal/40 focus:border-teal"
+              className="w-full pl-9 pr-3.5 py-2.5 rounded-lg border border-divider bg-white text-sm text-body focus:outline-none focus:ring-2 focus:ring-red/40 focus:border-red"
             />
           </div>
 
@@ -205,7 +205,7 @@ export default function DashboardPage() {
             onClick={() => setPositionFilter(null)}
             className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
               positionFilter === null
-                ? "border-teal bg-teal/10 text-[#0a7a83]"
+                ? "border-red bg-red/10 text-[#b8121e]"
                 : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
             }`}
           >
@@ -217,7 +217,7 @@ export default function DashboardPage() {
               onClick={() => setPositionFilter(p)}
               className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
                 positionFilter === p
-                  ? "border-teal bg-teal/10 text-[#0a7a83]"
+                  ? "border-red bg-red/10 text-[#b8121e]"
                   : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
               }`}
             >
@@ -231,7 +231,7 @@ export default function DashboardPage() {
               onClick={() => setLabelFilter(labelFilter === l ? null : l)}
               className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
                 labelFilter === l
-                  ? "border-teal bg-teal/10 text-[#0a7a83]"
+                  ? "border-red bg-red/10 text-[#b8121e]"
                   : "border-divider bg-white text-body hover:bg-[#F8F9FB]"
               }`}
             >
@@ -253,7 +253,7 @@ export default function DashboardPage() {
                       onClick={() => toggleSort(col.key)}
                       className={`text-left text-[11px] uppercase tracking-wide text-muted font-bold px-5 py-3.5 border-b border-divider whitespace-nowrap cursor-pointer select-none hover:text-navy transition-colors ${
                         col.align === "right" ? "text-right" : ""
-                      } ${sortKey === col.key ? "text-[#0a7a83]" : ""}`}
+                      } ${sortKey === col.key ? "text-[#b8121e]" : ""}`}
                     >
                       {col.label} <span className="ml-0.5 text-[10px]">{sortArrow(col.key)}</span>
                     </th>
@@ -340,8 +340,8 @@ export default function DashboardPage() {
 
         <footer className="text-center text-xs text-muted pt-2 pb-2">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-1 w-1 rounded-full bg-teal" />©{" "}
-            {new Date().getFullYear()} DEUS Human Capital Services. Confidential — for internal HR use only.
+            <span className="h-1 w-1 rounded-full bg-red" />©{" "}
+            {new Date().getFullYear()} Telkom Indonesia. Confidential — for internal HR use only.
           </span>
         </footer>
       </div>

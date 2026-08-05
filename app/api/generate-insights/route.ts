@@ -6,13 +6,20 @@ import { AIInsights, aiInsightsSchema, Competency } from "@/lib/types";
 
 export const runtime = "nodejs";
 
-const SYSTEM_PROMPT = `You are a senior organizational psychologist writing a professional psychometric suitability report for a B2B HR client in Indonesia.
-Write in clear, professional English. Be specific and evidence-based, grounding every statement in the competency data provided.
+function systemPrompt(locale: "en" | "id") {
+  const languageInstruction =
+    locale === "id"
+      ? "Write in clear, professional Bahasa Indonesia. Be specific and evidence-based, grounding every statement in the competency data provided."
+      : "Write in clear, professional English. Be specific and evidence-based, grounding every statement in the competency data provided.";
+
+  return `You are a senior organizational psychologist writing a professional psychometric suitability report for a B2B HR client in Indonesia.
+${languageInstruction}
 Avoid generic filler.
 
 Do not cite competency names, numeric scores, percentiles, or benchmark/status labels (e.g. "Above", "Below", "Meets") anywhere in your output — translate the data into plain behavioral statements instead. For example, write "Struggles to project authority in group settings" rather than "Leadership Presence (60/100, below benchmark) is a concern."
 
 keyStrengths and developmentAreas must each contain exactly 4 bullets. If fewer than 4 competencies are clearly strong or weak, draw on multiple distinct facets of the same competency rather than padding with filler.`;
+}
 
 interface RequestBody {
   candidateId: string;
@@ -21,6 +28,7 @@ interface RequestBody {
   competencies: Competency[];
   suitabilityScore: number;
   normativePercentile: number;
+  locale?: "en" | "id";
   regenerate?: boolean;
 }
 
@@ -33,6 +41,7 @@ export async function POST(req: NextRequest) {
     competencies,
     suitabilityScore,
     normativePercentile,
+    locale = "en",
     regenerate,
   } = body;
 
@@ -43,7 +52,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const insightsRef = getDb().collection("reportInsights").doc(candidateId);
+  const insightsRef = getDb().collection("reportInsights").doc(`${candidateId}_${locale}`);
 
   if (!regenerate) {
     const cached = await insightsRef.get();
@@ -73,7 +82,7 @@ ${competencyLines}`;
   const result = streamObject({
     model: anthropic("claude-sonnet-4-6"),
     schema: aiInsightsSchema,
-    system: SYSTEM_PROMPT,
+    system: systemPrompt(locale),
     prompt: userPrompt,
     onFinish: async ({ object }) => {
       if (object) await insightsRef.set(object);

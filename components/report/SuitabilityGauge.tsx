@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ordinal } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { localeOrdinal } from "@/lib/i18n";
 
 interface SuitabilityGaugeProps {
   score: number;
@@ -27,6 +28,7 @@ function describeArc(cx: number, cy: number, r: number, startAngle: number, endA
 }
 
 export default function SuitabilityGauge({ score, color, size = 220, percentile }: SuitabilityGaugeProps) {
+  const { t, locale } = useLocale();
   const [animatedScore, setAnimatedScore] = useState(0);
   const rafRef = useRef<number | null>(null);
 
@@ -96,13 +98,13 @@ export default function SuitabilityGauge({ score, color, size = 220, percentile 
         <span className="font-mono font-bold text-5xl text-navy tabular-nums">
           {animatedScore}
         </span>
-        <span className="font-mono text-sm text-muted mt-1">/ 100</span>
+        <span className="font-mono text-sm text-muted mt-1">{t("report.outOf100")}</span>
         {percentile !== undefined && (
           <span
             className="font-mono font-semibold text-sm text-navy mt-2 px-2.5 py-0.5 rounded-full border"
             style={{ backgroundColor: `${color}14`, borderColor: `${color}33` }}
           >
-            {ordinal(percentile)} percentile
+            {t("report.percentileShort", { pct: localeOrdinal(percentile, locale) })}
           </span>
         )}
       </div>

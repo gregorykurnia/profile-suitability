@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { getReportByCandidateId } from "@/lib/reportMock";
 import ReportHeader from "@/components/report/ReportHeader";
 import OverallSuitabilitySection from "@/components/report/OverallSuitabilitySection";
@@ -8,6 +6,7 @@ import CompetencyBreakdownSection from "@/components/report/CompetencyBreakdownS
 import AIInsightsSection from "@/components/report/AIInsightsSection";
 import CompetencyDetailSection from "@/components/report/CompetencyDetailSection";
 import DownloadPdfButton from "@/components/report/DownloadPdfButton";
+import { BackToCandidatesLink, ReportFooter } from "@/components/report/ReportPageChrome";
 
 export default async function ReportPage({
   params,
@@ -29,12 +28,7 @@ export default async function ReportPage({
   return (
     <div className="min-h-screen py-10 px-4 sm:px-6">
       <div className="max-w-[860px] mx-auto flex items-center justify-between mb-4">
-        <Link
-          href="/"
-          className="no-print inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-navy transition-colors"
-        >
-          <ArrowLeft size={15} /> Back to candidates
-        </Link>
+        <BackToCandidatesLink />
         <DownloadPdfButton targetId="report-content" fileName={fileName} />
       </div>
 
@@ -45,13 +39,7 @@ export default async function ReportPage({
         <AIInsightsSection report={report} />
         <CompetencyDetailSection competencies={report.competencies} />
 
-        <footer className="text-center text-xs text-muted pt-6 pb-2">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-1 w-1 rounded-full bg-red" />©{" "}
-            {new Date().getFullYear()} Telkom Indonesia. Confidential — for internal
-            HR use only.
-          </span>
-        </footer>
+        <ReportFooter />
       </div>
     </div>
   );

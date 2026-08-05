@@ -1,4 +1,7 @@
-import { mockReport } from "@/lib/reportMock";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { getReportByCandidateId } from "@/lib/reportMock";
 import ReportHeader from "@/components/report/ReportHeader";
 import OverallSuitabilitySection from "@/components/report/OverallSuitabilitySection";
 import CompetencyBreakdownSection from "@/components/report/CompetencyBreakdownSection";
@@ -11,8 +14,12 @@ export default async function ReportPage({
 }: {
   params: Promise<{ candidateId: string }>;
 }) {
-  await params;
-  const report = mockReport;
+  const { candidateId } = await params;
+  const report = getReportByCandidateId(candidateId);
+
+  if (!report) {
+    notFound();
+  }
 
   const fileName = `DEUS_Report_${report.candidateName.replace(/\s+/g, "_")}_${report.positionApplied.replace(
     /\s+/g,
@@ -21,7 +28,13 @@ export default async function ReportPage({
 
   return (
     <div className="min-h-screen py-10 px-4 sm:px-6">
-      <div className="max-w-[860px] mx-auto flex justify-end mb-4">
+      <div className="max-w-[860px] mx-auto flex items-center justify-between mb-4">
+        <Link
+          href="/"
+          className="no-print inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-navy transition-colors"
+        >
+          <ArrowLeft size={15} /> Back to candidates
+        </Link>
         <DownloadPdfButton targetId="report-content" fileName={fileName} />
       </div>
 

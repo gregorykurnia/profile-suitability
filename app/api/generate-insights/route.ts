@@ -7,8 +7,12 @@ import { AIInsights, aiInsightsSchema, Competency } from "@/lib/types";
 export const runtime = "nodejs";
 
 const SYSTEM_PROMPT = `You are a senior organizational psychologist writing a professional psychometric suitability report for a B2B HR client in Indonesia.
-Write in clear, professional English. Be specific and evidence-based — reference actual competency scores and names.
-Avoid generic filler.`;
+Write in clear, professional English. Be specific and evidence-based, grounding every statement in the competency data provided.
+Avoid generic filler.
+
+Do not cite competency names, numeric scores, percentiles, or benchmark/status labels (e.g. "Above", "Below", "Meets") anywhere in your output — translate the data into plain behavioral statements instead. For example, write "Struggles to project authority in group settings" rather than "Leadership Presence (60/100, below benchmark) is a concern."
+
+keyStrengths and developmentAreas must contain the same number of bullets.`;
 
 interface RequestBody {
   candidateId: string;

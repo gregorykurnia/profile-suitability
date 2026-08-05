@@ -41,14 +41,18 @@ export const aiInsightsSchema = z.object({
     .describe("2-3 sentence overall read on this candidate's suitability"),
   keyStrengths: z
     .array(z.string())
-    .describe("one bullet per top-scoring competency, name the competency and reference its score"),
+    .describe(
+      "plain behavioral statements describing what the candidate does well, one per top-scoring competency. Do not mention competency names, scores, percentiles, or benchmark status — just the observation itself. Must have the same number of bullets as developmentAreas."
+    ),
   developmentAreas: z
     .array(z.string())
-    .describe("one bullet per low-scoring competency, name the competency and reference its score"),
+    .describe(
+      "plain behavioral statements describing where the candidate falls short, one per low-scoring competency. Do not mention competency names, scores, percentiles, or benchmark status — just the observation itself. Must have the same number of bullets as keyStrengths."
+    ),
   roleFitRisks: z
     .array(
       z.object({
-        risk: z.string().describe("a specific risk this role may pose, grounded in a named competency and its score/status"),
+        risk: z.string().describe("a specific risk this role may pose, stated as a plain behavioral observation — do not mention competency names, scores, percentiles, or benchmark status"),
         mitigation: z.string().describe("a concrete, actionable mitigation for that risk"),
       })
     )

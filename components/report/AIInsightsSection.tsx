@@ -80,37 +80,36 @@ export default function AIInsightsSection({ report }: { report: SuitabilityRepor
 
       {!loading && !error && insights && (
         <div className="space-y-8">
-          {insights.executiveSummary && (
-            <p className="text-body leading-relaxed">{insights.executiveSummary}</p>
-          )}
-
-          <div className="grid sm:grid-cols-2 gap-8">
-            <div>
-              <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-                Key Strengths
-              </p>
-              <ul className="space-y-2">
-                {insights.keyStrengths?.filter(Boolean).map((s, i) => (
-                  <li key={i} className="text-sm text-body flex gap-2">
-                    <span className="text-teal font-bold mt-0.5">+</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
-                Development Areas
-              </p>
-              <ul className="space-y-2">
-                {insights.developmentAreas?.filter(Boolean).map((s, i) => (
+          <div>
+            <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
+              Role Fit Risks &amp; Mitigations
+            </p>
+            <ul className="space-y-3">
+              {insights.roleFitRisks
+                ?.filter((r): r is { risk: string; mitigation?: string } => !!r?.risk)
+                .map((r, i) => (
                   <li key={i} className="text-sm text-body flex gap-2">
                     <span className="text-amber font-bold mt-0.5">–</span>
-                    <span>{s}</span>
+                    <span>
+                      <span className="font-semibold text-navy">{r.risk}</span>
+                      {r.mitigation && <span> {r.mitigation}</span>}
+                    </span>
                   </li>
                 ))}
-              </ul>
-            </div>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-xs uppercase tracking-wide text-muted font-semibold mb-3">
+              90-Day Success Plan
+            </p>
+            <ol className="space-y-2 list-decimal list-inside">
+              {insights.successPlan90Day?.filter(Boolean).map((s, i) => (
+                <li key={i} className="text-sm text-body">
+                  {s}
+                </li>
+              ))}
+            </ol>
           </div>
 
           <div>

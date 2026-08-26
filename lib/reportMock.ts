@@ -566,7 +566,7 @@ const seeds: CandidateSeed[] = [
     hrContact: "Hendra Wijaya, Talent Acquisition Lead",
     roleBenchmarkScore: 70,
     normGroupDescription: "Indonesian working adults, managerial level, n=1,240",
-    competencyScores: [70, 68, 65, 72, 66, 71, 69, 64, 73, 67, 70, 63, 68, 72],
+    competencyScores: [72, 75, 72, 73, 69, 74, 70, 70, 75, 68, 73, 70, 70, 79],
   },
   {
     candidateName: "Fajar Nugroho",

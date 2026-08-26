@@ -4,14 +4,18 @@ import { useState } from "react";
 import { Competency } from "@/lib/types";
 import CompetencyRadarChart from "./CompetencyRadarChart";
 import CompetencyBarChart from "./CompetencyBarChart";
+import CompetencyHorizontalBarChart from "./CompetencyHorizontalBarChart";
 import CompetencySummaryTable from "./CompetencySummaryTable";
+
+const DENSE_THRESHOLD = 8;
 
 export default function CompetencyBreakdownSection({
   competencies,
 }: {
   competencies: Competency[];
 }) {
-  const [view, setView] = useState<"radar" | "bar">("radar");
+  const isDense = competencies.length > DENSE_THRESHOLD;
+  const [view, setView] = useState<"radar" | "bar" | "hbar">(isDense ? "hbar" : "radar");
 
   return (
     <section className="report-card px-8 py-8 sm:px-10 sm:py-10">
@@ -43,13 +47,25 @@ export default function CompetencyBreakdownSection({
           >
             Bar
           </button>
+          <button
+            onClick={() => setView("hbar")}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+              view === "hbar"
+                ? "bg-gradient-to-br from-navy to-navy-light text-white shadow-sm"
+                : "text-muted hover:text-navy"
+            }`}
+          >
+            Compare
+          </button>
         </div>
       </div>
 
       {view === "radar" ? (
         <CompetencyRadarChart competencies={competencies} />
-      ) : (
+      ) : view === "bar" ? (
         <CompetencyBarChart competencies={competencies} />
+      ) : (
+        <CompetencyHorizontalBarChart competencies={competencies} />
       )}
 
       <CompetencySummaryTable competencies={competencies} />

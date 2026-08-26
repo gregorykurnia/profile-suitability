@@ -48,7 +48,7 @@ export default async function ReportPage({
         <footer className="text-center text-xs text-muted pt-6 pb-2">
           <span className="inline-flex items-center gap-1.5">
             <span className="h-1 w-1 rounded-full bg-red" />©{" "}
-            {new Date().getFullYear()} Telkom Indonesia. Confidential — for internal
+            {new Date().getFullYear()} Adhimix Precast. Confidential — for internal
             HR use only.
           </span>
         </footer>

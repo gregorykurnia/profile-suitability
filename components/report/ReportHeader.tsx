@@ -32,14 +32,14 @@ export default function ReportHeader({ report }: { report: SuitabilityReport }) 
             <div className="flex items-center gap-3 mb-6">
               <div className="h-10 w-10 rounded-lg overflow-hidden bg-white shadow-lg shadow-red/20 ring-1 ring-white/10 shrink-0 flex items-center justify-center">
                 <img
-                  src="/telkom-logo.png"
-                  alt="Telkom Indonesia logo"
+                  src="/adhimix-logo.png"
+                  alt="Adhimix Precast logo"
                   className="max-w-none"
                   style={{ width: 34, height: 34, objectFit: "contain" }}
                 />
               </div>
               <span className="font-sans font-bold tracking-wide text-white/90 text-sm uppercase">
-                Telkom Indonesia
+                Adhimix Precast
               </span>
             </div>
 

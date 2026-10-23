@@ -2,13 +2,14 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "DEUS Individual Profile Suitability Report",
-    short_name: "DEUS Report",
-    description: "Psychometric suitability report by DEUS Human Capital Services",
+    name: "PT Example hiring assessments",
+    short_name: "Hiring",
+    description: "Psychometric assessment results for PT Example store candidates.",
     start_url: "/",
+    scope: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#e30613",
+    background_color: "#FFFFFF",
+    theme_color: "#1D4ED8",
     icons: [
       {
         src: "/icon-192x192.png",

@@ -1,54 +1,32 @@
-import { BenchmarkStatus, SuitabilityLabel } from "./types";
-
-export function labelColor(label: SuitabilityLabel): string {
-  switch (label) {
-    case "Highly Suitable":
-      return "#0EA5B0";
-    case "Suitable":
-      return "#0EA5B0";
-    case "Needs Development":
-      return "#F59E0B";
-    case "Not Recommended":
-      return "#EF4444";
-  }
+// "st", "nd", "rd" or "th" for 1st, 22nd, 13th…
+export function ordinalSuffix(n: number): string {
+  const t = n % 100;
+  if (t >= 11 && t <= 13) return "th";
+  return { 1: "st", 2: "nd", 3: "rd" }[n % 10] ?? "th";
 }
 
-export function labelBadgeClasses(label: SuitabilityLabel): string {
-  switch (label) {
-    case "Highly Suitable":
-    case "Suitable":
-      return "bg-teal/10 text-teal border-teal/30";
-    case "Needs Development":
-      return "bg-amber/10 text-amber border-amber/30";
-    case "Not Recommended":
-      return "bg-alert/10 text-alert border-alert/30";
-  }
+// +8, −6 (a real minus sign), 0.
+export function signed(n: number): string {
+  if (n > 0) return `+${n}`;
+  if (n < 0) return `−${Math.abs(n)}`;
+  return "0";
 }
 
-export function statusColor(status: BenchmarkStatus): string {
-  switch (status) {
-    case "Above":
-      return "#0EA5B0";
-    case "Meets":
-      return "#F59E0B";
-    case "Below":
-      return "#EF4444";
-  }
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// ISO date to "14 Oct 2026" (design.md, Copy and tone).
+export function formatDate(iso: string): string {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
 }
 
-export function statusBadgeClasses(status: BenchmarkStatus): string {
-  switch (status) {
-    case "Above":
-      return "bg-teal/10 text-teal";
-    case "Meets":
-      return "bg-amber/10 text-amber";
-    case "Below":
-      return "bg-alert/10 text-alert";
-  }
+// The first name, or the first two words for longer names, for the previous / next buttons.
+export function shortName(name: string): string {
+  const parts = name.split(" ");
+  return parts.length > 2 ? parts.slice(0, 2).join(" ") : parts[0];
 }
 
-export function ordinal(n: number): string {
-  const s = ["th", "st", "nd", "rd"];
-  const v = n % 100;
-  return `${n}${s[(v - 20) % 10] || s[v] || s[0]}`;
+// "Rizky Aditya Pratama - Shift Manager - 15 Oct 2026": candidate, role, report date (design.md §5), without ".pdf".
+export function reportFileName(report: { candidateName: string; positionApplied: string; reportGeneratedDate: string }): string {
+  return `${report.candidateName} - ${report.positionApplied} - ${formatDate(report.reportGeneratedDate)}`;
 }

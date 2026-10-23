@@ -1,69 +1,239 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
+/* ---------- New UI: design tokens as Tailwind theme ----------
+   tokens.css (copied from redesign/design) is the source; these only give the same values utility names. */
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-text: var(--brand-text);
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-accent: var(--band-accent);
+  --color-band-soft: var(--band-soft);
+  --color-band-line: var(--band-line);
+  --color-strip: var(--strip);
+
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-shade: var(--shade);
+  --color-shade-2: var(--shade-2);
+  --color-paper: var(--paper);
+  --color-canvas: var(--canvas);
+  --color-above: var(--above);
+  --color-above-text: var(--above-text);
+  --color-above-t: var(--above-t);
+  --color-below: var(--below);
+  --color-below-text: var(--below-text);
+  --color-below-t: var(--below-t);
+  --color-meet: var(--meet);
+  --color-danger-text: var(--danger-text);
+
+  --radius-bar: var(--r-xs);
+  --radius-tile: var(--r-md);
+  --radius-sheet: var(--r-lg);
+
+  --shadow-seg: var(--e-1);
+  --shadow-pop: var(--e-2);
+
+  --container-page: var(--max);
+  --ease-out-soft: var(--ease);
+}
+
+/* The next/font variable name is generated per build, so the family is wired here rather than in tokens.css. */
 :root {
-  --background: #eef2f9;
-  --foreground: #374151;
+  --font: var(--font-archivo), "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --font-sans: var(--font);
+  --font-mono: var(--font);
+}
 
-  --color-surface: #ffffff;
-  --color-navy: #1b2b4b;
-  --color-navy-light: #2d4470;
-  --color-teal: #0ea5b0;
-  --color-teal-light: #14c8d4;
-  --color-red: #b8121e;
-  --color-red-light: #e3061c;
-  --color-amber: #f59e0b;
-  --color-alert: #ef4444;
-  --color-body: #374151;
-  --color-muted: #9ca3af;
-  --color-divider: #e5e7eb;
+/* Phone sizes of the type tokens (design.md, Type), so components only use the token. */
+@media (max-width: 759px) {
+  :root {
+    --gutter: var(--gutter-phone);
+    --n-hero: 128px;
+    --n-xl: 64px;
+    --t-h1: 32px;
+    --t-h1-board: 30px;
+    --n-lg: 28px;
+    --t-h2: 21px;
+    --t-lead: 18px;
+  }
+}
 
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-inter);
+/* ---------- Base ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background:
-    radial-gradient(1100px 520px at 12% -8%, rgba(14, 165, 176, 0.14), transparent 60%),
-    radial-gradient(900px 480px at 100% 0%, rgba(27, 43, 75, 0.10), transparent 55%),
-    var(--background);
-  color: var(--foreground);
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--paper);
+  font-size: var(--t-md);
+  line-height: var(--lh);
+  font-variant-numeric: tabular-nums lining-nums;
+  -webkit-font-smoothing: antialiased;
 }
 
-.report-card {
-  position: relative;
-  background: var(--color-surface);
-  border-radius: 1.1rem;
-  border: 1px solid var(--color-divider);
-  box-shadow:
-    0 1px 2px rgba(16, 24, 40, 0.04),
-    0 12px 28px -12px rgba(27, 43, 75, 0.14);
-  isolation: isolate;
+button {
+  cursor: pointer;
 }
 
-.report-card.no-accent::before {
-  content: none;
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-.report-card::before {
-  content: "";
+/* White ring on the blue band and other dark surfaces. */
+.on-dark :focus-visible {
+  outline-color: #fff;
+}
+
+h1:focus {
+  outline: none;
+}
+
+mark {
+  background: #ffe4a8;
+  color: inherit;
+  border-radius: 2px;
+}
+
+bdi {
+  unicode-bidi: isolate;
+}
+
+/* Page content width and gutter, shared by every screen. */
+.page-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Visually hidden, still read by screen readers. */
+.sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  border-radius: 1.1rem 1.1rem 0 0;
-  background: linear-gradient(90deg, var(--color-teal), var(--color-teal-light) 45%, var(--color-navy) 100%);
-  opacity: 0.9;
+  left: 12px;
+  top: -60px;
+  z-index: 50;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  font-weight: 600;
 }
 
-@media print {
-  .no-print {
-    display: none !important;
+.skip-link:focus {
+  top: 10px;
+}
+
+/* ---------- Buttons (design.md, Components: Buttons) ---------- */
+@layer components {
+  .btn {
+    min-height: var(--tap);
+    border-radius: var(--r-pill);
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 0 20px;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: background var(--d-fast);
   }
-  .report-card {
-    box-shadow: none;
+  .btn svg {
+    width: 17px;
+    height: 17px;
+    flex: none;
+  }
+  .btn:hover {
+    background: var(--shade);
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: #1E293B;
+  }
+  .btn:disabled {
+    background: var(--shade-2);
+    border-color: var(--shade-2);
+    color: var(--ink-3);
+    cursor: not-allowed;
+  }
+  .btn[aria-busy="true"] {
+    cursor: progress;
+  }
+  .btn-ghost {
+    border-color: transparent;
+  }
+
+  .text-btn {
+    min-height: var(--tap);
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: underline;
+    text-decoration-color: var(--line-2);
+    text-underline-offset: 4px;
+  }
+  .text-btn:hover {
+    text-decoration-color: var(--ink);
+  }
+
+  .spin {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes skeleton {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes open-detail {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin {
+    animation-duration: 2.4s;
   }
 }

@@ -1,0 +1,54 @@
+<!doctype html>
+<!-- Served by sw.js when there's no connection and the page asked for was never kept on this device.
+     Plain HTML on purpose: the app's code may not be on the device either. Values match app/tokens.css. -->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1D4ED8">
+<meta name="robots" content="noindex">
+<title>Needs a connection – PT Example hiring assessments</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+@font-face{font-family:"Archivo Doc";src:url("/fonts/archivo-doc-400-100.ttf");font-weight:400;font-stretch:100%}
+@font-face{font-family:"Archivo Doc";src:url("/fonts/archivo-doc-700-100.ttf");font-weight:700;font-stretch:100%}
+@font-face{font-family:"Archivo Doc";src:url("/fonts/archivo-doc-750-112.ttf");font-weight:750;font-stretch:112%}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Archivo Doc","Noto Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:#0F172A;background:#fff;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid #0F172A;outline-offset:2px;border-radius:4px}
+header{height:60px;display:flex;align-items:center;gap:10px;padding:0 32px;border-bottom:1px solid #E5E9F0}
+header a{display:flex;align-items:center;gap:10px;min-height:44px;color:#1D4ED8;font-weight:750;font-stretch:112%;font-size:17px;letter-spacing:-.01em;text-decoration:none}
+header img{height:30px;width:auto}
+.offline{display:flex;gap:10px;padding:11px 32px;background:#0F172A;color:#fff;font-size:13.5px}
+.offline :focus-visible{outline-color:#fff}
+main{max-width:720px;margin:0 auto;padding:80px 32px 96px}
+h1{font-size:40px;line-height:1.08;font-weight:750;font-stretch:112%;letter-spacing:-.02em;overflow-wrap:anywhere;text-wrap:balance}
+h1:focus{outline:none}
+p{margin-top:16px;font-size:17px;color:#475569;max-width:52ch}
+.ref{color:#1D4ED8}
+.acts{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+.btn{min-height:44px;border-radius:999px;border:2px solid #0F172A;background:#fff;color:#0F172A;padding:0 20px;font:inherit;font-weight:700;display:inline-flex;align-items:center;text-decoration:none;cursor:pointer}
+.btn:hover{background:#F4F6F9}
+.btn.primary{background:#0F172A;color:#fff}
+.btn.primary:hover{background:#1E293B}
+@media (max-width:759px){header{height:54px;padding:0 18px}.offline{padding:10px 18px}main{padding:56px 18px 72px}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header><a href="/" aria-label="PT Example hiring assessments, all candidates"><img src="/logo.png" alt=""><span>PT Example</span></a></header>
+<div class="offline" role="status"><p style="margin:0;font-size:inherit;color:inherit;max-width:none"><b>You're offline.</b> Reports you've opened before still work. Anything else waits for a connection.</p></div>
+<main id="content">
+  <h1 tabindex="-1" id="heading">This report needs a connection</h1>
+  <p id="detail">You're offline, and this report hasn't been opened on this device yet. Reports you've opened before still work.</p>
+  <div class="acts"><a class="btn primary" href="/">All candidates</a><button class="btn" type="button" id="retry">Try again</button></div>
+</main>
+<script>
+  // Not a report address: say "page" instead.
+  if (!/^\/report\//.test(location.pathname)) {
+    document.getElementById("heading").textContent = "This page needs a connection";
+    document.getElementById("detail").textContent = "You're offline, and this page hasn't been opened on this device yet. Reports you've opened before still work.";
+  }
+  document.getElementById("retry").addEventListener("click", function () { location.reload(); });
+</script>
+</body>
+</html>

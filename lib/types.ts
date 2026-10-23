@@ -1,9 +1,10 @@
 import { z } from "zod";
+import type { DefaultCompetencyName } from "./competencyFramework";
 
 export type SuitabilityLabel =
-  | "Highly Suitable"
-  | "Suitable"
-  | "Needs Development"
+  | "Highly Recommended"
+  | "Recommended"
+  | "Considered"
   | "Not Recommended";
 
 export type BenchmarkStatus = "Above" | "Meets" | "Below";
@@ -12,6 +13,7 @@ export interface Competency {
   id: string;
   name: string;
   definition: string;
+  sourceCompetencies?: DefaultCompetencyName[];
   score: number;
   percentile: number;
   benchmarkScore: number;

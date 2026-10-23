@@ -1,0 +1,103 @@
+/* Hiring assessments design tokens. Light mode only (brief).
+   Two layers: the brand theme (the only values a client copy changes, decisions P2)
+   and the product tokens (the same for every client). See design.md for usage. */
+
+/* ---------- Brand theme: PT Example ---------- */
+:root{
+  --brand:#1D4ED8;              /* mark area, active markers, PDF accents */
+  --brand-text:#1D4ED8;         /* brand colour as text on white (6.7:1) */
+  --band:#1D4ED8;               /* verdict band; white text on it is 6.7:1 */
+  --band-ink:#FFFFFF;           /* all text on the band; never use opacity for small text */
+  --band-accent:#FFFFFF;        /* score numeral, active level segment, pin */
+  --band-soft:rgba(255,255,255,.32); /* inactive level segments on the band */
+  --band-line:rgba(255,255,255,.45); /* hairlines on the band */
+  --strip:transparent;          /* accent strip above a neutral band (light brands only) */
+  --brand-name:"PT Example";
+}
+
+/* ---------- Product colour ---------- */
+:root{
+  --ink:#0F172A;      /* text, primary buttons, focus ring   17.9:1 on paper */
+  --ink-2:#475569;    /* secondary text                        7.6:1 */
+  --ink-3:#5F6B7E;    /* tertiary text, axis labels            5.4:1 (5.0:1 on shade) */
+  --line:#E5E9F0;     /* hairlines */
+  --line-2:#D3D9E2;   /* control outlines, stronger rules */
+  --shade:#F4F6F9;    /* search field, segmented control, hover */
+  --shade-2:#EAEEF3;  /* skeleton blocks, pressed */
+  --paper:#FFFFFF;
+  --canvas:#E2E7EE;   /* behind A4 pages in the print preview */
+
+  --above:#0B8A5C;      /* bar above the benchmark      4.4:1 on paper */
+  --above-text:#08703F; /* "+14" etc.                   6.2:1 */
+  --above-t:#DDF3EA;    /* biggest-strength tile */
+  --below:#CF7A00;      /* bar below the benchmark      3.3:1 on paper */
+  --below-text:#8F5208; /* "−12" etc.                   6.1:1 */
+  --below-t:#FDEBCB;    /* biggest-gap tile */
+  --meet:#C3CAD5;       /* bar within 3 points */
+
+  --danger-text:#B3261E; /* failed actions (PDF), 6.4:1 */
+}
+
+/* ---------- Type ---------- */
+:root{
+  --font:"Archivo", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Archivo's width axis does the hierarchy: expanded headings, condensed numerals. */
+  --wide:112%;     /* headings, brand */
+  --narrow:68%;    /* hero numerals */
+  --narrow-2:80%;  /* small numerals in lists and stats */
+
+  --t-xs:12.5px;   /* axis labels, tags */
+  --t-sm:13.5px;   /* meta lines, captions */
+  --t-md:15px;     /* body */
+  --t-lg:17px;     /* lane headings, sub-lines on the band */
+  --t-lead:21px;   /* the "in short" summary */
+  --t-h2:24px;
+  --t-h1:48px;     /* candidate name on the band */
+  --t-h1-board:44px;
+
+  --n-sm:20px;     /* lane counts, list scores */
+  --n-md:32px;     /* candidate score on the board */
+  --n-lg:34px;     /* percentile, difference on the band */
+  --n-xl:112px;    /* group counts on the board band */
+  --n-hero:200px;  /* the score */
+
+  --lh-tight:1.04;
+  --lh:1.5;
+  --lh-read:1.6;   /* insight paragraphs */
+}
+
+/* ---------- Space, radius, elevation ---------- */
+:root{
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px; --s12:48px; --s14:56px; --s16:64px;
+  --gutter:32px;            /* page side padding, desktop */
+  --gutter-phone:18px;
+  --max:1376px;             /* content width */
+
+  --r-xs:4px;   /* bars, tags */
+  --r-md:12px;  /* stand-out tiles, notices */
+  --r-lg:16px;  /* sheets and dialogs */
+  --r-pill:999px; /* buttons, fields, chips */
+
+  --e-0:none;                                                     /* everything on the page */
+  --e-1:0 1px 2px rgba(15,23,42,.12);                             /* active segment */
+  --e-2:0 8px 28px rgba(15,23,42,.18), 0 1px 3px rgba(15,23,42,.1); /* toasts, install card */
+
+  --tap:44px; /* minimum touch target */
+}
+
+/* ---------- Motion ---------- */
+:root{
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --d-fast:120ms;   /* hover, press */
+  --d-mid:220ms;    /* expand a competency, toasts */
+  --d-moment:900ms; /* the score moment on opening a report */
+}
+@media (prefers-reduced-motion:reduce){
+  :root{ --d-fast:0ms; --d-mid:0ms; --d-moment:0ms; }
+}
+
+/* ---------- Breakpoints (for reference; CSS variables can't be used in media queries) ----------
+   phone   < 760px
+   tablet  760–1179px
+   desktop ≥ 1180px
+   print   A4 portrait, 16mm side margins */

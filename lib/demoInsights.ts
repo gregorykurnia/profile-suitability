@@ -1,7 +1,7 @@
 import type { AIInsights, SuitabilityReport } from "./types";
 import { aiInsightsSchema } from "./types";
 
-type DemoRole = "Service Crew" | "Pizza Cook" | "Shift Manager";
+type DemoRole = "Service Crew" | "Pizza Cook" | "Shift Manager" | "Bank Teller";
 
 const DEMO_SEED_VERSION = "pizzahut-qsr-demo-v6";
 
@@ -162,34 +162,34 @@ const fixtures: Record<string, DemoInsightFixture> = {
   },
   "DEUS-2026-09615": {
     candidateId: "DEUS-2026-09615",
-    role: "Service Crew",
+    role: "Bank Teller",
     seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:0b3d6c55",
+    profileSignature: "fnv1a:e553f11c",
     evidenceNote:
-      "guest-welcome-service-ownership, guest-recovery-escalation, and front-kitchen-coordination 95; order-accuracy-payment-handling 90/68; menu-knowledge-suggestive-selling 88/78; composure-peak-hours 74/70 is the lowest but still exceeds target. Overall 90, Highly Recommended.",
+      "customer-service-at-the-counter 95/80, cash-handling-transaction-accuracy 93/75, complaint-handling-service-recovery 92/75, compliance-fraud-vigilance 88/71, and product-awareness-referral 84/71 exceed target; composure-peak-queues 72/70 is the lowest and only at target. Overall 87, Highly Recommended.",
     insights: {
       executiveSummary:
-        "Hendra's profile is strong across guest care, recommendations, order accuracy, complaint handling, and teamwork. They are likely to deliver warm, accurate service and keep the counter, kitchen, and riders well connected. Preparing them for sustained peaks and giving them early crew-leader responsibilities could help them stay engaged and grow toward a shift leadership path.",
+        "Hendra's profile is strong across accurate cash handling, warm and clear service, careful controls, complaint handling, and well-judged product referrals. They are likely to run a clean, trusted counter that customers return to and the head teller can rely on at the end-of-day close. Preparing them for the longest queues, such as paydays and the days before Lebaran, and giving them early senior-teller responsibilities could help them grow toward a head teller or customer service path.",
       keyStrengths: [
-        "They are likely to anticipate guest needs and stay with each request until it is resolved.",
-        "They can recommend bundles and add-ons that fit the guest's group and budget without sounding pushy.",
-        "Complaints are likely to be handled calmly, with a fair remedy offered and the shift manager involved when needed.",
-        "They are likely to keep the kitchen and delivery riders informed and step in to help colleagues before gaps appear.",
+        "They are likely to count, confirm, and post every transaction exactly, and to correct a difference before the customer leaves the counter.",
+        "Customers are likely to feel welcomed and well informed, including elderly or first-time customers who need more patience.",
+        "They are likely to apply identity and signature checks every time and to report unusual cash patterns discreetly.",
+        "Upset customers are likely to be calmed and given a clear next step, with interested customers referred to customer service or a relationship manager.",
       ],
       developmentAreas: [
-        "Sustained peaks, such as Ramadan iftar or holiday weekends, may test their composure more than routine rushes.",
-        "Preparing ahead for peak demand, such as setting out packaging before the queue builds, could help them hold the same standard for longer.",
-        "They may benefit from learning to delegate when they take on more than their share during busy periods.",
-        "Early exposure to crew-leader tasks would help them translate strong personal service into team-level results.",
+        "Exceptional peaks, such as payday, month-end, or the cash rush before Lebaran, may test their pace and composure more than routine busy days.",
+        "Preparing the drawer, forms, and receipts before the doors open on known peak days could help them hold the same standard for longer.",
+        "They may take extra time with each customer during long queues, so balancing personal care with a steady pace is worth practising.",
+        "Early exposure to senior-teller tasks, such as vault counts and supporting new tellers, would help them turn strong personal work into team results.",
       ],
       roleFitRisks: [
         {
-          risk: "During an extended peak, they could take on too many tasks themselves and tire before the rush ends.",
-          mitigation: "Agree clear station boundaries for peaks and encourage them to call for support early.",
+          risk: "During an extended peak, they could slow down to give every customer full attention and let the queue grow.",
+          mitigation: "Agree a peak-day routine with the head teller, including preparation before opening and an early call to open an extra counter.",
         },
         {
-          risk: "A strong performer without a visible growth path may lose motivation over time.",
-          mitigation: "Discuss a crew leader development path and give them a small coaching responsibility for new starters.",
+          risk: "A strong teller without a visible growth path may lose motivation over time.",
+          mitigation: "Discuss a senior teller or customer service path and give them a small role in coaching new tellers.",
         },
       ],
     },

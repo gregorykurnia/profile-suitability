@@ -80,6 +80,22 @@ test.describe("report list", () => {
     await expect(page).not.toHaveURL(/[?&]q=/);
   });
 
+  test("phone level labels fit inside their summary buttons", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const labels = page.getByRole("group", { name: "Show one level" }).locator("button > span");
+    for (const view of ["By level", "List"]) {
+      await page.getByRole("button", { name: view, exact: true }).click();
+      expect(await labels.evaluateAll((elements) => elements.map((label) => {
+        const range = document.createRange();
+        range.selectNodeContents(label);
+        const text = range.getBoundingClientRect();
+        const button = label.parentElement!.getBoundingClientRect();
+        return text.left >= button.left && text.right <= button.right &&
+          text.right <= document.documentElement.clientWidth;
+      }))).toEqual([true, true, true, true]);
+    }
+  });
+
   test("role and level narrow the list and each chip clears its own", async ({ page }) => {
     const role = page.locator("select[aria-label='Role']");
     const roles = (await role.locator("option").allInnerTexts()).slice(1);
@@ -147,6 +163,31 @@ test.describe("report list", () => {
 });
 
 test.describe("report", () => {
+  test("Hendra PDF preview fits phone gutters after a direct link and resize", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/report/DEUS-2026-09615/preview");
+    const document = page.locator(".doc-onscreen[data-a4='ready']");
+    await expect(document).toBeVisible();
+    for (const width of [390, 1440, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      await expect.poll(() => document.evaluate((el) => {
+        const frame = el.getBoundingClientRect();
+        const root = el.ownerDocument.documentElement;
+        return root.scrollWidth <= root.clientWidth && frame.left >= 15 && frame.right <= root.clientWidth - 15;
+      })).toBe(true);
+    }
+    const heads = document.locator(".doc-head");
+    expect(await heads.count()).toBeGreaterThan(0);
+    for (const head of await heads.all()) {
+      await expect(head).toContainText("Customer Service Officer");
+      expect(await head.evaluate((el) => {
+        const [name, brand] = el.children;
+        return name.getBoundingClientRect().right < brand.getBoundingClientRect().left &&
+          el.scrollHeight <= el.clientHeight + 1;
+      })).toBe(true);
+    }
+  });
+
   test("a report opens from the list", async ({ page }) => {
     await page.goto("/");
     await expect(candidates(page).first()).toBeVisible();

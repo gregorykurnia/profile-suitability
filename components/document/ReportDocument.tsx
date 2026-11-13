@@ -425,7 +425,9 @@ function FittedPages({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     const measure = () => {
-      const available = outer.current!.parentElement!.clientWidth;
+      const parent = outer.current!.parentElement!;
+      const style = getComputedStyle(parent);
+      const available = parent.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
       const width = inner.current!.offsetWidth;
       const scale = Math.min(1, available / width);
       setFit({ scale, width: width * scale, height: inner.current!.offsetHeight * scale });

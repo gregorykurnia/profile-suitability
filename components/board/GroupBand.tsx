@@ -59,7 +59,7 @@ export default function GroupBand({
               >
                 {counts[l]}
               </b>
-              <span className="mt-2 flex items-center gap-[5px] border-b-[3px] border-transparent pb-1 text-xs leading-[1.25] font-semibold group-aria-pressed:border-band-accent min-[760px]:mt-3 min-[760px]:gap-2 min-[760px]:text-sm min-[760px]:whitespace-nowrap">
+              <span className="mt-2 flex items-center gap-[5px] border-b-[3px] border-transparent pb-1 text-xs leading-[1.25] font-semibold [font-stretch:var(--narrow-2)] group-aria-pressed:border-band-accent min-[760px]:mt-3 min-[760px]:gap-2 min-[760px]:text-sm min-[760px]:whitespace-nowrap min-[760px]:[font-stretch:100%]">
                 <span className="hidden min-[760px]:inline-flex">
                   <LevelMark level={l} />
                 </span>

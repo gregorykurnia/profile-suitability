@@ -3,6 +3,7 @@ import { aiInsightsSchema } from "./types";
 import type { RoleName } from "./roles";
 
 const DEMO_SEED_VERSION = "pizzahut-qsr-demo-v6";
+const PT_EXAMPLE_SEED_VERSION = "pt-example-demo-v1";
 
 interface DemoInsightFixture {
   candidateId: string;
@@ -55,34 +56,34 @@ const fixtures: Record<string, DemoInsightFixture> = {
   },
   "DEUS-2026-09612": {
     candidateId: "DEUS-2026-09612",
-    role: "Shift Manager",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:bf06ddf8",
+    role: "Sales Executive",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:7ed9333d",
     evidenceNote:
-      "All six competencies exceed target, from guest-experience-service-recovery 86/73 to crew-coaching-development, operational-standards-compliance, and composure-decision-making at 95. Overall 92, Highly Recommended.",
+      "All six competencies exceed target, from bouncing-back-from-setbacks 89/79 and client-relationship-management 88/75 to consultative-selling-negotiation 93/69 and target-ownership-drive 94/77. Overall 90, Highly Recommended.",
     insights: {
       executiveSummary:
-        "Rina's profile is consistently strong across crew leadership, coaching, standards, commercial awareness, and composure under pressure. They are likely to run organised, audit-ready shifts while developing crew and acting early on performance data. Exposure to store-level challenges, together with a deliberate focus on guest feedback themes, could help them prepare for wider restaurant management responsibility.",
+        "Rina's profile is consistently strong across finding new business, selling on value, building lasting client relationships, owning the target, reading the market, and recovering from setbacks. They are likely to keep a full pipeline, win profitable deals with senior buyers, and grow key accounts without needing pressure from the sales manager. Larger and more complex accounts, together with a chance to share their approach with newer colleagues, could help them prepare for a key account or sales leadership role.",
       keyStrengths: [
-        "They are likely to develop crew through timely, well-adapted feedback and help new starters become productive quickly.",
-        "Food safety, halal handling, and cash procedures appear well embedded in how they run the shift, even under pressure.",
-        "They can read sales, speed-of-service, and waste indicators in real time and adjust labour or prep before results drift.",
-        "When several problems arise at once, they are likely to stay calm, weigh options quickly, and keep the crew focused.",
+        "They are likely to build new opportunities every week and reach decision-makers through referrals and their own network.",
+        "They can uncover a client's real business problem and negotiate terms that work for the client while protecting the margin.",
+        "Key accounts are likely to see them as a trusted adviser who keeps every promise after the sale.",
+        "Lost deals and slow months are likely to be treated as lessons, with a quick return to customers and a better approach.",
       ],
       developmentAreas: [
-        "Turning guest feedback and online review themes into pre-shift priorities could further strengthen their service leadership.",
-        "Rina may benefit from delegating more decisions to developing crew so that strong personal control does not limit their growth.",
-        "Sharing their planning approach with peers could help lift deployment standards beyond Rina's own shifts.",
-        "Exposure to store-level targets and multi-shift planning would help them prepare for broader management responsibility.",
+        "Their strong personal results may rely on doing much of the work themselves, so handing more to support teams is worth practising.",
+        "Sharing their prospecting and negotiation approach with newer colleagues could lift results beyond their own territory.",
+        "Exposure to larger, multi-site accounts and formal tenders would stretch their strategic selling further.",
+        "Turning what they hear in the field into written input for the sales plan could increase their influence on the wider business.",
       ],
       roleFitRisks: [
         {
-          risk: "Their high standards and quick decisions could leave less experienced crew relying on Rina rather than building their own judgement.",
-          mitigation: "Agree specific decisions that crew leaders own during Rina's shifts and debrief them afterwards.",
+          risk: "Their high standards and quick decisions could leave colleagues and support teams relying on Rina rather than building their own judgement.",
+          mitigation: "Agree which client tasks the support teams own, and review handovers together each month.",
         },
         {
           risk: "Without new stretch, a strong performer in this role may disengage or look for advancement elsewhere.",
-          mitigation: "Discuss a development path toward assistant restaurant manager and set clear milestones.",
+          mitigation: "Discuss a path toward key account management or sales leadership and set clear milestones.",
         },
       ],
     },
@@ -161,110 +162,110 @@ const fixtures: Record<string, DemoInsightFixture> = {
   },
   "DEUS-2026-09615": {
     candidateId: "DEUS-2026-09615",
-    role: "Bank Teller",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:e553f11c",
+    role: "Customer Service Officer",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:c296ecfd",
     evidenceNote:
-      "customer-service-at-the-counter 95/80, cash-handling-transaction-accuracy 93/75, complaint-handling-service-recovery 92/75, compliance-fraud-vigilance 88/71, and product-awareness-referral 84/71 exceed target; composure-peak-queues 72/70 is the lowest and only at target. Overall 87, Highly Recommended.",
+      "clear-empathetic-communication 96/77, customer-care-ownership 94/77, complaint-resolution-escalation 93/79, accurate-case-handling 90/82, and product-process-knowledge 88/70 exceed target; composure-under-customer-pressure 75/82 is the one gap. Overall 89, Highly Recommended.",
     insights: {
       executiveSummary:
-        "Hendra's profile is strong across accurate cash handling, warm and clear service, careful controls, complaint handling, and well-judged product referrals. They are likely to run a clean, trusted counter that customers return to and the head teller can rely on at the end-of-day close. Preparing them for the longest queues, such as paydays and the days before Lebaran, and giving them early senior-teller responsibilities could help them grow toward a head teller or customer service path.",
+        "Hendra's profile is strong across owning customer problems, warm and clear explanations, accurate case records, fair complaint resolution, and product knowledge. They are likely to give customers correct answers the first time and see each case through until it is closed, whether the contact comes in at the counter, on the phone, or in chat. Building their composure for the most demanding contacts and the busiest periods, such as service disruptions and the weeks before Lebaran, could help them hold that standard every day and prepare for a senior officer or team leader path.",
       keyStrengths: [
-        "They are likely to count, confirm, and post every transaction exactly, and to correct a difference before the customer leaves the counter.",
-        "Customers are likely to feel welcomed and well informed, including elderly or first-time customers who need more patience.",
-        "They are likely to apply identity and signature checks every time and to report unusual cash patterns discreetly.",
-        "Upset customers are likely to be calmed and given a clear next step, with interested customers referred to customer service or a relationship manager.",
+        "They are likely to treat each customer's problem as their own, keep promised call-backs, and update customers before they have to ask.",
+        "Customers are likely to feel heard and well informed, whether the conversation happens at the counter, on the phone, or in chat.",
+        "Case records are likely to be complete and precise, so the teams that pick up a case can act without contacting the customer again.",
+        "They can trace the cause of a complaint, offer a fair fix within their authority, and explain new products and policies correctly.",
       ],
       developmentAreas: [
-        "Exceptional peaks, such as payday, month-end, or the cash rush before Lebaran, may test their pace and composure more than routine busy days.",
-        "Preparing the drawer, forms, and receipts before the doors open on known peak days could help them hold the same standard for longer.",
-        "They may take extra time with each customer during long queues, so balancing personal care with a steady pace is worth practising.",
-        "Early exposure to senior-teller tasks, such as vault counts and supporting new tellers, would help them turn strong personal work into team results.",
+        "Very angry customers or long disruptions may unsettle them more than routine busy days, and their usual warmth could become strained.",
+        "When the phone queue and open chats build up together, they may find it harder to keep their usual pace and precision.",
+        "A clear plan for known peaks, such as month-end billing and the weeks before Lebaran, could help them hold the same standard for longer.",
+        "Their care for each customer may lead them to spend extra time on every contact, so balancing thoroughness with queue pace is worth practising.",
       ],
       roleFitRisks: [
         {
-          risk: "During an extended peak, they could slow down to give every customer full attention and let the queue grow.",
-          mitigation: "Agree a peak-day routine with the head teller, including preparation before opening and an early call to open an extra counter.",
+          risk: "During a major service disruption, a run of angry contacts could wear down their composure and slow their handling of the queue.",
+          mitigation: "Agree a disruption routine with the team leader, including fewer parallel chats, short breaks after very difficult calls, and an early call for support.",
         },
         {
-          risk: "A strong teller without a visible growth path may lose motivation over time.",
-          mitigation: "Discuss a senior teller or customer service path and give them a small role in coaching new tellers.",
+          risk: "A strong officer without a visible growth path may lose motivation over time.",
+          mitigation: "Discuss a senior officer or team leader path and give them a small role in coaching new officers.",
         },
       ],
     },
   },
   "DEUS-2026-09616": {
     candidateId: "DEUS-2026-09616",
-    role: "Service Crew",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:c3b471ce",
+    role: "Customer Service Officer",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:014d1824",
     evidenceNote:
-      "order-accuracy-payment-handling 75/68 is the one result exceeding target; guest-welcome-service-ownership 60/77 and guest-recovery-escalation 57/72 follow; front-kitchen-coordination 44/74 is the clearest gap. Overall 57, Considered.",
+      "accurate-case-handling 88/82 and product-process-knowledge 80/70 exceed target; customer-care-ownership 76/77 is at target; clear-empathetic-communication 72/77 is below; complaint-resolution-escalation 66/79 and composure-under-customer-pressure 70/82 are the clearest gaps. Overall 75, Recommended.",
     insights: {
       executiveSummary:
-        "Ayu shows a clear strength in accurate order taking and payment handling, while the wider guest service and team coordination parts of the role need substantial development. They are likely to be reliable at the till but may find it harder to recommend products, coordinate with the kitchen, and stay organised during peaks. A focused onboarding plan that builds on their accuracy while coaching guest conversations and call-outs could help them become a more complete crew member.",
+        "Ayu shows clear strengths in accurate case records and in knowing products and procedures, with a dependable approach to following routine cases through. They are likely to give correct answers and leave a clean record behind every contact, but may find it harder to calm an upset customer, resolve complaints that fall outside the standard remedies, or stay steady when pressure rises. Coaching on difficult conversations and a clear plan for peak days could help them turn their accuracy into a more complete service role.",
       keyStrengths: [
-        "They are likely to capture orders accurately across counter, phone, and delivery-app channels and read back key details.",
-        "Vouchers and payments are likely to be handled carefully and according to store procedures.",
-        "Their attention to detail may help reduce remakes caused by missed modifiers or special requests.",
-        "A clear routine at the till gives them a dependable base from which to build wider service skills.",
+        "They are likely to verify customers, record each contact precisely, and route cases to the right team the first time.",
+        "Their knowledge of products, prices, and policies is likely to be correct and up to date, including after announced changes.",
+        "Routine cases are likely to be followed through to a clear outcome, with promised call-backs kept.",
+        "Colleagues may come to rely on them to check a procedure or find the right answer in the knowledge base.",
       ],
       developmentAreas: [
-        "Updates to the kitchen and riders may be incomplete when orders change, so structured call-outs should be a priority.",
-        "They may need coaching to explain menu options and suggest relevant bundles or add-ons.",
-        "Peaks may leave them unsure which task to handle first, especially when guests, riders, and delivery orders compete.",
-        "Complaints may need clearer steps for listening, offering a standard remedy, and involving the shift manager.",
+        "Complaints that need judgement beyond the standard remedies may be escalated early or handled by repeating policy.",
+        "Their explanations may be correct but brief, so anxious or confused customers could need more warmth and patience.",
+        "Angry customers and high-volume periods may unsettle them and affect their pace.",
+        "Longer cases that pass through several departments may need a reminder so the customer is updated along the way.",
       ],
       roleFitRisks: [
         {
-          risk: "A changed order could be captured correctly at the till but not communicated clearly to the make-line or rider.",
-          mitigation: "Pair their accurate order entry with a standard call-out and a quick confirmation from the kitchen.",
+          risk: "A business customer with a repeated problem could receive a correct but standard answer that does not address the real cause.",
+          mitigation: "Practise a listen, clarify, and resolve routine through role-play, and review complex complaints with the team leader each week.",
         },
         {
-          risk: "During an iftar or weekend peak, they may become overwhelmed if moved away from the counter.",
-          mitigation: "Keep them on the till during early peaks and introduce other stations gradually with a buddy.",
+          risk: "During month-end or a service disruption, a growing queue could leave them flustered and slow.",
+          mitigation: "Start them with fewer parallel chats on peak days and agree when to call the team leader for support.",
         },
         {
-          risk: "A guest complaint could be passed on without the details the shift manager needs.",
-          mitigation: "Practise a short listen, clarify, and escalate routine through role-play.",
+          risk: "Customers on the phone may find their answers accurate but impersonal.",
+          mitigation: "Review recorded calls together and build plain, warm versions of the most common answers.",
         },
       ],
     },
   },
   "DEUS-2026-09617": {
     candidateId: "DEUS-2026-09617",
-    role: "Pizza Cook",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:5268e826",
+    role: "Sales Executive",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:099e8b68",
     evidenceNote:
-      "make-line-speed-rush-handling 79/68 and kitchen-teamwork-station-support 77/68 exceed target; recipe-build-standards 63/75, prep-planning-stock-rotation 61/68, product-quality-checks 60/80, and food-safety-hygiene-discipline 57/77 are below. Overall 66, Recommended.",
+      "prospecting-pipeline-building 82/69 and target-ownership-drive 84/77 exceed target; client-relationship-management 74/75 and bouncing-back-from-setbacks 78/79 are at target; consultative-selling-negotiation 62/69 and market-competitor-insight 60/70 are the gaps. Overall 73, Recommended.",
     insights: {
       executiveSummary:
-        "Bayu brings strong pace on the make-line and a helpful team attitude, which makes them a useful presence during busy service. Their results also point to gaps in food safety discipline, final quality checks, and consistent builds, where speed may be coming at the expense of standards. Pairing their rush strength with firm checklists and regular quality coaching could help them become a reliable all-round cook.",
+        "Bayu shows clear strengths in finding new business and owning the target, with a sound base in looking after clients and recovering from lost deals. They are likely to keep plenty of opportunities moving and push hard for results, but may rely on price rather than value when negotiating and know too little about the client's industry and competitors. Coaching on discovery questions, negotiation practice, and regular market briefings could help them turn their energy into larger, more profitable deals.",
       keyStrengths: [
-        "They are likely to keep pizzas moving steadily from the order screen to the oven when orders stack up.",
-        "They can stay composed and adjust their sequence when a large order arrives mid-peak.",
-        "They are likely to support colleagues at other stations and share updates about shortages or delays.",
-        "Their willingness to help may make them a positive influence on newer crew during busy shifts.",
+        "They are likely to prospect steadily and book first meetings with new business customers without waiting for leads.",
+        "They can track progress against the target every week and act early when results slip.",
+        "Assigned accounts are likely to hear from them regularly, with routine after-sales issues followed up.",
+        "Routine rejections are unlikely to slow them for long, and they are likely to move on to the next opportunity quickly.",
       ],
       developmentAreas: [
-        "Temperature logs, date labels, and sanitation steps may slip when the kitchen is busy, so verification is needed.",
-        "They may box pizzas without a careful final check, letting bake or topping faults reach the guest.",
-        "Topping portions and build steps may vary when they work quickly, so recipe-card prompts would help.",
-        "Planning prep against the forecast and rotating stock correctly are areas to strengthen with a lead.",
+        "When a buyer pushes on price, they may offer a discount before understanding what the client needs or showing the value of the offer.",
+        "They may present a similar pitch to different clients rather than shaping the proposal around each client's business.",
+        "Knowledge of competitor offers and the client's industry may be thin, so comparisons could catch them unprepared.",
+        "Market signals heard in the field may not be passed on to the team or turned into new sales ideas.",
       ],
       roleFitRisks: [
         {
-          risk: "Speed during a rush could come at the cost of food safety checks, creating risk during an audit.",
-          mitigation: "Schedule shift manager verification of logs at fixed times and keep the checklist visible at the station.",
+          risk: "Pressure to hit the target could lead to discounts that win deals at a weak margin.",
+          mitigation: "Set clear discount approval limits and review larger quotations with the sales manager before they go out.",
         },
         {
-          risk: "Faulty pizzas could reach guests, increasing complaints and refunds.",
-          mitigation: "Introduce a short visual standard at the cut table and coach them to check each pizza against the order slip.",
+          risk: "A client comparing PT Example with a competitor could find their answers unconvincing.",
+          mitigation: "Give them a short competitor summary to study and include a monthly market discussion in the sales meeting.",
         },
         {
-          risk: "Inconsistent portions could raise food cost and create variation between orders.",
-          mitigation: "Use portion cups and periodic build checks until their consistency is established.",
+          risk: "Larger deals with several decision-makers could stall without a clear selling strategy.",
+          mitigation: "Pair them with an experienced colleague on their first larger opportunities and plan each meeting together.",
         },
       ],
     },
@@ -367,6 +368,82 @@ const fixtures: Record<string, DemoInsightFixture> = {
         {
           risk: "An occasional faulty pizza could reach a guest during a rush.",
           mitigation: "Use a short visual standard at the cut table and spot checks from the shift manager.",
+        },
+      ],
+    },
+  },
+  "DEUS-2026-09621": {
+    candidateId: "DEUS-2026-09621",
+    role: "Customer Service Officer",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:9f255d63",
+    evidenceNote:
+      "clear-empathetic-communication 82/77 is the one result exceeding target; customer-care-ownership 68/77 and composure-under-customer-pressure 64/82 follow; accurate-case-handling 52/82, product-process-knowledge 54/70, and complaint-resolution-escalation 58/79 are the clearest gaps. Overall 63, Considered.",
+    insights: {
+      executiveSummary:
+        "Gilang's clearest strength is warm, clear communication that helps customers feel listened to, while accurate records, product knowledge, and complaint handling need substantial development. They are likely to build good rapport on calls and in chat but may give incomplete answers, leave gaps in case notes, or pass problems on without a complete summary. A structured onboarding with checklists for common request types, a knowledge-base routine, and close support from the team leader could help them build a reliable service base.",
+      keyStrengths: [
+        "They are likely to listen patiently and explain things in plain, friendly language that suits each customer.",
+        "Customers may feel at ease with them, which can help calm a worried caller early in the conversation.",
+        "Their chat replies are likely to sound personal rather than copied from a template.",
+        "Their rapport with customers gives them a useful base from which to build case and product skills.",
+      ],
+      developmentAreas: [
+        "Case notes may be incomplete or filed under the wrong category, leaving the next officer to contact the customer again.",
+        "They may give outdated or partial answers about products and policies and need to check with colleagues often.",
+        "Complaints may be passed on without the facts the next person needs, or settled with a remedy that does not fit the problem.",
+        "Busy periods and demanding customers may affect their accuracy and pace, and promised call-backs could slip.",
+      ],
+      roleFitRisks: [
+        {
+          risk: "A friendly conversation could end with the customer satisfied for now but the request not recorded or routed correctly.",
+          mitigation: "Use a short checklist for each common request type and audit a sample of their case notes every week in the first months.",
+        },
+        {
+          risk: "Incorrect product or policy information could lead to complaints or refunds later.",
+          mitigation: "Pair them with a buddy, give short weekly knowledge checks, and make the knowledge base the first stop for any question.",
+        },
+        {
+          risk: "During a disruption, a growing queue could lead to rushed answers and mixed-up cases.",
+          mitigation: "Keep them on a single channel during peaks and introduce parallel chats gradually.",
+        },
+      ],
+    },
+  },
+  "DEUS-2026-09622": {
+    candidateId: "DEUS-2026-09622",
+    role: "Sales Executive",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:d0e88bd6",
+    evidenceNote:
+      "All six are below target. client-relationship-management 56/75 is the relative foundation; market-competitor-insight 44/70 and consultative-selling-negotiation 40/69 follow; prospecting-pipeline-building 34/69, bouncing-back-from-setbacks 36/79, and target-ownership-drive 38/77 are the clearest gaps. Overall 41, Not Recommended.",
+    insights: {
+      executiveSummary:
+        "Nadia's relative foundation is looking after clients they already know, while most other parts of their sales profile point to substantial support needs. They may find it hard to build new business, negotiate on value, keep up the effort toward a target, and recover after a lost deal. If they were hired, a narrower account support role with close guidance would suit them better than independent field sales at first.",
+      keyStrengths: [
+        "Existing clients they already know may find them helpful and willing to follow up on routine requests.",
+        "With a clear contact plan, they may be able to keep in regular touch with a small set of assigned accounts.",
+        "When a client raises a simple delivery problem, they can pass it to the right internal team.",
+        "A defined account list and clear weekly activities may help them stay productive while they build wider sales skills.",
+      ],
+      developmentAreas: [
+        "They may wait for leads to arrive and start prospecting only when the pipeline is already empty.",
+        "When a buyer asks for a lower price, they may give way quickly rather than explore what the client values.",
+        "They may lose sight of the target until late in the period and find it hard to close the gap.",
+        "A rejection or lost deal may leave them discouraged and slow to contact new prospects for some time.",
+      ],
+      roleFitRisks: [
+        {
+          risk: "An empty pipeline could leave the target out of reach well before the end of the quarter.",
+          mitigation: "Set a weekly prospecting block and a target number of first meetings, reviewed with the sales manager every week.",
+        },
+        {
+          risk: "Deals could be closed only through discounts that hurt the margin.",
+          mitigation: "Keep pricing decisions with the sales manager until negotiation practice shows steady progress.",
+        },
+        {
+          risk: "A series of lost deals could lower their confidence and activity further.",
+          mitigation: "Review each lost deal together, focus feedback on activities within their control, and pair them with an experienced colleague.",
         },
       ],
     },

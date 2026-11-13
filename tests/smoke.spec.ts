@@ -1,4 +1,5 @@
 import { expect, test as base, type Page } from "@playwright/test";
+import { demoCandidates } from "../lib/reportMock";
 
 // Behaviour smoke test. B0 wrote it against the old UI; B5 rewrote its steps for the new one.
 // The behaviours are the same as in B0: the list loads; search, filter and order work; a report opens;
@@ -6,6 +7,7 @@ import { expect, test as base, type Page } from "@playwright/test";
 
 const KNOWN_ID = "DEUS-2026-09611";
 const KNOWN_NAME = "Agus Wibowo";
+const TOTAL = demoCandidates.length;
 
 // Every test also fails on a console error or an uncaught error in the page (a React key clash, a failed hydration).
 const test = base.extend<{ consoleGuard: void; ignoredErrors: RegExp[] }>({
@@ -52,8 +54,8 @@ test.describe("report list", () => {
 
   test("list loads with every candidate", async ({ page }) => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(candidates(page)).toHaveCount(10);
-    await expect(page.locator("#content").getByText("Showing all 10 candidates")).toBeVisible();
+    await expect(candidates(page)).toHaveCount(TOTAL);
+    await expect(page.locator("#content").getByText(`Showing all ${TOTAL} candidates`)).toBeVisible();
     await expect(candidates(page).filter({ hasText: KNOWN_NAME })).toHaveCount(1);
     // Grouped by level, best fit first.
     const lanes = await page.getByRole("heading", { level: 2 }).allInnerTexts();
@@ -70,12 +72,12 @@ test.describe("report list", () => {
     await box.fill("09612");
     await expect(candidates(page)).toHaveCount(1);
     await expect(candidates(page).first()).toContainText("Rina Marlina");
-    await expect(page.locator("#content").getByText("Showing 1 of 10 candidates")).toBeVisible();
+    await expect(page.locator("#content").getByText(`Showing 1 of ${TOTAL} candidates`)).toBeVisible();
 
     await box.fill("zzzz-nobody");
     await expect(page.getByRole("heading", { name: "No candidates match “zzzz-nobody”" })).toBeVisible();
     await page.getByRole("button", { name: "Clear search" }).click();
-    await expect(candidates(page)).toHaveCount(10);
+    await expect(candidates(page)).toHaveCount(TOTAL);
     await expect(page).not.toHaveURL(/[?&]q=/);
   });
 
@@ -87,10 +89,10 @@ test.describe("report list", () => {
     await role.selectOption({ label: roles[0] });
     const narrowed = await candidates(page).count();
     expect(narrowed).toBeGreaterThan(0);
-    expect(narrowed).toBeLessThan(10);
+    expect(narrowed).toBeLessThan(TOTAL);
     await expect(page).toHaveURL(/[?&]role=/);
     await page.getByRole("button", { name: `Remove filter ${roles[0]}` }).click();
-    await expect(candidates(page)).toHaveCount(10);
+    await expect(candidates(page)).toHaveCount(TOTAL);
 
     // The band's level counts narrow to one level and toggle back.
     const level = page.getByRole("group", { name: "Show one level" }).getByRole("button", { name: /Highly Recommended/ });
@@ -100,18 +102,18 @@ test.describe("report list", () => {
     await expect(candidates(page)).toHaveCount(expected);
     await expect(page).toHaveURL(/[?&]level=4/);
     await level.click();
-    await expect(candidates(page)).toHaveCount(10);
+    await expect(candidates(page)).toHaveCount(TOTAL);
 
     // Filters combine; "Clear all" undoes them together.
     await role.selectOption({ label: roles[0] });
     await page.locator("select[aria-label='Level']").selectOption({ label: "Recommended" });
     await page.getByRole("button", { name: "Clear all" }).click();
-    await expect(candidates(page)).toHaveCount(10);
+    await expect(candidates(page)).toHaveCount(TOTAL);
   });
 
   test("order sorts by score both ways and by name", async ({ page }) => {
     await page.getByRole("button", { name: "List", exact: true }).click();
-    await expect(page.locator("tbody tr")).toHaveCount(10);
+    await expect(page.locator("tbody tr")).toHaveCount(TOTAL);
     const order = page.locator("select[aria-label='Order']");
     const sortedBy = (xs: number[], dir: 1 | -1) => xs.every((x, i) => i === 0 || (xs[i - 1] - x) * dir <= 0);
 

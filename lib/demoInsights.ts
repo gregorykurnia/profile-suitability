@@ -2,7 +2,6 @@ import type { AIInsights, SuitabilityReport } from "./types";
 import { aiInsightsSchema } from "./types";
 import type { RoleName } from "./roles";
 
-const DEMO_SEED_VERSION = "pizzahut-qsr-demo-v6";
 const PT_EXAMPLE_SEED_VERSION = "pt-example-demo-v1";
 
 interface DemoInsightFixture {
@@ -18,38 +17,38 @@ interface DemoInsightFixture {
 const fixtures: Record<string, DemoInsightFixture> = {
   "DEUS-2026-09611": {
     candidateId: "DEUS-2026-09611",
-    role: "Shift Manager",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:7c2dc981",
+    role: "Project Manager",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:122b17a6",
     evidenceNote:
-      "crew-coaching-development 71/69 and operational-standards-compliance 70/71 meet target; shift-leadership-crew-deployment 71/79 and composure-decision-making 65/79 are below; guest-experience-service-recovery 54/73 and shift-performance-cost-control 52/68 are the clearest gaps. Overall 64, Considered.",
+      "planning-scheduling 78/71 and delivery-ownership 80/75 exceed target; team-leadership-delegation 62/68 and risk-issue-management 58/71 are behind; stakeholder-management 52/77 and leading-through-change-pressure 50/80 are the clearest gaps. Overall 63, Considered.",
     insights: {
       executiveSummary:
-        "Agus shows a workable base in coaching crew and keeping routine shift controls in place, but their profile points to clear gaps in leading the guest experience and using shift data to steer results. They are likely to run a familiar shift adequately while needing support when complaints escalate or performance drifts mid-shift. A structured recovery framework, a simple mid-shift review routine, and close coaching from the restaurant manager could help them grow into the full shift leadership role.",
+        "Agus builds dependable plans and takes the delivery of agreed work seriously, following the company's process through to handover. Their profile points to clear gaps in winning support across departments, leading people through change, and acting early on what could go wrong. They are likely to run a well-defined project with a supportive sponsor, but would need close backing and coaching before leading a large or contested one.",
       keyStrengths: [
-        "They are likely to explain routine standards to crew and give practical feedback when a task is done incorrectly.",
-        "Opening and closing checklists and routine cash procedures appear to give them a dependable structure for running the shift.",
-        "With a forecast in hand, they can set a workable crew deployment for a familiar weekday shift.",
-        "They may be a steady presence for newer crew members who need a clear demonstration before working a station alone.",
+        "They are likely to turn a project goal into a clear plan of tasks, owners and dates, and keep it current as work moves.",
+        "Dependencies such as permits, equipment and training are likely to be mapped before dates are promised.",
+        "They can be expected to hold the work to the agreed standard and complete sign-off steps properly.",
+        "Open items at handover are likely to be passed on with a named owner rather than left behind.",
       ],
       developmentAreas: [
-        "Escalated complaints may receive inconsistent remedies, and the underlying cause may not be followed up once the guest leaves.",
-        "They may review sales, labour, and waste only at close rather than adjusting while the shift is still running.",
-        "When several problems arise together, they may hesitate or wait for direction rather than choosing a practical workaround.",
-        "Redeploying crew early as demand moves between dine-in and delivery is an area to strengthen through planning and practice.",
+        "When a department pushes back, they may press ahead without meeting them or send updates that do not suit senior readers.",
+        "Changes may be presented as instructions, and tighter deadlines may be passed straight to the team without deciding what to drop.",
+        "Early warning signs, such as a vendor missing small deliveries, may be noted without asking what they mean for the main date.",
+        "They may keep difficult tasks for themselves and give team members from other departments vague direction.",
       ],
       roleFitRisks: [
         {
-          risk: "A guest complaint during a busy peak could be resolved inconsistently, leading to repeat issues or negative online reviews.",
-          mitigation: "Introduce a simple recovery framework with agreed remedies, and review logged complaints weekly with the restaurant manager.",
+          risk: "A department that was not won over could object late and delay a decision or go-live.",
+          mitigation: "Map stakeholders at kick-off with the sponsor and have the sponsor join the first difficult conversations.",
         },
         {
-          risk: "Labour hours or waste could drift during a slow period without being corrected until the end-of-day report.",
-          mitigation: "Set two or three indicators to check at fixed points in the shift, with an agreed action for each.",
+          risk: "A sudden change in scope or date could unsettle the team and stall progress.",
+          mitigation: "Agree with the sponsor in advance how priorities will be cut when dates move, and coach them on explaining changes to users.",
         },
         {
-          risk: "An equipment failure combined with a staff shortage could stall decisions at a critical moment.",
-          mitigation: "Rehearse common disruption scenarios and agree clear decision rights before they lead peak shifts alone.",
+          risk: "Problems could surface only once they have already caused delay.",
+          mitigation: "Hold a short fortnightly risk review with the sponsor that asks what the latest signs mean for the key dates.",
         },
       ],
     },
@@ -276,102 +275,102 @@ const fixtures: Record<string, DemoInsightFixture> = {
   },
   "DEUS-2026-09618": {
     candidateId: "DEUS-2026-09618",
-    role: "Pizza Cook",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:84aeeebe",
+    role: "Management Trainee",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:178cba64",
     evidenceNote:
-      "prep-planning-stock-rotation 81/68 is the clear strength; make-line-speed-rush-handling 67/68 and kitchen-teamwork-station-support 66/68 meet target; product-quality-checks 71/80, food-safety-hygiene-discipline 67/77, and recipe-build-standards 66/75 are below. Overall 70, Recommended.",
+      "learning-agility 94/79, analytical-thinking 92/81, initiative-ownership 90/78, influence-collaboration 86/71 and commercial-awareness 84/77 exceed target; leadership-potential 74/79 is the one gap. Overall 87, Highly Recommended.",
     insights: {
       executiveSummary:
-        "Citra stands out for planning prep against demand and keeping the kitchen stocked, with a steady base in rush handling and teamwork. Their build consistency, food safety routines, and final product checks need further development to reach the standard the role requires. Structured build coaching and verified food safety routines could help them match their planning strength with consistent product quality.",
+        "Citra is a fast, self-driven learner who becomes useful quickly in a new team, reads data sharply, and links everyday work to how the business makes money. They are likely to find improvements nobody asked for, see them through, and win colleagues' support along the way. Their one area to build is leading a group under pressure, which planned chances to lead with a mentor's feedback should develop during the programme.",
       keyStrengths: [
-        "They are likely to check the forecast and prepare dough and toppings so the make-line does not run short.",
-        "Stock rotation and waste control appear to be natural parts of how they plan the shift.",
-        "They can keep pace with a normal lunch or dinner peak and follow the order screen sequence.",
-        "They are likely to share routine updates with nearby stations and help colleagues when asked.",
+        "They are likely to settle into each new function quickly, ask for feedback without prompting, and carry lessons into the next rotation.",
+        "Complex information is likely to be turned into a clear recommendation that managers can act on.",
+        "They can be expected to spot useful work, take responsibility for it, and follow it through to a measurable result.",
+        "They are likely to build relationships across departments early and bring colleagues behind a well-prepared idea.",
       ],
       developmentAreas: [
-        "Topping portions and build steps may vary, especially with newer or less familiar products.",
-        "Temperature checks and labelling may need reminders when production timing is tight.",
-        "They may need to treat the cut table as a firmer quality gate before boxing.",
-        "During sustained weekend or iftar rushes, they may need extra support to protect both speed and quality.",
+        "They may hold back from organising a group and wait for someone else to take charge.",
+        "As a deadline nears, they may become less settled and find it harder to keep others calm.",
+        "Coaching peers who are struggling may come less naturally than doing the work themselves.",
+        "Giving clear direction to more experienced colleagues is likely to need practice.",
       ],
       roleFitRisks: [
         {
-          risk: "Inconsistent builds could lead to guest complaints about pizzas that look or taste different between visits.",
-          mitigation: "Coach builds against recipe cards and check their first products after each new menu launch.",
+          risk: "Their pace could lead them to take on too much work themselves rather than share it out.",
+          mitigation: "Give them one group task to lead in each rotation, with the mentor reviewing how the work was shared.",
         },
         {
-          risk: "Food safety logs could be missed on compressed shifts.",
-          mitigation: "Add scheduled verification by the shift manager until the routine is consistent.",
+          risk: "A tight group deadline could test their composure in front of peers.",
+          mitigation: "Plan an early leadership assignment with a clear deadline and debrief it with the programme manager.",
         },
       ],
     },
   },
   "DEUS-2026-09619": {
     candidateId: "DEUS-2026-09619",
-    role: "Pizza Cook",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:ae3cf8af",
+    role: "Project Manager",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:307ede58",
     evidenceNote:
-      "make-line-speed-rush-handling and kitchen-teamwork-station-support 95/68, food-safety-hygiene-discipline 86/77, recipe-build-standards 82/75; prep-planning-stock-rotation 69/68 meets target; product-quality-checks 77/80 is just below. Overall 84, Recommended.",
+      "team-leadership-delegation 88/68, leading-through-change-pressure 86/80 and stakeholder-management 84/77 exceed target; risk-issue-management 72/71 is at target; planning-scheduling 66/71 and delivery-ownership 70/75 are behind. Overall 78, Recommended.",
     insights: {
       executiveSummary:
-        "Eko's profile is strong across make-line speed, teamwork, food safety, and build consistency, making them a likely anchor for busy kitchen shifts. Their final product checks and prep planning are sound but less developed than their other strengths. A consistent cut-table routine and more ownership of prep planning could round out their profile and prepare them for a kitchen leader role.",
+        "Eko is a confident people leader who builds committed project teams, earns the support of other departments, and stays steady when scope or deadlines change. They are likely to keep a project moving and keep people on side, but their schedules and follow-through at handover may be looser than the role needs. A plan review at each milestone and a firm closure checklist could pair well with their leadership.",
       keyStrengths: [
-        "They are likely to stay quick and composed when the order screen is full, keeping the oven loaded steadily.",
-        "They can keep stations aligned with clear call-outs and help newer crew learn routines.",
-        "Food safety and halal handling procedures appear well embedded, even under time pressure.",
-        "They are likely to build pizzas to specification and notice when a dough batch behaves differently.",
+        "They are likely to build a committed team from people who report elsewhere and delegate real ownership.",
+        "Newer team members are likely to be given stretching work with the support to succeed.",
+        "Departments with different interests are likely to be brought to an agreement the project can work with.",
+        "When priorities shift or pressure peaks, they can be expected to reshape the plan and keep morale steady.",
       ],
       developmentAreas: [
-        "Final checks at the cut table may be rushed when they are focused on speed, letting occasional faults through.",
-        "They may rely on the prep chart rather than adjusting quantities ahead of promotions or holiday weekends.",
-        "Turning their speed into team results will mean explaining their sequencing approach to colleagues.",
-        "Taking ownership of prep planning for a shift would help prepare them for broader kitchen responsibility.",
+        "Dates may be set before dependencies are checked, so the schedule may need to change more than once.",
+        "The plan may fall out of date while their attention is on the people side of the project.",
+        "A project may be closed with some items unfinished and no clear owner for them.",
+        "Agreed sign-off steps may be shortened when the team is keen to move on.",
       ],
       roleFitRisks: [
         {
-          risk: "A focus on speed could let an under-baked pizza or wrong topping reach the guest.",
-          mitigation: "Agree a short cut-table check that every pizza passes, even during peaks.",
+          risk: "Sponsors could receive optimistic dates that later slip.",
+          mitigation: "Review each new schedule and its dependencies with the programme lead before dates are shared.",
         },
         {
-          risk: "Prep could run short during an unexpected promotion surge.",
-          mitigation: "Have them review the forecast with the shift manager before promotional days and adjust dough pulls together.",
+          risk: "Users could be left with unfinished features after go-live.",
+          mitigation: "Agree acceptance criteria at kick-off and use a handover checklist signed off by the receiving team.",
         },
       ],
     },
   },
   "DEUS-2026-09620": {
     candidateId: "DEUS-2026-09620",
-    role: "Pizza Cook",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:c13716d3",
+    role: "Management Trainee",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:539d1619",
     evidenceNote:
-      "food-safety-hygiene-discipline 81/77, make-line-speed-rush-handling 80/68, and kitchen-teamwork-station-support 76/68 exceed target; recipe-build-standards 77/75 meets; product-quality-checks 77/80 and prep-planning-stock-rotation 64/68 are below. Overall 76, Recommended.",
+      "influence-collaboration 88/71 and leadership-potential 86/79 exceed target; learning-agility 80/79 and initiative-ownership 76/78 are at target; analytical-thinking 66/81 and commercial-awareness 64/77 are behind. Overall 77, Recommended.",
     insights: {
       executiveSummary:
-        "Fitri offers a solid all-round kitchen profile, with particular strengths in food safety discipline, rush handling, and supporting colleagues. Their prep planning and final product checks are the main areas to tighten. With guidance on forecasting prep and a firmer cut-table routine, they are likely to become a dependable member of the kitchen team.",
+        "Fitri connects easily with people across the business and naturally takes the lead in a group, staying calm and supportive when deadlines tighten. They settle into new teams steadily and complete what they are given, but their analysis of data and their grasp of how decisions affect the business are less developed. Structured practice with analysis and regular time with commercial teams could round out a promising people leader.",
       keyStrengths: [
-        "They are likely to complete temperature checks and labelling on time and raise concerns before product reaches the make-line.",
-        "They can keep pace during busy peaks and adjust their sequence when demand changes.",
-        "They are likely to support colleagues at other stations and share updates clearly.",
-        "They follow recipe cards and portion guides reliably for familiar products.",
+        "They are likely to build friendly working relationships quickly and win colleagues' support for their ideas.",
+        "In group tasks, they can be expected to organise the work, give clear direction and keep others positive under pressure.",
+        "Peers who are struggling are likely to receive practical help and encouragement from them.",
+        "They are likely to settle into each rotation at a reasonable pace and complete assigned work reliably.",
       ],
       developmentAreas: [
-        "Planning prep against the forecast may need support, especially ahead of promotions or holiday weekends.",
-        "They may need to slow down at the cut table to catch bake or topping faults before boxing.",
-        "Newer menu items may benefit from a short demonstration and a check of their first builds.",
-        "Reviewing waste at close could help them connect prep decisions with food cost.",
+        "Analyses may present many figures without a clear conclusion about which factor matters most.",
+        "Recommendations may focus on price or convenience without weighing the wider effect on cost and revenue.",
+        "Developments among customers and competitors may go unnoticed unless someone points them out.",
+        "They may wait to be invited before proposing improvements to how things are done.",
       ],
       roleFitRisks: [
         {
-          risk: "Under-prepared items could run short during a dinner peak and stop the make-line.",
-          mitigation: "Review the prep chart and forecast with a lead before busy shifts.",
+          risk: "Proposals could win support on goodwill while resting on weak analysis.",
+          mitigation: "Have the supervisor review their analyses before they are shared, using strong past reports as examples.",
         },
         {
-          risk: "An occasional faulty pizza could reach a guest during a rush.",
-          mitigation: "Use a short visual standard at the cut table and spot checks from the shift manager.",
+          risk: "Decisions could overlook their commercial effect on the business.",
+          mitigation: "Schedule a rotation in sales or finance early and discuss the monthly management report with their mentor.",
         },
       ],
     },
@@ -524,6 +523,44 @@ const fixtures: Record<string, DemoInsightFixture> = {
         {
           risk: "Commitments made at sprint planning could slip without warning.",
           mitigation: "Break work into smaller pieces with the team lead and compare estimates with actual time each sprint.",
+        },
+      ],
+    },
+  },
+  "DEUS-2026-09625": {
+    candidateId: "DEUS-2026-09625",
+    role: "Management Trainee",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:5e2987c3",
+    evidenceNote:
+      "influence-collaboration 76/71 exceeds target; learning-agility 38/79, initiative-ownership 30/78, analytical-thinking 44/81, commercial-awareness 36/77 and leadership-potential 32/79 are well behind. Overall 43, Not Recommended.",
+    insights: {
+      executiveSummary:
+        "Yoga is friendly and cooperative and is likely to get on well with each team they join. Their profile, however, points to substantial gaps in learning quickly, acting without instruction, analysing information, understanding the business, and taking the lead. The programme's pace and rotation demands are likely to be a difficult fit at present, and a more structured entry-level role may suit them better.",
+      keyStrengths: [
+        "They are likely to build friendly working relationships with colleagues in each new team.",
+        "In group work, they can be expected to take on their share and keep others informed.",
+        "Colleagues are likely to find them approachable and easy to work with.",
+        "Straightforward suggestions they make are likely to be received with goodwill.",
+      ],
+      developmentAreas: [
+        "They may take a long time to become useful in a new function and repeat errors already pointed out.",
+        "Tasks may wait for detailed instructions and be left unfinished when no one checks.",
+        "Information may be presented without a clear conclusion, or with conclusions the evidence does not support.",
+        "They may avoid organising a group and become unsettled as deadlines approach.",
+      ],
+      roleFitRisks: [
+        {
+          risk: "Each rotation could end before they are able to contribute on their own.",
+          mitigation: "If hired, set a written learning plan with a named buddy and fortnightly feedback in every rotation.",
+        },
+        {
+          risk: "Work could stall without close direction, putting the programme's milestones behind.",
+          mitigation: "Give them one small owned task at a time with agreed check-in points and a clear finish line.",
+        },
+        {
+          risk: "Recommendations could overlook cost and customer effects.",
+          mitigation: "Pair them with a mentor from the sales or finance team to discuss how daily decisions affect results.",
         },
       ],
     },

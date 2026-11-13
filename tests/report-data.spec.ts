@@ -112,3 +112,29 @@ test("authored insight guards still reject seed, role and profile drift", () => 
     scores: { ...candidate.scores, [id]: score === 100 ? score - 1 : score + 1 },
   })).toThrow(/profile mismatch/);
 });
+
+test("the 15 candidates sit on the six generic positions with the planned level spread and shapes", () => {
+  expect(new Set(reportRoles)).toEqual(new Set([
+    "Customer Service Officer",
+    "Sales Executive",
+    "Finance Officer",
+    "Software Engineer",
+    "Project Manager",
+    "Management Trainee",
+  ]));
+  expect(mockReports).toHaveLength(15);
+  const spread = { "Highly Recommended": 0, Recommended: 0, Considered: 0, "Not Recommended": 0 };
+  for (const report of mockReports) spread[report.suitabilityLabel] += 1;
+  expect(spread).toEqual({ "Highly Recommended": 3, Recommended: 6, Considered: 4, "Not Recommended": 2 });
+
+  for (const report of mockReports) {
+    const statuses = new Set(report.competencies.map(({ status }) => status));
+    if (report.candidateName === "Rina Marlina") {
+      expect(statuses).toEqual(new Set(["Above"]));
+    } else if (report.candidateName === "Nadia Kusuma") {
+      expect(statuses.has("Above")).toBe(false);
+    } else {
+      expect(statuses.has("Above") && statuses.has("Below"), report.candidateName).toBe(true);
+    }
+  }
+});

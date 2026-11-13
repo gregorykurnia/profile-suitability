@@ -1,0 +1,125 @@
+{
+  "serverStopped": true,
+  "cases": [
+    {
+      "width": 1440,
+      "path": "/",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/?view=list",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09615",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09612",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09614",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09613",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09619",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09618",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09622",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 1440,
+      "path": "/report/DEUS-2026-09615/preview",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/?view=list",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09615",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09612",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09614",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09613",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09619",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09618",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09622",
+      "violations": [],
+      "incompleteRules": []
+    },
+    {
+      "width": 390,
+      "path": "/report/DEUS-2026-09615/preview",
+      "violations": [],
+      "incompleteRules": []
+    }
+  ]
+}

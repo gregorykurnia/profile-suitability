@@ -1,5 +1,8 @@
 # Generic roles: task 1.6 look check
 
+R1 refreshed this gallery and reviewed every current shot: [review](../../reviews/R1.md),
+[20 accessibility cases](r1-accessibility.json).
+
 2026-11-13. All 32 gallery checks pass; 61 key images, four comparison crops and a percentile detail crop.
 All 14 smoke tests passed; the final PDF-only sentence correction was rechecked separately.
 Webpack production build, TypeScript, changed-file lint and `redesign/old-names.sh` pass.

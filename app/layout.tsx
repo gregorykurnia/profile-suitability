@@ -15,7 +15,7 @@ const archivo = Archivo({
 
 export const metadata: Metadata = {
   title: "PT Example hiring assessments",
-  description: "Psychometric assessment results for PT Example store candidates.",
+  description: "Psychometric assessment results for PT Example candidates across six roles.",
   manifest: "/manifest.webmanifest",
   robots: { index: false, follow: false },
   appleWebApp: {

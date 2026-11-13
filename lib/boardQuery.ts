@@ -118,7 +118,7 @@ export function boardSequence<T extends BoardCandidate>(reports: T[], query: Boa
   return ([4, 3, 2, 1] as Level[]).flatMap((level) => results.filter((r) => levelOf(r.suitabilityScore) === level));
 }
 
-// "Shift Manager, Recommended, matching “agus”, highest score first" for the queue bar.
+// "Project Manager, Recommended, matching “agus”, highest score first" for the queue bar.
 export function queryContext(query: BoardQuery, roles: string[]): { narrowing: string; order: string } {
   const parts = [
     query.role !== "all" ? roles.find((r) => roleSlug(r) === query.role) : null,

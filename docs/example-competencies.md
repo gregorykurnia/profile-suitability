@@ -1,45 +1,79 @@
 # PT Example custom competency mappings
 
-Behavioural composites for three PT Example restaurant roles: Service Crew (front of house, counter and delivery-app orders), Pizza Cook (prep, make-line, oven and cut table) and Shift Manager (runs a shift: crew deployment, standards, guest recovery and shift results). Each role has six custom competencies. Source names match the user-provided default framework exactly. Full Low/Mid/High descriptors and practical interpretations live in `lib/reportMock.ts`.
+Behavioural composites for six PT Example positions across customer service, sales, finance, software development, project delivery and a graduate programme. Each role has six custom competencies. Source names match the default framework in `docs/default-competencies.md` exactly. Full Low/Mid/High descriptors and practical interpretations live in the corresponding `lib/roles/<role-slug>.ts` file.
 
 ## Role mappings
 
-### Service Crew
+### Customer Service Officer
 
 | Custom competency | Default sources | Role behaviour |
 | --- | --- | --- |
-| Guest Welcome & Service Ownership | Quality Client Delivery; Supporting Others; Being Accountable | The tendency to greet guests warmly, notice what they need at the counter or table, and take ownership of each order or request until it is delivered or clearly handed over. |
-| Menu Knowledge & Suggestive Selling | Persuading Others; Applying Expertise; Adaptive Communication | The ability to explain pizzas, sides, and current promotions clearly and suggest relevant add-ons or bundles that fit the guest's group size, budget, and preferences without creating pressure. |
-| Order Accuracy & Payment Handling | Following Directions; Distilling Information; Being Accountable | The ability to capture dine-in, takeaway, and delivery-app orders accurately, confirm modifiers and special requests, and handle payments and vouchers according to store procedures. |
-| Guest Recovery & Escalation | Lateral Problem Solving; Taking Initiative; Adaptive Communication | The ability to listen to guest complaints, clarify what went wrong, offer a fair remedy within store guidelines, and involve the shift manager promptly when a decision falls outside crew authority. |
-| Front & Kitchen Coordination | Enabling Teamwork; Supporting Others; Adaptive Communication | The ability to keep the counter, dining area, kitchen, and delivery riders aligned through clear handoffs, and to support colleagues at other stations when service needs shift. |
-| Composure at Peak Hours | Resilience Under Pressure; Operational Flexibility; Forward Planning | The capacity to stay calm and organised during lunch, dinner, weekend, and Ramadan iftar peaks, reprioritising tasks as queues, delivery orders, and staffing levels change. |
+| Customer Care & Ownership | Quality Client Delivery; Supporting Others; Being Accountable | The tendency to treat each customer's problem as their own, see it through to a real answer, and keep the customer informed until the case is closed, whether the contact starts at the counter, on the phone, or in chat. |
+| Clear & Empathetic Communication | Adaptive Communication; Supporting Others; Building Connections | The ability to listen fully, explain things in plain language that suits each customer, and show genuine understanding, adjusting tone and wording across face-to-face, phone, and written chat. |
+| Accurate Case Handling | Following Directions; Distilling Information; Being Accountable | The tendency to verify the customer, record each contact completely and correctly in the case system, follow the agreed procedure for each request type, and route cases to the right team the first time. |
+| Complaint Resolution & Escalation | Lateral Problem Solving; Taking Initiative; Adaptive Communication | The ability to understand what lies behind a complaint, find a practical fix within the officer's authority, and escalate what cannot be solved at the front line with a clear summary and a promised next step. |
+| Product & Process Knowledge | Applying Expertise; Active Learning; Distilling Information | The ability to learn PT Example's products, prices, policies, and internal procedures quickly, keep up with changes, and use that knowledge to give customers correct answers the first time. |
+| Composure Under Customer Pressure | Resilience Under Pressure; Operational Flexibility; Forward Planning | The tendency to stay calm, polite, and accurate with angry or demanding customers and through high-volume periods, such as month-end billing, service disruptions, or the weeks before Lebaran, while handling several contacts at once. |
 
-### Pizza Cook
-
-| Custom competency | Default sources | Role behaviour |
-| --- | --- | --- |
-| Recipe & Build Standards | Following Directions; Applying Expertise; Optimizing Performance | The ability to follow approved dough, sauce, topping, and bake specifications so every pizza matches the brand standard for portion, appearance, and taste across shifts. |
-| Food Safety & Hygiene Discipline | Following Directions; Being Accountable; Applying Expertise | The tendency to follow food safety, halal handling, and sanitation procedures consistently, including temperature checks, date labelling, and stock rotation, and to report any departure promptly. |
-| Make-Line Speed & Rush Handling | Resilience Under Pressure; Operational Flexibility; Optimizing Performance | The capacity to keep pizzas moving from the order screen through the oven at target speed, staying composed and reprioritising when dine-in, takeaway, and delivery orders peak together. |
-| Prep Planning & Stock Rotation | Forward Planning; Optimizing Performance; Being Accountable | The ability to plan dough, sauce, and topping preparation against forecast demand, rotate stock correctly, and adjust prep during the shift to avoid both shortages and waste. |
-| Product Quality Checks | Quality Client Delivery; Being Accountable; Taking Initiative | The tendency to check every pizza and side at the cut table against brand standards for bake, cut, toppings, and order accuracy, and to remake or flag products that fall short before they reach the guest. |
-| Kitchen Teamwork & Station Support | Enabling Teamwork; Supporting Others; Adaptive Communication | The ability to communicate clearly across prep, make-line, oven, and cut-table stations, share workload during peaks, and help newer crew learn station routines. |
-
-### Shift Manager
+### Sales Executive
 
 | Custom competency | Default sources | Role behaviour |
 | --- | --- | --- |
-| Shift Leadership & Crew Deployment | Providing Directions; Forward Planning; Operational Flexibility | The ability to plan the shift, deploy crew to the right stations based on forecast and skill, give clear direction, and redeploy people quickly as demand changes. |
-| Crew Coaching & Development | Coaching Others; Supporting Others; Adaptive Communication | The ability to train new crew, give timely feedback on the floor, and build each crew member's confidence and skill so the store's standards hold on every shift. |
-| Guest Experience & Service Recovery | Quality Client Delivery; Lateral Problem Solving; Adaptive Communication | The ability to set and model service standards on the shift, resolve escalated complaints fairly, and use guest feedback and online reviews to prevent repeat problems. |
-| Operational Standards & Compliance | Following Directions; Being Accountable; Applying Expertise | The tendency to run the shift to brand and regulatory standards, including food safety, halal compliance, cash handling, and opening and closing checklists, and to take ownership of any gaps found. |
-| Shift Performance & Cost Control | Business Acumen; Optimizing Performance; Distilling Information | The ability to track sales, speed of service, labour, and waste during the shift, interpret what the numbers show, and act quickly to keep results on target. |
-| Composure & Decision-Making Under Pressure | Resilience Under Pressure; Taking Initiative; Lateral Problem Solving | The capacity to stay calm and decisive when several problems arise at once, such as equipment failure, staff shortages, or a sudden surge in orders, and to choose practical solutions quickly. |
+| Prospecting & Pipeline Building | Taking Initiative; Building Connections; Forward Planning | The tendency to find and approach new business customers steadily, open doors through referrals and networks, and keep a pipeline full enough to meet next quarter's target as well as this one. |
+| Consultative Selling & Negotiation | Persuading Others; Adaptive Communication; Business Acumen | The ability to understand a business customer's needs and buying process, shape a proposal around the value it brings, and negotiate price and terms that work for the customer and protect PT Example's margin. |
+| Client Relationship Management | Building Connections; Quality Client Delivery; Supporting Others | The tendency to build trusted, long-term relationships with key accounts, deliver on every promise after the sale, and grow each account by understanding the client's business over time. |
+| Target Ownership & Drive | Being Accountable; Optimizing Performance; Resilience Under Pressure | The tendency to take personal responsibility for the sales target, track progress against it every week, and keep pushing for results through slow months and difficult quarters. |
+| Market & Competitor Insight | Trend Identification; Business Acumen; Distilling Information | The ability to follow the customer's industry, competitor offers, and market trends, and to turn what is heard in the field into useful input for customers, the sales plan, and the business. |
+| Bouncing Back from Setbacks | Resilience Under Pressure; Self Development Focused; Lateral Problem Solving | The tendency to recover quickly from lost deals, rejections, and slow periods, learn something useful from each one, and return to customers with renewed energy and a better approach. |
+
+### Finance Officer
+
+| Custom competency | Default sources | Role behaviour |
+| --- | --- | --- |
+| Accuracy & Attention to Detail | Following Directions; Being Accountable; Optimizing Performance | The tendency to get figures, entries, and supporting documents right the first time, check their own work before it moves on, and keep improving the routines that prevent errors in journals, invoices, and payments. |
+| Compliance & Control Discipline | Following Directions; Being Accountable; Applying Expertise | The tendency to follow accounting policies, approval limits, and tax rules every time, keep the evidence that auditors and reviewers need, and apply technical knowledge to recognise when a transaction needs special treatment. |
+| Analytical Reporting | Distilling Information; Trend Identification; Applying Expertise | The ability to turn ledger data into clear reports, explain the movements behind the numbers, and spot trends or unusual changes that managers should know about. |
+| Deadline & Close Management | Forward Planning; Resilience Under Pressure; Optimizing Performance | The ability to plan the month-end close, tax filings, and reporting deadlines in advance, keep work moving when several deadlines meet, and stay accurate under that pressure. |
+| Reconciliation & Problem Investigation | Lateral Problem Solving; Distilling Information; Taking Initiative | The tendency to reconcile accounts thoroughly, dig into differences until the real cause is found, and take the initiative to fix the source so the same problem does not return. |
+| Business Partnering | Adaptive Communication; Business Acumen; Building Connections | The ability to explain financial information in plain language to people outside finance, understand what drives each department's costs and income, and build working relationships that help the business make better decisions. |
+
+### Software Engineer
+
+| Custom competency | Default sources | Role behaviour |
+| --- | --- | --- |
+| Technical Problem Solving | Lateral Problem Solving; Applying Expertise; Distilling Information | The ability to break a technical problem into parts, find the real cause of defects, and apply sound engineering knowledge to choose a solution that works now and stays workable later. |
+| Code Quality & Ownership | Being Accountable; Quality Client Delivery; Following Directions | The tendency to write clear, tested code that follows the team's standards, take responsibility for how it behaves once released, and care about the experience of the people who use it. |
+| Continuous Learning | Active Learning; Self Development Focused; Trend Identification | The tendency to keep building technical skills, pick up new tools and languages when the work needs them, and follow developments in the field to judge which are worth adopting. |
+| Collaborative Delivery | Enabling Teamwork; Adaptive Communication; Supporting Others | The ability to work closely with other engineers, designers, testers, and product managers, explain technical points in terms each person understands, and help teammates so the whole team delivers. |
+| Adapting to Changing Requirements | Operational Flexibility; Strategic Agility; Championing Change | The tendency to respond constructively when priorities, requirements, or technical direction change, adjust plans and code without losing momentum, and help the team move forward with the change. |
+| Planning & Estimation | Forward Planning; Being Accountable; Optimizing Performance | The ability to break work into manageable pieces, give realistic estimates, plan for dependencies and risks, and keep commitments to the team or raise slippage early. |
+
+### Project Manager
+
+| Custom competency | Default sources | Role behaviour |
+| --- | --- | --- |
+| Planning & Scheduling | Forward Planning; Distilling Information; Optimizing Performance | The ability to turn a project's goal into a realistic plan of tasks, owners, dependencies and dates, and to keep that plan current so the team always knows what comes next. |
+| Stakeholder Management | Building Connections; Adaptive Communication; Persuading Others | The ability to identify everyone with an interest in a project, keep each of them informed in a way that suits them, and win their support for decisions, even when interests conflict. |
+| Team Leadership & Delegation | Providing Directions; Enabling Teamwork; Coaching Others | The ability to give a project team clear direction, delegate work to the right people with the authority to do it, and help team members grow while the project is delivered. |
+| Risk & Issue Management | Lateral Problem Solving; Taking Initiative; Trend Identification | The ability to spot what could go wrong on a project before it happens, act early to reduce it, and solve issues practically when they do arise. |
+| Delivery Ownership | Being Accountable; Quality Client Delivery; Following Directions | The tendency to take personal responsibility for delivering what was promised, to the agreed standard and process, and to see the project through handover until users are well supported. |
+| Leading Through Change & Pressure | Championing Change; Resilience Under Pressure; Strategic Agility | The ability to lead people through the changes a project brings, stay composed when scope, budget or deadlines come under pressure, and adjust the approach when the business's priorities move. |
+
+### Management Trainee
+
+| Custom competency | Default sources | Role behaviour |
+| --- | --- | --- |
+| Learning Agility | Active Learning; Self Development Focused; Operational Flexibility | The ability to learn quickly in unfamiliar settings, take lessons from each rotation into the next, and adjust to new teams, tasks and ways of working. |
+| Initiative & Ownership | Taking Initiative; Being Accountable; Championing Change | The tendency to act without waiting to be told, take responsibility for results, and propose improvements to how things are done, even as a newcomer to the team. |
+| Analytical Thinking | Distilling Information; Lateral Problem Solving; Trend Identification | The ability to make sense of data and information, separate what matters from what does not, and reach sound conclusions that others can act on. |
+| Commercial Awareness | Business Acumen; Strategic Agility; Trend Identification | The understanding of how the business makes money, what its customers and competitors are doing, and how day-to-day decisions affect cost, revenue and the company's longer-term direction. |
+| Influence & Collaboration | Persuading Others; Enabling Teamwork; Building Connections | The ability to build working relationships quickly across functions, work well in teams, and persuade others to support an idea without relying on formal authority. |
+| Leadership Potential | Providing Directions; Coaching Others; Resilience Under Pressure | The early signs of being able to lead others: giving clear direction, helping colleagues develop, and staying steady and constructive when the pressure is on. |
 
 ## Demo data
 
-- Seed `pizzahut-qsr-demo-v6` assigns the ten proxy candidates (four Pizza Cooks, three Service Crew, three Shift Managers) and simulates their scores, role norms, per-competency benchmarks and percentiles. The seed version was picked for a balanced spread of results (two Highly Suitable, five Suitable, three Needs Development).
+- The 15 candidates in `lib/reportMock.ts` have authored scores across the six roles. Their levels are three Highly Recommended, six Recommended, four Considered and two Not Recommended.
+- Seed `pt-example-demo-v1` simulates a separate 1,000-person reference population for each role, plus its per-competency benchmarks, role norms and percentiles. It does not assign candidates or generate their authored scores.
 - Scores, benchmarks, norms and percentiles are simulated demo data; custom scores are not calculated from default assessment results. Treat the composites as a proposal subject to review and calibration before assessment use.
-- Authored insights in `lib/demoInsights.ts` are tied to each candidate's profile signature, so any change to the seed, definitions or score generator fails the build until the insights are rewritten to match.
-- These labels describe role behaviour. They do not establish product knowledge, cooking skill, food-safety certification or cash-handling accuracy; practical tests, training records and observation supply that evidence.
+- Authored insights in `lib/demoInsights.ts` are validated against each candidate's role, seed and score profile. Missing or mismatched fixtures fail the build; score or benchmark changes must keep the fixture signatures in sync.
+- These labels describe role behaviour. They do not establish product knowledge, technical skill, financial accuracy or delivery experience; work samples, training records and observation supply that evidence.

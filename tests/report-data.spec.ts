@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { readFileSync } from "node:fs";
 import {
   buildReport,
   demoCandidates,
@@ -11,6 +12,7 @@ import {
 import { assertDemoInsightCoverage, getDemoInsightsForReport } from "../lib/demoInsights";
 import { getRoleDefinition, roleRegistry, type RoleName } from "../lib/roles";
 import { buildRoleReferenceData } from "../lib/roles/reference";
+import { reportFileName } from "../lib/utils";
 
 test("authored candidates give board, report and PDF readers the same complete reports", () => {
   expect(demoCandidates.length).toBeGreaterThan(0);
@@ -33,6 +35,8 @@ test("authored candidates give board, report and PDF readers the same complete r
     expect(new Set(ids).size).toBe(ids.length);
   }
   expect(getReportByCandidateId("unknown")).toBeUndefined();
+  expect(`${reportFileName(getReportByCandidateId("DEUS-2026-09611")!)}.pdf`)
+    .toBe("Agus Wibowo - Project Manager - 12 Oct 2026.pdf");
 });
 
 test("benchmarks and reference populations use only their role's seed", () => {
@@ -114,14 +118,19 @@ test("authored insight guards still reject seed, role and profile drift", () => 
 });
 
 test("the 15 candidates sit on the six generic positions with the planned level spread and shapes", () => {
-  expect(new Set(reportRoles)).toEqual(new Set([
+  const roles = [
     "Customer Service Officer",
     "Sales Executive",
     "Finance Officer",
     "Software Engineer",
     "Project Manager",
     "Management Trainee",
-  ]));
+  ];
+  expect(new Set(reportRoles)).toEqual(new Set(roles));
+  expect(Object.keys(roleRegistry).sort()).toEqual([...roles].sort());
+  for (const [name, role] of Object.entries(roleRegistry)) {
+    expect(role.seed, name).toBe("pt-example-demo-v1");
+  }
   expect(mockReports).toHaveLength(15);
   const spread = { "Highly Recommended": 0, Recommended: 0, Considered: 0, "Not Recommended": 0 };
   for (const report of mockReports) spread[report.suitabilityLabel] += 1;
@@ -135,6 +144,22 @@ test("the 15 candidates sit on the six generic positions with the planned level 
       expect(statuses.has("Above")).toBe(false);
     } else {
       expect(statuses.has("Above") && statuses.has("Below"), report.candidateName).toBe(true);
+    }
+  }
+});
+
+test("competency documentation mirrors all six role definitions", () => {
+  const doc = readFileSync("docs/example-competencies.md", "utf8");
+  const roles = Object.entries(roleRegistry);
+  expect([...doc.matchAll(/^### (.+)$/gm)].map((match) => match[1]))
+    .toEqual(roles.map(([name]) => name));
+  for (const [name, role] of roles) {
+    const section = doc.split(`### ${name}\n`)[1].split(/\n##/)[0];
+    expect(section.match(/^\| /gm)).toHaveLength(role.competencies.length + 2);
+    for (const competency of role.competencies) {
+      expect(section).toContain(
+        `| ${competency.name} | ${competency.sourceCompetencies.join("; ")} | ${competency.definition} |`,
+      );
     }
   }
 });

@@ -1,7 +1,7 @@
 // Offline (design.md §6): the board, every report opened on this device and its PDF preview are kept, with the
 // code, fonts and images they use, so they work without a connection. Pages always come from the network when
 // there is one; a page that was never kept gets offline.html.
-const PAGES = "hiring-pages-v1"; // board and opened reports, read by lib/offline.ts
+const PAGES = "hiring-pages-v2"; // board and opened reports, read by lib/offline.ts
 const ASSETS = "hiring-assets-v2";
 const STATIC = [
   "/offline.html",

@@ -1,7 +1,3 @@
-import * as serviceCrew from "./service-crew";
-import * as pizzaCook from "./pizza-cook";
-import * as shiftManager from "./shift-manager";
-import * as bankTeller from "./bank-teller";
 import * as customerServiceOfficer from "./customer-service-officer";
 import * as salesExecutive from "./sales-executive";
 import * as financeOfficer from "./finance-officer";
@@ -11,10 +7,6 @@ import * as managementTrainee from "./management-trainee";
 import type { RoleDefinition } from "./types";
 
 export const roleRegistry = {
-  "Service Crew": serviceCrew,
-  "Pizza Cook": pizzaCook,
-  "Shift Manager": shiftManager,
-  "Bank Teller": bankTeller,
   "Customer Service Officer": customerServiceOfficer,
   "Sales Executive": salesExecutive,
   "Finance Officer": financeOfficer,

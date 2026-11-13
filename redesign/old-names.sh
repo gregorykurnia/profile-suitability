@@ -18,10 +18,13 @@ STACK='html2canvas|html2canvas-pro|recharts|lucide-react|firebase-admin|@ai-sdk/
 # Old visible labels, in the exact casing the old UI used (case-sensitive: the design's own "Competency detail"
 # differs from the old "Competency Detail" only by case and is allowed).
 LABELS='Highly Suitable|Needs Development|Role Benchmark|Role Norm Comparison|Role Fit Risks|Individual Profile Suitability Report|Candidate Assessments|Total Assessed|Needs Attention|Position Applied|Overall Suitability|Competency Breakdown|Competency Detail|AI-Generated Insights|Key Strengths|Development Areas|Mitigations|What This Means in Practice|Reference No|Report Generated|Back to candidates|Norm Average|Candidate Score|Demo sample|Regenerate|Download PDF|Exporting'
+# Retired demo roles and seed, including file slugs and identifiers, in any casing.
+ROLES='Service[-_[:space:]]*Crew|Pizza[-_[:space:]]*Cook|Shift[-_[:space:]]*Manager|Bank[-_[:space:]]*Teller|pizzahut'
 
 hits=0
 grep "${GREP[@]}" -nwE "($NAMES|$STACK)" "${SCAN[@]}" && hits=1
 grep "${GREP[@]}" -nE "($LABELS)" "${SCAN[@]}" && hits=1
+grep "${GREP[@]}" -niE "($ROLES)" "${SCAN[@]}" && hits=1
 # Whole-word "Suitable" was the old name of the second level; the new levels never use it.
 grep "${GREP[@]}" -nwE 'Suitable' "${SCAN[@]}" && hits=1
 # Old files that must stay gone.

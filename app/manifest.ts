@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "PT Example hiring assessments",
     short_name: "Hiring",
-    description: "Psychometric assessment results for PT Example store candidates.",
+    description: "Psychometric assessment results for PT Example candidates across six roles.",
     start_url: "/",
     scope: "/",
     display: "standalone",

@@ -88,7 +88,7 @@ Phone < 760px, tablet 760–1179px, desktop ≥ 1180px, print A4 portrait.
 | **Candidate row** | Name, role and assessment date, score. Hover: shade. Tags: "Opened" (seen this session; offline, it means available), "Needs a connection" (offline and not opened: greyed, still opens a message). Focus returns to this row when coming back from the report. |
 | **List view** | Table: candidate and reference, role, level, score, date. Whole row opens the report. 50 rows per page, then "Show 50 more" with "Showing 50 of 240". On phones each row folds into two lines. |
 | **No matches** | Says what was searched or filtered, and offers the one-step undo as the primary button ("Clear search", "Show all levels", "Show all roles"; "Clear search" and "Clear filters" when both). |
-| **Queue bar** (report) | "All candidates" back link (returns to the board with the same filters, order, view, open lanes and scroll position), the context ("Shift Manager, Recommended, highest score first"), position ("4 of 10") and previous / next with first names. At either end the button is shown disabled. Opened from a link that doesn't fit the saved filters: steps through everyone, newest first. |
+| **Queue bar** (report) | "All candidates" back link (returns to the board with the same filters, order, view, open lanes and scroll position), the context ("Project Manager, Recommended, highest score first"), position ("4 of 10") and previous / next with first names. At either end the button is shown disabled. Opened from a link that doesn't fit the saved filters: steps through everyone, newest first. |
 | **Verdict band** | Name, role, reference; facts (client company, HR contact only when there is one, assessed, report produced); score /100; level chip; percentile with the norm group spelt out; difference from the role average ("+8 above", "Level with", "−6 below"); level scale with four segments sized to the score ranges and a pin at the score. Phone: facts move under the scale, and the scale shows only the active level's name. |
 | **Level mark** | Four rising bars, filled up to the level (4 = Highly Recommended). Always next to the level's name, never alone. |
 | **"In short" lead** | Run-in bold "In short." then the summary, at lead size. Demo notice under it. |
@@ -116,7 +116,7 @@ Phone < 760px, tablet 760–1179px, desktop ≥ 1180px, print A4 portrait.
 | A4 PDF (print) | ✓ | — | — | — | — | — | — | headings never orphaned, rows never split |
 
 ## 5. The A4 document (S1, S2, S5)
-- **Named** "Rizky Aditya Pratama - Shift Manager - 15 Oct 2026.pdf" (candidate, role, report date).
+- **Named** "Rizky Aditya Pratama - Project Manager - 15 Oct 2026.pdf" (candidate, role, report date).
 - **Page:** A4 portrait, 12mm top, 16mm sides, 10mm bottom. Running head from page 2 (name, role, reference; brand on the right). Foot on every page: "Confidential, for internal HR use only" and "Page 2 of 4".
 - **Page 1:** brand line with a blue rule and room for the mark, "Hiring assessment report"; name 26pt; role and reference; facts; score 76pt in brand blue with level, percentile sentence and difference from the average; the level scale with score ranges.
 - **Then:** In short (11pt lead + demo notice) → competency table (name, score / expected, percentile, diverging bar, difference) → competency detail, one block each (figures, what it measures, what a score like this means, on the job) → Does well → Where they fall short → Risks and how to reduce them → About this report (demo data, what the numbers mean, confidentiality).
@@ -187,7 +187,7 @@ Prototype routes: board `#/`, report `#/c/PH-2026-0147`, PDF preview `#/c/PH-202
 | State | Where |
 |---|---|
 | Nothing yet | `?empty`: band "No candidates assessed yet", levels explained, no counts or zeros, no tools |
-| No matches | Search "zzz", or Role Shift Manager + Level Highly Recommended: message with one-step undo |
+| No matches | Search "zzz", or Role Project Manager + Level Highly Recommended: message with one-step undo |
 | Loading | `?slow`: board and report skeletons with a status message; Save PDF spinner |
 | Saving the PDF | Save PDF: saving (blocked double start), done (toast), `?pdf=fail`: failed with "Try again" |
 | No connection | `?offline`, see A3 |

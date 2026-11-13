@@ -26,7 +26,7 @@ export function shortName(name: string): string {
   return parts.length > 2 ? parts.slice(0, 2).join(" ") : parts[0];
 }
 
-// "Rizky Aditya Pratama - Shift Manager - 15 Oct 2026": candidate, role, report date (design.md §5), without ".pdf".
+// "Rizky Aditya Pratama - Project Manager - 15 Oct 2026": candidate, role, report date (design.md §5), without ".pdf".
 export function reportFileName(report: { candidateName: string; positionApplied: string; reportGeneratedDate: string }): string {
   return `${report.candidateName} - ${report.positionApplied} - ${formatDate(report.reportGeneratedDate)}`;
 }

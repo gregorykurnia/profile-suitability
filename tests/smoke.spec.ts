@@ -1,5 +1,4 @@
 import { expect, test as base, type Page } from "@playwright/test";
-import { demoCandidates } from "../lib/reportMock";
 
 // Behaviour smoke test. B0 wrote it against the old UI; B5 rewrote its steps for the new one.
 // The behaviours are the same as in B0: the list loads; search, filter and order work; a report opens;
@@ -7,7 +6,7 @@ import { demoCandidates } from "../lib/reportMock";
 
 const KNOWN_ID = "DEUS-2026-09611";
 const KNOWN_NAME = "Agus Wibowo";
-const TOTAL = demoCandidates.length;
+const TOTAL = 15;
 
 // Every test also fails on a console error or an uncaught error in the page (a React key clash, a failed hydration).
 const test = base.extend<{ consoleGuard: void; ignoredErrors: RegExp[] }>({
@@ -190,7 +189,7 @@ test.describe("report", () => {
       page.waitForEvent("download", { timeout: 60_000 }),
       page.getByRole("button", { name: "Save PDF" }).click(),
     ]);
-    expect(download.suggestedFilename()).toBe(`${KNOWN_NAME} - Shift Manager - 12 Oct 2026.pdf`);
+    expect(download.suggestedFilename()).toBe(`${KNOWN_NAME} - Project Manager - 12 Oct 2026.pdf`);
     const path = await download.path();
     const { statSync, readFileSync } = await import("node:fs");
     expect(statSync(path).size).toBeGreaterThan(5_000);

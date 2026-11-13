@@ -2,7 +2,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 
 // Offline (A3, design.md §6). The service worker (public/sw.js) keeps the board and every report opened on this
 // device, with its PDF preview, in the cache below; this side asks it to, and reads what it has kept.
-export const PAGES_CACHE = "hiring-pages-v1"; // same name in public/sw.js
+export const PAGES_CACHE = "hiring-pages-v2"; // same name in public/sw.js
 const SEEN_KEY = "reports:seen";
 const KEPT_EVENT = "app:kept";
 

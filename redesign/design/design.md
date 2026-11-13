@@ -104,6 +104,8 @@ Phone < 760px, tablet 760–1179px, desktop ≥ 1180px, print A4 portrait.
 | **Install offer** | Desktop: "Install app" in the top bar. Phone: a card at the bottom of the board, "Keep it one tap away", with Install / Not now. Only shown when the browser offers installation; dismissed for the session. iPhone (no install prompt): the card says "Tap Share, then Add to Home Screen" instead (build note). |
 | **Buttons** | Primary (ink), secondary (outlined), ghost, on-dark (white). States: hover, focus ring, disabled (grey fill), busy (spinner). Minimum height 44px. |
 
+Phone filter rails show a fading edge and chevron only where filters remain off screen (task 1.6 fresh-eyes check).
+
 ## 4. Screens × states
 
 | Screen | Normal | Loading | Nothing yet | No matches | Offline | Saving PDF | Unknown | Stress |

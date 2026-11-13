@@ -93,14 +93,14 @@ export default function VerdictBand({
             <p>
               <Figure>
                 {percentile}
-                <sup className="relative top-[3px] ml-0.5 align-top text-[15px] font-bold [font-stretch:100%]">
+                <sup className="relative top-[3px] align-top text-[15px] font-bold [font-stretch:100%]">
                   {ordinalSuffix(percentile)}
                 </sup>
               </Figure>
               <span className="mt-[3px] block text-[12.5px] min-[760px]:text-(length:--t-sm)">
                 percentile: outscores {percentile}% of
               </span>
-              <span className="mt-px block text-[12.5px] leading-[1.35] font-[650] [overflow-wrap:anywhere] min-[760px]:text-(length:--t-sm)">{normGroup}</span>
+              <span className="mt-px block text-[12.5px] leading-[1.35] font-[650] [overflow-wrap:anywhere] min-[760px]:text-(length:--t-sm)">{normGroup.replace(/^Simulated /, "simulated ")}</span>
             </p>
             <p>
               <Figure>{diff === 0 ? "Level" : signed(diff)}</Figure>

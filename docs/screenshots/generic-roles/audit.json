@@ -1,9 +1,17 @@
 {
-  "serverPid": 3293554,
+  "serverPid": 3311213,
   "serverStopped": true,
   "cases": [
     {
       "name": "board-1440",
+      "passed": true
+    },
+    {
+      "name": "board-customer-service-officer-1440",
+      "passed": true
+    },
+    {
+      "name": "board-recommended-1440",
       "passed": true
     },
     {
@@ -43,11 +51,31 @@
       "passed": true
     },
     {
+      "name": "rina-pdf-1440",
+      "passed": true
+    },
+    {
+      "name": "intan-pdf-1440",
+      "passed": true
+    },
+    {
+      "name": "dimas-pdf-1440",
+      "passed": true
+    },
+    {
       "name": "console-1440",
       "passed": true
     },
     {
       "name": "board-390",
+      "passed": true
+    },
+    {
+      "name": "board-customer-service-officer-390",
+      "passed": true
+    },
+    {
+      "name": "board-recommended-390",
       "passed": true
     },
     {
@@ -84,6 +112,18 @@
     },
     {
       "name": "hendra-pdf-390",
+      "passed": true
+    },
+    {
+      "name": "rina-pdf-390",
+      "passed": true
+    },
+    {
+      "name": "intan-pdf-390",
+      "passed": true
+    },
+    {
+      "name": "dimas-pdf-390",
       "passed": true
     },
     {

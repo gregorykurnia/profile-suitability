@@ -80,6 +80,21 @@ test.describe("report list", () => {
     await expect(page).not.toHaveURL(/[?&]q=/);
   });
 
+  test("phone filters show where more options can be scrolled into view", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const rail = page.locator("[data-filter-rail]");
+    const right = page.locator('[data-filter-cue="right"]');
+    const left = page.locator('[data-filter-cue="left"]');
+    await expect(right).toBeVisible();
+    await rail.evaluate((el) => { el.scrollLeft = el.scrollWidth; });
+    await expect(right).toBeHidden();
+    await expect(left).toBeVisible();
+    await expect(page.getByRole("combobox", { name: "Order", exact: true })).toBeInViewport({ ratio: 1 });
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await expect(left).toBeHidden();
+    await expect(right).toBeHidden();
+  });
+
   test("phone level labels fit inside their summary buttons", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     const labels = page.getByRole("group", { name: "Show one level" }).locator("button > span");
@@ -163,11 +178,26 @@ test.describe("report list", () => {
 });
 
 test.describe("report", () => {
+  test("percentile suffixes join the number and comparison sentences use lower case", async ({ page }) => {
+    await page.goto("/report/DEUS-2026-09615");
+    const band = page.locator('section[aria-labelledby="verdict-name"]');
+    const suffix = band.locator("sup");
+    const gap = await suffix.evaluate((el) => {
+      const number = document.createRange();
+      number.selectNode(el.previousSibling!);
+      return el.getBoundingClientRect().left - number.getBoundingClientRect().right;
+    });
+    expect(gap).toBeLessThanOrEqual(0.5);
+    await expect(band.getByText(/^simulated Indonesian/)).toBeVisible();
+  });
+
   test("Hendra PDF preview fits phone gutters after a direct link and resize", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/report/DEUS-2026-09615/preview");
     const document = page.locator(".doc-onscreen[data-a4='ready']");
     await expect(document).toBeVisible();
+    await expect(document).not.toContainText("of Simulated");
+    await expect(document).not.toContainText("with Simulated");
     for (const width of [390, 1440, 390]) {
       await page.setViewportSize({ width, height: 844 });
       await expect.poll(() => document.evaluate((el) => {

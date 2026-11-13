@@ -1,9 +1,9 @@
 // Task 1.6: repeatable local-only gallery and layout checks. Requires an existing
-// production build, Xvfb and ImageMagick (native select popups are separate windows).
+// production build, Xvfb, ImageMagick and pdftotext (native popups are separate windows).
 // Run: xvfb-run -a -s '-screen 0 1600x1400x24' node tests/generic-roles-look.mjs
 import assert from "node:assert/strict";
 import { spawn, execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, openSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, openSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { once } from "node:events";
 import { chromium } from "@playwright/test";
 
@@ -81,6 +81,8 @@ async function audit(page, name) {
 }
 
 async function screenshot(page, name, fullPage = true) {
+  await page.mouse.move(0, 0);
+  assert.equal(await page.locator("main [data-ref]:hover").count(), 0, "capture has no hovered candidate");
   await page.screenshot({ path: `${output}/${name}.png`, fullPage, animations: "disabled" });
   await audit(page, name);
 }
@@ -94,12 +96,15 @@ async function nativeSelectScreenshot(page, name) {
     x: screenX,
     y: screenY + outerHeight - innerHeight + 2,
     width: innerWidth,
-    height: innerHeight,
+    height: innerHeight - 2, // Exclude Xvfb's two-pixel bottom window border.
   }));
   execFileSync("import", ["-window", "root", "-crop",
     `${bounds.width}x${bounds.height}+${Math.round(bounds.x)}+${Math.round(bounds.y)}`,
     "+repage", `${output}/${name}.png`], { timeout: 10_000 });
   await page.keyboard.press("Escape");
+  const lastRow = execFileSync("convert", [`${output}/${name}.png`, "-crop",
+    `${bounds.width}x1+0+${bounds.height - 1}`, "-depth", "8", "rgb:-"]);
+  assert(lastRow.some((value) => value !== 0), "capture excludes the black window border");
 }
 
 const serverLog = openSync("/tmp/profile-generic-look-server.log", "w");
@@ -147,9 +152,15 @@ try {
         const count = Number((await lane.locator("h2 em").innerText()).match(/\d+/)[0]);
         assert.equal(await lane.locator("[data-more]").count(), count > 6 ? 1 : 0);
       }
+      // Exercise cleanup of a real hover before recording the neutral overview.
+      await page.locator("main [data-ref]").first().hover();
       await screenshot(page, `board-by-level-${width}`);
       for (const [edge, lane] of [["first", lanes.first()], ["last", lanes.last()]]) {
-        await lane.screenshot({ path: `${output}/board-lane-${edge}-${width}.png` });
+        await lane.scrollIntoViewIfNeeded();
+        const box = await lane.boundingBox();
+        await page.screenshot({ path: `${output}/board-lane-${edge}-${width}.png`,
+          clip: { x: box.x - 8, y: box.y - 8, width: box.width + 16, height: box.height + 16 },
+          animations: "disabled" });
       }
       await page.getByRole("button", { name: "List", exact: true }).click();
       await page.waitForURL(/view=list/);
@@ -161,6 +172,18 @@ try {
       assert.equal(options[0], "All");
       assert.deepEqual(options.slice(1).sort(), roles.map(([role]) => role).sort());
     });
+    if (selected.has("board")) {
+      for (const [name, query, count] of [
+        ["customer-service-officer", "role=customer-service-officer", 3],
+        ["recommended", "level=3", 6],
+      ]) await record(`board-${name}-${width}`, async () => {
+        await page.goto(`${origin}/?${query}`);
+        await settled(page);
+        assert.equal(await page.locator("main [data-ref]").count(), count);
+        if (width === 390) await page.locator('[data-filter-cue="right"]').waitFor({ state: "visible" });
+        await screenshot(page, `board-${name}-${width}`);
+      });
+    }
     if (selected.has("menus")) await record(`role-menu-${width}`, async () => {
       await page.goto(origin);
       await settled(page);
@@ -179,7 +202,14 @@ try {
         if (ref === "09615") await page.reload();
         await settled(page);
         assert.equal(await page.locator("h1").innerText(), name);
-        assert((await page.locator("section[aria-labelledby='verdict-name']").innerText()).includes(role));
+        const band = page.locator("section[aria-labelledby='verdict-name']");
+        assert((await band.innerText()).includes(role));
+        assert((await band.innerText()).includes("simulated Indonesian"));
+        assert(await band.locator("sup").evaluate((el) => {
+          const number = document.createRange();
+          number.selectNode(el.previousSibling);
+          return el.getBoundingClientRect().left - number.getBoundingClientRect().right <= 0.5;
+        }), "ordinal suffix joins the percentile number");
         const chart = page.locator("section[aria-labelledby='competencies-heading']");
         assert((await chart.innerText()).includes(`what a ${role} needs`));
         assert.equal(await chart.locator("button[aria-controls^='detail-']").count(), 6);
@@ -187,7 +217,7 @@ try {
         if (ref === "09622") assert((await chart.innerText()).includes("No strengths."));
         const queue = page.getByRole("navigation", { name: "Candidates", exact: true });
         assert((await queue.textContent()).includes(role));
-        if (!only || !existsSync(`${output}/report-${stem}.png`)) await screenshot(page, `report-${stem}`, false);
+        await screenshot(page, `report-${stem}`, false);
         await chart.locator("button[aria-controls^='detail-']").first().click();
         const detail = chart.locator("[id^='detail-']:not([hidden])");
         await detail.waitFor({ state: "visible" });
@@ -198,23 +228,58 @@ try {
       });
     }
 
-    if (selected.has("pdf")) await record(`hendra-pdf-${width}`, async () => {
-      await page.goto(`${origin}/report/DEUS-2026-09615/preview`);
+    if (selected.has("pdf")) for (const [name, ref, role] of [
+      ["hendra", "09615", "Customer Service Officer"], ["rina", "09612", "Sales Executive"],
+      ["intan", "09614", "Finance Officer"], ["dimas", "09613", "Software Engineer"],
+    ]) await record(`${name}-pdf-${width}`, async () => {
+      await page.goto(`${origin}/report/DEUS-2026-${ref}/preview`);
       await settled(page);
       await page.locator(".doc-onscreen[data-a4='ready']").waitFor();
-      await screenshot(page, `hendra-pdf-${width}`, false);
+      assert(!/\b(?:of|with)\s+Simulated\b/.test(await page.locator(".doc-onscreen").innerText()));
+      await screenshot(page, `${name}-pdf-${width}`, false);
       const heads = page.locator(".doc-onscreen .doc-head");
       assert(await heads.count() > 0, "multi-page running heads exist");
       for (const head of await heads.all()) {
-        assert((await head.innerText()).includes("Customer Service Officer"));
+        assert((await head.innerText()).includes(role));
         assert(await head.evaluate((el) => {
           const [left, right] = el.children;
           return left.getBoundingClientRect().right + 1 <= right.getBoundingClientRect().left &&
             left.scrollWidth <= left.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1;
         }), "running head stays on one line and clear of the brand");
       }
+      await page.locator(".doc-onscreen .doc-end").scrollIntoViewIfNeeded();
+      await screenshot(page, `${name}-pdf-about-${width}`, false);
+      if (name !== "hendra") return;
       await heads.first().evaluate((el) => scrollTo(0, el.getBoundingClientRect().top + scrollY - 85));
       await screenshot(page, `hendra-pdf-running-head-${width}`, false);
+      if (width === 390) {
+        const pending = page.waitForEvent("download");
+        await page.getByRole("button", { name: "Save PDF", exact: true }).click();
+        const download = await pending;
+        const pdfFile = "/tmp/profile-hendra-fresh-eyes.pdf";
+        await download.saveAs(pdfFile);
+        try {
+          const text = execFileSync("pdftotext", [pdfFile, "-"], { encoding: "utf8" });
+          for (const phrase of ["Customer Service Officer", "Confidential", "Competency detail"]) {
+            assert(text.includes(phrase), `searchable PDF includes ${phrase}`);
+          }
+          assert(!/\b(?:of|with)\s+Simulated\b/.test(text));
+        } finally { unlinkSync(pdfFile); }
+        await page.reload();
+        await settled(page);
+        await page.locator(".doc-onscreen[data-a4='ready']").waitFor();
+        await page.locator(".doc-onscreen .doc-det").first().evaluate((el) =>
+          scrollTo(0, el.getBoundingClientRect().top + scrollY - 80));
+        const cdp = await context.newCDPSession(page);
+        try {
+          await cdp.send("Emulation.setPageScaleFactor", { pageScaleFactor: 3 });
+          assert.equal(await page.evaluate(() => visualViewport.scale), 3);
+          await page.screenshot({ path: `${output}/hendra-pdf-zoomed-390.png`, animations: "disabled" });
+        } finally {
+          await cdp.send("Emulation.setPageScaleFactor", { pageScaleFactor: 1 });
+          await cdp.detach();
+        }
+      }
     });
     await record(`console-${width}`, async () => assert.deepEqual(consoleErrors, []));
     await context.close();

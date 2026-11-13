@@ -83,7 +83,7 @@ function blocksFor(r: SuitabilityReport): Block[] {
                 {r.normativePercentile}
                 {ordinalSuffix(r.normativePercentile)} percentile.
               </b>{" "}
-              Outscores {r.normativePercentile}% of {r.normGroupDescription}.
+              Outscores {r.normativePercentile}% of {r.normGroupDescription.replace(/^Simulated /, "simulated ")}.
             </p>
             <p>
               <b>{diff === 0 ? "Level with" : `${Math.abs(diff)} points ${diff > 0 ? "above" : "below"}`}</b> the role
@@ -291,7 +291,7 @@ function blocksFor(r: SuitabilityReport): Block[] {
           <p>
             <b>About this report.</b> The written insight is based on simulated demo data and is not a real assessment
             result. Scores and benchmarks run from 0 to 100; percentiles compare the candidate with{" "}
-            {r.normGroupDescription}.
+            {r.normGroupDescription.replace(/^Simulated /, "simulated ")}.
           </p>
           <p>
             <b>Confidential.</b> For internal HR use only. Don&apos;t forward outside the hiring team.

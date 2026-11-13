@@ -1,5 +1,5 @@
-import type { RefObject } from "react";
-import { ChevronIcon, SearchIcon } from "@/components/shell/icons";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import { BackIcon, ChevronIcon, NextIcon, SearchIcon } from "@/components/shell/icons";
 import { LEVELS } from "@/lib/levels";
 import { DEFAULT_QUERY, ORDERS, roleSlug, type BoardQuery } from "@/lib/boardQuery";
 
@@ -18,6 +18,27 @@ export default function BoardTools({
   searchRef: RefObject<HTMLInputElement | null>;
   onChange: (patch: Partial<BoardQuery>) => void;
 }) {
+  const filterRail = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ left: false, right: false });
+
+  useEffect(() => {
+    const rail = filterRail.current!;
+    const update = () => {
+      const left = rail.scrollLeft > 1;
+      const right = rail.scrollWidth - rail.clientWidth - rail.scrollLeft > 1;
+      setEdges((current) => current.left === left && current.right === right ? current : { left, right });
+    };
+    const observer = new ResizeObserver(update);
+    for (const element of [rail, ...rail.children]) observer.observe(element);
+    rail.addEventListener("scroll", update, { passive: true });
+    const frame = requestAnimationFrame(update);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      rail.removeEventListener("scroll", update);
+    };
+  }, []);
+
   return (
     <div className="mx-auto flex max-w-(--max) flex-wrap items-center gap-2 px-(--gutter) pt-4 pb-1 min-[760px]:gap-2.5 min-[760px]:pt-[22px] min-[760px]:pb-1.5">
       <label className="group order-first flex h-[46px] w-full items-center gap-2 rounded-full bg-shade pr-2 pl-4 text-ink-3 focus-within:outline-3 focus-within:outline-offset-2 focus-within:outline-ink min-[760px]:relative min-[760px]:order-none min-[760px]:h-[42px] min-[760px]:w-[340px] min-[760px]:before:absolute min-[760px]:before:inset-x-0 min-[760px]:before:-inset-y-px min-[760px]:before:content-['']">
@@ -42,7 +63,8 @@ export default function BoardTools({
         </kbd>
       </label>
 
-      <div className="mx-[calc(var(--gutter)*-1)] flex basis-full gap-2 overflow-x-auto px-(--gutter) py-0.5 [scrollbar-width:none] min-[760px]:mx-0 min-[760px]:basis-auto min-[760px]:overflow-visible min-[760px]:p-0">
+      <div className="relative mx-[calc(var(--gutter)*-1)] min-w-0 basis-full min-[760px]:mx-0 min-[760px]:basis-auto">
+        <div ref={filterRail} data-filter-rail role="group" aria-label="Candidate filters" className="flex gap-2 overflow-x-auto px-(--gutter) py-0.5 [scrollbar-width:none] min-[760px]:overflow-visible min-[760px]:p-0">
         <Pill
           label="Role"
           value={query.role}
@@ -64,6 +86,17 @@ export default function BoardTools({
           options={Object.entries(ORDERS)}
           onChange={(order) => onChange({ order: order as BoardQuery["order"] })}
         />
+        </div>
+        {edges.left && (
+          <span data-filter-cue="left" aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex w-10 items-center bg-linear-to-r from-paper from-35% to-transparent pl-1.5 min-[760px]:hidden">
+            <BackIcon className="size-4 text-ink-2" />
+          </span>
+        )}
+        {edges.right && (
+          <span data-filter-cue="right" aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 flex w-10 items-center justify-end bg-linear-to-l from-paper from-35% to-transparent pr-1.5 min-[760px]:hidden">
+            <NextIcon className="size-4 text-ink-2" />
+          </span>
+        )}
       </div>
 
       <div role="group" aria-label="View" className="inline-flex rounded-full bg-shade p-1 min-[760px]:ml-auto">

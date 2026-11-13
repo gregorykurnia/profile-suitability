@@ -1,5 +1,6 @@
 # Changelog
 
+- 2026-11-13 · Fresh-eyes follow-up: made phone filter scrolling visible, tightened percentile suffixes and sentence casing, removed screenshot hover/window-border artifacts, and added shared-view and live PDF zoom evidence.
 - 2026-11-13 · Checked all six generic roles at desktop and phone widths; saved the screenshot gallery and fixed overflowing phone level labels and the PDF preview's missing right gutter, with regressions.
 - 2026-11-13 · Retired the four old demo roles and seed; documented the six generic positions and 15 candidates, refreshed app descriptions and PDF examples, updated smoke checks and old-name guards, and cleared obsolete cached reports.
 - 2026-10-23 · Replaced this repo with a neutral demo copy of a client hiring-assessments app: "PT Example" brand with a placeholder "PT" mark and icons, blue `#1D4ED8` brand colour, cool grey neutrals. Design-studio process files left out; the earlier Adhimix Precast app is in git history before this commit.

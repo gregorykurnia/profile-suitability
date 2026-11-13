@@ -4,6 +4,8 @@ import * as shiftManager from "./shift-manager";
 import * as bankTeller from "./bank-teller";
 import * as customerServiceOfficer from "./customer-service-officer";
 import * as salesExecutive from "./sales-executive";
+import * as financeOfficer from "./finance-officer";
+import * as softwareEngineer from "./software-engineer";
 import type { RoleDefinition } from "./types";
 
 export const roleRegistry = {
@@ -13,6 +15,8 @@ export const roleRegistry = {
   "Bank Teller": bankTeller,
   "Customer Service Officer": customerServiceOfficer,
   "Sales Executive": salesExecutive,
+  "Finance Officer": financeOfficer,
+  "Software Engineer": softwareEngineer,
 } satisfies Record<string, RoleDefinition>;
 
 export type RoleName = keyof typeof roleRegistry;

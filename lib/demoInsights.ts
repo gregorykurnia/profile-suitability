@@ -90,72 +90,76 @@ const fixtures: Record<string, DemoInsightFixture> = {
   },
   "DEUS-2026-09613": {
     candidateId: "DEUS-2026-09613",
-    role: "Service Crew",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:57a93897",
+    role: "Software Engineer",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:6660f78f",
     evidenceNote:
-      "order-accuracy-payment-handling 65/68 is the relative foundation, then guest-recovery-escalation 59/72; menu-knowledge-suggestive-selling 35/78 and front-kitchen-coordination 38/74 are the clearest gaps. All six are below target. Overall 50, Considered.",
+      "technical-problem-solving 86/81 and continuous-learning 82/72 exceed target; code-quality-ownership 78/80 and adapting-changing-requirements 66/68 are at target; collaborative-delivery 70/81 and planning-estimation 68/78 are the clearest gaps. Overall 75, Recommended.",
     insights: {
       executiveSummary:
-        "Dimas's relative foundation is following the order and payment routine, while most other parts of their service profile point to substantial support needs. They may work best on a clearly defined task such as counter ordering, with close guidance when they need to recommend products, coordinate with the kitchen, or cope with a peak. Structured onboarding, role-played guest conversations, and a buddy during busy shifts could help them build a more complete service base.",
+        "Dimas brings strong technical depth and a real appetite for new skills, backed by a dependable standard of tested code. They are likely to find the cause of difficult defects and pick up unfamiliar tools quickly, but may work too much on their own and give estimates that prove optimistic. Regular pairing, short daily check-ins, and estimating together with the team lead could help them turn individual strength into reliable team delivery.",
       keyStrengths: [
-        "A clear order routine gives them a useful starting point for capturing details and processing payment correctly.",
-        "With a read-back habit, they may be able to confirm key details before an order is sent to the kitchen.",
-        "When a guest concern is simple and clearly stated, they can listen and pass it to the shift manager with the essential facts.",
-        "A defined station and a clear task list may help them stay productive while they build wider service skills.",
+        "They are likely to break difficult problems into parts and find the real cause rather than patching symptoms.",
+        "New languages, frameworks, and parts of the system are likely to be learned quickly when the work needs them.",
+        "They can be expected to bring well-judged ideas about tools and practices back to the team.",
+        "Their code is likely to be tested and to follow the team's standards for routine work.",
       ],
       developmentAreas: [
-        "They may need significant coaching to explain menu options and suggest bundles or add-ons that suit the guest.",
-        "Updates to the kitchen and delivery riders may be incomplete, leaving colleagues working from different information.",
-        "Warm greetings and check-backs with guests may need deliberate practice so requests are not left open.",
-        "They may become flustered during peaks and need help deciding which task to handle first.",
+        "They may spend too long on a task alone before mentioning that they are blocked.",
+        "Technical trade-offs may be explained in terms that product managers and testers find hard to follow.",
+        "Estimates may leave out testing time or dependencies on other teams, so delays surface late in the sprint.",
+        "Larger changes in technical direction may take them some time to accept.",
       ],
       roleFitRisks: [
         {
-          risk: "During a lunch or dinner peak, open guest requests and unclear kitchen updates could combine to slow service.",
-          mitigation: "Start them on quieter shifts with a buddy, and introduce peaks gradually with a clear task sequence.",
+          risk: "A feature that depends on another team could slip without warning because the dependency was not planned for.",
+          mitigation: "Review estimates and dependencies with the team lead at sprint planning, and agree a mid-sprint check-in.",
         },
         {
-          risk: "Limited product knowledge could lead to missed promotions or orders that do not match what the guest wanted.",
-          mitigation: "Provide promotion-sheet training and role-play common recommendation scenarios before they work the counter alone.",
+          risk: "Working alone on hard problems could leave teammates unaware of progress or blockers.",
+          mitigation: "Pair them with a teammate on complex tasks and ask for a short daily update in stand-up.",
         },
         {
-          risk: "A rider waiting for a changed order could leave with incorrect information.",
-          mitigation: "Use a standard call-out for order changes and confirm it with the make-line before updating the rider.",
+          risk: "Product managers could lose confidence if technical delays are hard to understand.",
+          mitigation: "Practise plain-language updates that say what changed, why, and what it means for the release.",
         },
       ],
     },
   },
   "DEUS-2026-09614": {
     candidateId: "DEUS-2026-09614",
-    role: "Shift Manager",
-    seedVersion: DEMO_SEED_VERSION,
-    profileSignature: "fnv1a:3144c86d",
+    role: "Finance Officer",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:3a0e7b03",
     evidenceNote:
-      "operational-standards-compliance 91/71, composure-decision-making 89/79, and crew-coaching-development 86/69 lead; guest-experience-service-recovery 76/73 and shift-performance-cost-control 71/68 exceed target; shift-leadership-crew-deployment 71/79 is the one gap. Overall 81, Recommended.",
+      "compliance-control-discipline 88/76, accuracy-attention-to-detail 84/70 and deadline-close-management 78/70 exceed target; analytical-reporting 70/72 and reconciliation-problem-investigation 74/72 are at target; business-partnering 66/82 is the clearest gap. Overall 77, Recommended.",
     insights: {
       executiveSummary:
-        "Intan's profile shows strong standards discipline, composure under pressure, and a natural coaching style, with sound guest and commercial foundations. They are likely to run a controlled, audit-ready shift and stay calm when problems arise. A more deliberate approach to pre-shift planning and early redeployment could help them lead peak periods as confidently as they handle routine ones.",
+        "Intan shows clear strengths in accurate, well-controlled work and in planning the month-end close, with a dependable approach to reports and reconciliations. They are likely to deliver clean figures on time and keep records ready for audit, but may find it harder to explain the numbers to colleagues outside finance or advise budget holders. Joint budget reviews with the supervisor and plain-language report templates could help them become a stronger partner to the business.",
       keyStrengths: [
-        "They are likely to keep food safety, cash, and checklist routines consistent even when the shift is under pressure.",
-        "When several problems arise at once, they can stay calm and choose a practical course of action.",
-        "They are likely to coach crew in the moment and adapt their explanation to how each person learns.",
-        "They appear able to resolve routine escalated complaints fairly and keep an eye on key shift indicators.",
+        "Entries and payments are likely to be right the first time, with small inconsistencies caught before review.",
+        "They are likely to follow approval limits and policies consistently, even when a deadline is close.",
+        "Close tasks are likely to be planned days ahead, with late inputs chased before they hold up the team.",
+        "Routine reconciliations and standard reports are likely to be complete and on time.",
       ],
       developmentAreas: [
-        "Turning the sales forecast into a clear deployment plan before the shift starts is their main area to strengthen.",
-        "They may move crew between stations later than ideal when delivery orders surge or someone is absent.",
-        "Using guest feedback themes to set service priorities in pre-shift briefings could lift their guest leadership further.",
-        "Interpreting less familiar performance trends, such as a change in channel mix, may still benefit from manager input.",
+        "Explanations to department heads may rely on account codes rather than plain descriptions of what was spent and why.",
+        "They may respond to formal requests from other teams rather than building working relationships ahead of need.",
+        "Slower trends that build over several months may need a prompt before they are raised.",
+        "Differences that span several months or come from a system error may still need escalation.",
       ],
       roleFitRisks: [
         {
-          risk: "A late reaction to a demand surge could leave one station overloaded during a peak.",
-          mitigation: "Use a pre-shift planning template and agree redeployment triggers, such as queue length or order-screen backlog.",
+          risk: "Budget holders could find their reports correct but hard to act on.",
+          mitigation: "Review the first few monthly reports together and add a short plain-language commentary to each.",
         },
         {
-          risk: "Strong personal control of standards could take their attention away from the floor during the busiest periods.",
-          mitigation: "Delegate routine checks to a trained crew leader during peaks and verify them afterwards.",
+          risk: "A firm stance on controls could be read as unhelpful by colleagues under time pressure.",
+          mitigation: "Coach them to explain the reason behind each control and offer the quickest compliant route.",
+        },
+        {
+          risk: "Limited contact with other departments could mean early warnings about cost changes are missed.",
+          mitigation: "Join the supervisor in monthly meetings with the departments they support.",
         },
       ],
     },
@@ -444,6 +448,82 @@ const fixtures: Record<string, DemoInsightFixture> = {
         {
           risk: "A series of lost deals could lower their confidence and activity further.",
           mitigation: "Review each lost deal together, focus feedback on activities within their control, and pair them with an experienced colleague.",
+        },
+      ],
+    },
+  },
+  "DEUS-2026-09623": {
+    candidateId: "DEUS-2026-09623",
+    role: "Finance Officer",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:cddd04a6",
+    evidenceNote:
+      "reconciliation-problem-investigation 78/72 exceeds target; analytical-reporting 70/72 is at target; accuracy-attention-to-detail 52/70, compliance-control-discipline 50/76, deadline-close-management 48/70 and business-partnering 62/82 are under target, with close and compliance the clearest gaps. Overall 60, Considered.",
+    insights: {
+      executiveSummary:
+        "Reza's clearest strength is digging into differences until the real cause is found, supported by a sound grasp of what the figures show. They may bring useful curiosity to reconciliations and variance questions, but are likely to need close support with accuracy, approval rules, and fixed deadlines. A structured close checklist, review of their entries during the first months, and guidance on controls could help them build a reliable base for the role.",
+      keyStrengths: [
+        "They are likely to trace differences to their source rather than carry them forward or force an account to balance.",
+        "When a reconciliation will not clear, they can be expected to look at several sources of evidence and take the initiative to fix the cause.",
+        "Standard reports are likely to be correct, with the main variances against budget explained.",
+        "Their curiosity about why the numbers move may make them useful on one-off investigations.",
+      ],
+      developmentAreas: [
+        "Entries may contain wrong amounts, accounts, or periods when they are not checked before submission.",
+        "Approval steps and supporting documents may be missed when a request feels urgent.",
+        "Close tasks may start late, especially when the month-end falls in the same week as a tax filing.",
+        "Explanations to managers outside finance may be hard to follow and could need more preparation.",
+      ],
+      roleFitRisks: [
+        {
+          risk: "Errors and missing approvals could lead to audit findings or a payment made without proper authority.",
+          mitigation: "Have a senior colleague review and sign off their entries and payment requests until accuracy is steady.",
+        },
+        {
+          risk: "The month-end close could be held up if their schedules arrive late or need correcting.",
+          mitigation: "Agree a personal close checklist with dates and hold a mid-week progress check with the supervisor.",
+        },
+        {
+          risk: "Time spent on interesting investigations could crowd out routine deadline work.",
+          mitigation: "Agree priorities each week and schedule investigation time after the close tasks are done.",
+        },
+      ],
+    },
+  },
+  "DEUS-2026-09624": {
+    candidateId: "DEUS-2026-09624",
+    role: "Software Engineer",
+    seedVersion: PT_EXAMPLE_SEED_VERSION,
+    profileSignature: "fnv1a:74f55990",
+    evidenceNote:
+      "collaborative-delivery 85/81 and adapting-changing-requirements 73/68 exceed target; continuous-learning 69/72 is at target; technical-problem-solving 46/81, code-quality-ownership 54/80 and planning-estimation 50/78 are the clearest gaps. Overall 63, Considered.",
+    insights: {
+      executiveSummary:
+        "Sari is a natural team player who stays positive when priorities shift, with a steady willingness to learn what the work needs. They are likely to help the team communicate and keep moving through changes, but may need substantial support with difficult defects, testing discipline, and realistic estimates. Pairing with a senior engineer, a clear definition of done, and estimating together could help them build the technical base the role needs.",
+      keyStrengths: [
+        "They are likely to keep teammates connected and explain progress in terms that product managers and testers follow.",
+        "Newer teammates are likely to find them approachable and willing to help.",
+        "When requirements change mid-sprint, they can be expected to adjust their work calmly and help others see the reason.",
+        "New tools and unfamiliar parts of the system are likely to be learned when a task needs them.",
+      ],
+      developmentAreas: [
+        "Difficult defects may be approached by trial and error, with fixes that hide the real cause.",
+        "Tests for unusual cases may be skipped when a release is close, so defects could reach users.",
+        "Estimates may be optimistic and delays may surface only at the end of the sprint.",
+        "Keeping ahead of wider developments in the field may need encouragement.",
+      ],
+      roleFitRisks: [
+        {
+          risk: "Untested changes could reach users and take others time to trace.",
+          mitigation: "Agree a definition of done that includes tests, and give their changes careful review from a senior engineer.",
+        },
+        {
+          risk: "Complex technical tasks could stall without a clear way forward.",
+          mitigation: "Start them on well-described tasks and pair them with a senior engineer on defect investigations.",
+        },
+        {
+          risk: "Commitments made at sprint planning could slip without warning.",
+          mitigation: "Break work into smaller pieces with the team lead and compare estimates with actual time each sprint.",
         },
       ],
     },

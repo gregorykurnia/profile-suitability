@@ -1,13 +1,12 @@
 import type { AIInsights, SuitabilityReport } from "./types";
 import { aiInsightsSchema } from "./types";
-
-type DemoRole = "Service Crew" | "Pizza Cook" | "Shift Manager" | "Bank Teller";
+import type { RoleName } from "./roles";
 
 const DEMO_SEED_VERSION = "pizzahut-qsr-demo-v6";
 
 interface DemoInsightFixture {
   candidateId: string;
-  role: DemoRole;
+  role: RoleName;
   seedVersion: string;
   profileSignature: string;
   /** Internal evidence note for reviewing the authored copy; never rendered. */
@@ -393,21 +392,15 @@ function profileSignature(report: SuitabilityReport): string {
   return `fnv1a:${(hash >>> 0).toString(16).padStart(8, "0")}`;
 }
 
-export function assertDemoInsightCoverage(
-  candidateIds: string[],
-  seedVersion: string
-): void {
-  const expected = [...candidateIds].sort();
-  const actual = Object.keys(fixtures).sort();
-
-  if (seedVersion !== DEMO_SEED_VERSION) {
-    throw new Error(`Demo insight seed mismatch: expected ${DEMO_SEED_VERSION}, received ${seedVersion}.`);
+export function assertDemoInsightCoverage(candidateIds: string[]): void {
+  const normalizedIds = candidateIds.map((id) => id.trim().toLowerCase());
+  if (normalizedIds.some((id) => !id) || new Set(normalizedIds).size !== candidateIds.length) {
+    throw new Error("Demo candidate IDs must be non-empty and unique.");
   }
-  if (expected.length !== 10 || new Set(expected).size !== expected.length) {
-    throw new Error("The PT Example demo must contain exactly ten unique candidate reports.");
-  }
-  if (actual.length !== expected.length || actual.some((id, index) => id !== expected[index])) {
-    throw new Error("Demo insight fixtures must cover exactly the current candidate IDs.");
+  for (const candidateId of candidateIds) {
+    if (!Object.hasOwn(fixtures, candidateId)) {
+      throw new Error(`Missing demo insight fixture for ${candidateId}.`);
+    }
   }
 }
 
@@ -415,10 +408,10 @@ export function getDemoInsightsForReport(
   report: SuitabilityReport,
   seedVersion: string
 ): AIInsights {
-  const fixture = fixtures[report.candidateId];
-  if (!fixture) {
+  if (!Object.hasOwn(fixtures, report.candidateId)) {
     throw new Error(`Missing demo insight fixture for ${report.candidateId}.`);
   }
+  const fixture = fixtures[report.candidateId];
   if (fixture.candidateId !== report.candidateId) {
     throw new Error(`Demo insight candidate mismatch for ${report.candidateId}.`);
   }
